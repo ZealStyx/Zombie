@@ -1,0 +1,2660 @@
+{
+  "_comment": "Player sprite renderer config. All paths relative to assets/. Layer render order bottom\u2192top: body_skin \u2192 hands \u2192 equipped_clothing \u2192 equipped_held.",
+  "render_layers": [
+    "body_skin",
+    "hands",
+    "equipped_clothing",
+    "equipped_held"
+  ],
+  "poses": {
+    "_comment": "Full set of possible player animation states. Items in equipped.json only list poses they actually have sprites for \u2014 missing poses fall back to the matching base pose.",
+    "active": [
+      "idle",
+      "run",
+      "axe",
+      "pistol",
+      "twohand",
+      "using"
+    ],
+    "holstered_prefix": "h_",
+    "holstered": [
+      "h_axe",
+      "h_run",
+      "h_pistol",
+      "h_twohand"
+    ],
+    "directions": [
+      "down",
+      "left",
+      "right",
+      "up"
+    ]
+  },
+  "available_skins": [
+    "player_skin_aika",
+    "player_skin_bandit",
+    "player_skin_bandit_black",
+    "player_skin_biker",
+    "player_skin_boxer",
+    "player_skin_dead",
+    "player_skin_def_1",
+    "player_skin_def_2",
+    "player_skin_def_3",
+    "player_skin_doc",
+    "player_skin_ganzo",
+    "player_skin_guard",
+    "player_skin_jager",
+    "player_skin_jasmine",
+    "player_skin_kate",
+    "player_skin_maniac",
+    "player_skin_pilot",
+    "player_skin_redneck",
+    "player_skin_scientist",
+    "player_skin_survivalist",
+    "player_skin_veteran"
+  ],
+  "available_hands": [
+    "player_hands_asian",
+    "player_hands_bandit",
+    "player_hands_black",
+    "player_hands_white"
+  ],
+  "default_skin": "player_skin_def_1",
+  "default_hands": "player_hands_white",
+  "skins": {
+    "player_skin_aika": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_aika/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_aika/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_aika/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_aika/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_aika/run/run_down_0.png",
+            "player/skins/player_skin_aika/run/run_down_1.png",
+            "player/skins/player_skin_aika/run/run_down_2.png",
+            "player/skins/player_skin_aika/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_aika/run/run_left_0.png",
+            "player/skins/player_skin_aika/run/run_left_1.png",
+            "player/skins/player_skin_aika/run/run_left_2.png",
+            "player/skins/player_skin_aika/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_aika/run/run_right_0.png",
+            "player/skins/player_skin_aika/run/run_right_1.png",
+            "player/skins/player_skin_aika/run/run_right_2.png",
+            "player/skins/player_skin_aika/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_aika/run/run_up_0.png",
+            "player/skins/player_skin_aika/run/run_up_1.png",
+            "player/skins/player_skin_aika/run/run_up_2.png",
+            "player/skins/player_skin_aika/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_aika/axe/axe_down_0.png",
+            "player/skins/player_skin_aika/axe/axe_down_1.png",
+            "player/skins/player_skin_aika/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_aika/axe/axe_left_0.png",
+            "player/skins/player_skin_aika/axe/axe_left_1.png",
+            "player/skins/player_skin_aika/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_aika/axe/axe_right_0.png",
+            "player/skins/player_skin_aika/axe/axe_right_1.png",
+            "player/skins/player_skin_aika/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_aika/axe/axe_up_0.png",
+            "player/skins/player_skin_aika/axe/axe_up_1.png",
+            "player/skins/player_skin_aika/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_aika/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_aika/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_aika/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_aika/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_aika/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_aika/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_aika/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_aika/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_aika/using/using_item_0.png",
+            "player/skins/player_skin_aika/using/using_item_1.png",
+            "player/skins/player_skin_aika/using/using_item_2.png",
+            "player/skins/player_skin_aika/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/aika/die_0.png",
+        "player/dead/aika/die_1.png",
+        "player/dead/aika/die_2.png",
+        "player/dead/aika/die_3.png",
+        "player/dead/aika/die_4.png",
+        "player/dead/aika/die_5.png"
+      ]
+    },
+    "player_skin_bandit": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_bandit/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_bandit/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_bandit/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_bandit/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_bandit/run/run_down_0.png",
+            "player/skins/player_skin_bandit/run/run_down_1.png",
+            "player/skins/player_skin_bandit/run/run_down_2.png",
+            "player/skins/player_skin_bandit/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_bandit/run/run_left_0.png",
+            "player/skins/player_skin_bandit/run/run_left_1.png",
+            "player/skins/player_skin_bandit/run/run_left_2.png",
+            "player/skins/player_skin_bandit/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_bandit/run/run_right_0.png",
+            "player/skins/player_skin_bandit/run/run_right_1.png",
+            "player/skins/player_skin_bandit/run/run_right_2.png",
+            "player/skins/player_skin_bandit/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_bandit/run/run_up_0.png",
+            "player/skins/player_skin_bandit/run/run_up_1.png",
+            "player/skins/player_skin_bandit/run/run_up_2.png",
+            "player/skins/player_skin_bandit/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_bandit/axe/axe_down_0.png",
+            "player/skins/player_skin_bandit/axe/axe_down_1.png",
+            "player/skins/player_skin_bandit/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_bandit/axe/axe_left_0.png",
+            "player/skins/player_skin_bandit/axe/axe_left_1.png",
+            "player/skins/player_skin_bandit/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_bandit/axe/axe_right_0.png",
+            "player/skins/player_skin_bandit/axe/axe_right_1.png",
+            "player/skins/player_skin_bandit/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_bandit/axe/axe_up_0.png",
+            "player/skins/player_skin_bandit/axe/axe_up_1.png",
+            "player/skins/player_skin_bandit/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_bandit/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_bandit/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_bandit/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_bandit/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_bandit/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_bandit/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_bandit/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_bandit/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_bandit/using/using_item_0.png",
+            "player/skins/player_skin_bandit/using/using_item_1.png",
+            "player/skins/player_skin_bandit/using/using_item_2.png",
+            "player/skins/player_skin_bandit/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/bandit/die_0.png",
+        "player/dead/bandit/die_1.png",
+        "player/dead/bandit/die_2.png",
+        "player/dead/bandit/die_3.png",
+        "player/dead/bandit/die_4.png",
+        "player/dead/bandit/die_5.png"
+      ]
+    },
+    "player_skin_bandit_black": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_bandit_black/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_bandit_black/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_bandit_black/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_bandit_black/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_bandit_black/run/run_down_0.png",
+            "player/skins/player_skin_bandit_black/run/run_down_1.png",
+            "player/skins/player_skin_bandit_black/run/run_down_2.png",
+            "player/skins/player_skin_bandit_black/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_bandit_black/run/run_left_0.png",
+            "player/skins/player_skin_bandit_black/run/run_left_1.png",
+            "player/skins/player_skin_bandit_black/run/run_left_2.png",
+            "player/skins/player_skin_bandit_black/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_bandit_black/run/run_right_0.png",
+            "player/skins/player_skin_bandit_black/run/run_right_1.png",
+            "player/skins/player_skin_bandit_black/run/run_right_2.png",
+            "player/skins/player_skin_bandit_black/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_bandit_black/run/run_up_0.png",
+            "player/skins/player_skin_bandit_black/run/run_up_1.png",
+            "player/skins/player_skin_bandit_black/run/run_up_2.png",
+            "player/skins/player_skin_bandit_black/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_bandit_black/axe/axe_down_0.png",
+            "player/skins/player_skin_bandit_black/axe/axe_down_1.png",
+            "player/skins/player_skin_bandit_black/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_bandit_black/axe/axe_left_0.png",
+            "player/skins/player_skin_bandit_black/axe/axe_left_1.png",
+            "player/skins/player_skin_bandit_black/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_bandit_black/axe/axe_right_0.png",
+            "player/skins/player_skin_bandit_black/axe/axe_right_1.png",
+            "player/skins/player_skin_bandit_black/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_bandit_black/axe/axe_up_0.png",
+            "player/skins/player_skin_bandit_black/axe/axe_up_1.png",
+            "player/skins/player_skin_bandit_black/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_bandit_black/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_bandit_black/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_bandit_black/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_bandit_black/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_bandit_black/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_bandit_black/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_bandit_black/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_bandit_black/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_bandit_black/using/using_item_0.png",
+            "player/skins/player_skin_bandit_black/using/using_item_1.png",
+            "player/skins/player_skin_bandit_black/using/using_item_2.png",
+            "player/skins/player_skin_bandit_black/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/bandit_black/die_0.png",
+        "player/dead/bandit_black/die_1.png",
+        "player/dead/bandit_black/die_2.png",
+        "player/dead/bandit_black/die_3.png",
+        "player/dead/bandit_black/die_4.png",
+        "player/dead/bandit_black/die_5.png"
+      ]
+    },
+    "player_skin_biker": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_biker/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_biker/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_biker/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_biker/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_biker/run/run_down_0.png",
+            "player/skins/player_skin_biker/run/run_down_1.png",
+            "player/skins/player_skin_biker/run/run_down_2.png",
+            "player/skins/player_skin_biker/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_biker/run/run_left_0.png",
+            "player/skins/player_skin_biker/run/run_left_1.png",
+            "player/skins/player_skin_biker/run/run_left_2.png",
+            "player/skins/player_skin_biker/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_biker/run/run_right_0.png",
+            "player/skins/player_skin_biker/run/run_right_1.png",
+            "player/skins/player_skin_biker/run/run_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_biker/run/run_up_0.png",
+            "player/skins/player_skin_biker/run/run_up_1.png",
+            "player/skins/player_skin_biker/run/run_up_2.png",
+            "player/skins/player_skin_biker/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_biker/axe/axe_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_biker/axe/axe_left_0.png",
+            "player/skins/player_skin_biker/axe/axe_left_1.png",
+            "player/skins/player_skin_biker/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_biker/axe/axe_right_0.png",
+            "player/skins/player_skin_biker/axe/axe_right_1.png",
+            "player/skins/player_skin_biker/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_biker/axe/axe_up_0.png",
+            "player/skins/player_skin_biker/axe/axe_up_1.png",
+            "player/skins/player_skin_biker/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_biker/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_biker/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_biker/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_biker/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_biker/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_biker/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_biker/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_biker/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_biker/using/using_item_0.png",
+            "player/skins/player_skin_biker/using/using_item_1.png",
+            "player/skins/player_skin_biker/using/using_item_2.png",
+            "player/skins/player_skin_biker/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/biker/die_0.png",
+        "player/dead/biker/die_1.png",
+        "player/dead/biker/die_2.png",
+        "player/dead/biker/die_3.png",
+        "player/dead/biker/die_4.png",
+        "player/dead/biker/die_5.png"
+      ]
+    },
+    "player_skin_boxer": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_boxer/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_boxer/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_boxer/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_boxer/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_boxer/run/run_down_0.png",
+            "player/skins/player_skin_boxer/run/run_down_1.png",
+            "player/skins/player_skin_boxer/run/run_down_2.png",
+            "player/skins/player_skin_boxer/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_boxer/run/run_left_0.png",
+            "player/skins/player_skin_boxer/run/run_left_1.png",
+            "player/skins/player_skin_boxer/run/run_left_2.png",
+            "player/skins/player_skin_boxer/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_boxer/run/run_right_0.png",
+            "player/skins/player_skin_boxer/run/run_right_1.png",
+            "player/skins/player_skin_boxer/run/run_right_2.png",
+            "player/skins/player_skin_boxer/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_boxer/run/run_up_0.png",
+            "player/skins/player_skin_boxer/run/run_up_1.png",
+            "player/skins/player_skin_boxer/run/run_up_2.png",
+            "player/skins/player_skin_boxer/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_boxer/axe/axe_down_0.png",
+            "player/skins/player_skin_boxer/axe/axe_down_1.png",
+            "player/skins/player_skin_boxer/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_boxer/axe/axe_left_0.png",
+            "player/skins/player_skin_boxer/axe/axe_left_1.png",
+            "player/skins/player_skin_boxer/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_boxer/axe/axe_right_0.png",
+            "player/skins/player_skin_boxer/axe/axe_right_1.png",
+            "player/skins/player_skin_boxer/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_boxer/axe/axe_up_0.png",
+            "player/skins/player_skin_boxer/axe/axe_up_1.png",
+            "player/skins/player_skin_boxer/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_boxer/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_boxer/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_boxer/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_boxer/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_boxer/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_boxer/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_boxer/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_boxer/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_boxer/using/using_item_0.png",
+            "player/skins/player_skin_boxer/using/using_item_1.png",
+            "player/skins/player_skin_boxer/using/using_item_2.png",
+            "player/skins/player_skin_boxer/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/boxer/die_0.png",
+        "player/dead/boxer/die_1.png",
+        "player/dead/boxer/die_2.png",
+        "player/dead/boxer/die_3.png",
+        "player/dead/boxer/die_4.png",
+        "player/dead/boxer/die_5.png"
+      ]
+    },
+    "player_skin_dead": {
+      "poses": {},
+      "dead": null
+    },
+    "player_skin_def_1": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_def_1/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_1/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_1/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_1/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_def_1/run/run_down_0.png",
+            "player/skins/player_skin_def_1/run/run_down_1.png",
+            "player/skins/player_skin_def_1/run/run_down_2.png",
+            "player/skins/player_skin_def_1/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_1/run/run_left_0.png",
+            "player/skins/player_skin_def_1/run/run_left_1.png",
+            "player/skins/player_skin_def_1/run/run_left_2.png",
+            "player/skins/player_skin_def_1/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_1/run/run_right_0.png",
+            "player/skins/player_skin_def_1/run/run_right_1.png",
+            "player/skins/player_skin_def_1/run/run_right_2.png",
+            "player/skins/player_skin_def_1/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_1/run/run_up_0.png",
+            "player/skins/player_skin_def_1/run/run_up_1.png",
+            "player/skins/player_skin_def_1/run/run_up_2.png",
+            "player/skins/player_skin_def_1/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_def_1/axe/axe_down_0.png",
+            "player/skins/player_skin_def_1/axe/axe_down_1.png",
+            "player/skins/player_skin_def_1/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_1/axe/axe_left_0.png",
+            "player/skins/player_skin_def_1/axe/axe_left_1.png",
+            "player/skins/player_skin_def_1/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_1/axe/axe_right_0.png",
+            "player/skins/player_skin_def_1/axe/axe_right_1.png",
+            "player/skins/player_skin_def_1/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_1/axe/axe_up_0.png",
+            "player/skins/player_skin_def_1/axe/axe_up_1.png",
+            "player/skins/player_skin_def_1/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_def_1/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_1/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_1/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_1/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_def_1/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_1/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_1/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_1/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_def_1/using/using_item_0.png",
+            "player/skins/player_skin_def_1/using/using_item_1.png",
+            "player/skins/player_skin_def_1/using/using_item_2.png",
+            "player/skins/player_skin_def_1/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/def1/die_0.png",
+        "player/dead/def1/die_1.png",
+        "player/dead/def1/die_2.png",
+        "player/dead/def1/die_3.png",
+        "player/dead/def1/die_4.png",
+        "player/dead/def1/die_5.png"
+      ]
+    },
+    "player_skin_def_2": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_def_2/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_2/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_2/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_2/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_def_2/run/run_down_0.png",
+            "player/skins/player_skin_def_2/run/run_down_1.png",
+            "player/skins/player_skin_def_2/run/run_down_2.png",
+            "player/skins/player_skin_def_2/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_2/run/run_left_0.png",
+            "player/skins/player_skin_def_2/run/run_left_1.png",
+            "player/skins/player_skin_def_2/run/run_left_2.png",
+            "player/skins/player_skin_def_2/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_2/run/run_right_0.png",
+            "player/skins/player_skin_def_2/run/run_right_1.png",
+            "player/skins/player_skin_def_2/run/run_right_2.png",
+            "player/skins/player_skin_def_2/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_2/run/run_up_0.png",
+            "player/skins/player_skin_def_2/run/run_up_1.png",
+            "player/skins/player_skin_def_2/run/run_up_2.png",
+            "player/skins/player_skin_def_2/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_def_2/axe/axe_down_0.png",
+            "player/skins/player_skin_def_2/axe/axe_down_1.png",
+            "player/skins/player_skin_def_2/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_2/axe/axe_left_0.png",
+            "player/skins/player_skin_def_2/axe/axe_left_1.png",
+            "player/skins/player_skin_def_2/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_2/axe/axe_right_0.png",
+            "player/skins/player_skin_def_2/axe/axe_right_1.png",
+            "player/skins/player_skin_def_2/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_2/axe/axe_up_0.png",
+            "player/skins/player_skin_def_2/axe/axe_up_1.png",
+            "player/skins/player_skin_def_2/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_def_2/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_2/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_2/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_2/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_def_2/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_2/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_2/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_2/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_def_2/using/using_item_0.png",
+            "player/skins/player_skin_def_2/using/using_item_1.png",
+            "player/skins/player_skin_def_2/using/using_item_2.png",
+            "player/skins/player_skin_def_2/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/def2/die_0.png",
+        "player/dead/def2/die_1.png",
+        "player/dead/def2/die_2.png",
+        "player/dead/def2/die_3.png",
+        "player/dead/def2/die_4.png",
+        "player/dead/def2/die_5.png"
+      ]
+    },
+    "player_skin_def_3": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_def_3/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_3/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_3/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_3/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_def_3/run/run_down_0.png",
+            "player/skins/player_skin_def_3/run/run_down_1.png",
+            "player/skins/player_skin_def_3/run/run_down_2.png",
+            "player/skins/player_skin_def_3/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_3/run/run_left_0.png",
+            "player/skins/player_skin_def_3/run/run_left_1.png",
+            "player/skins/player_skin_def_3/run/run_left_2.png",
+            "player/skins/player_skin_def_3/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_3/run/run_right_0.png",
+            "player/skins/player_skin_def_3/run/run_right_1.png",
+            "player/skins/player_skin_def_3/run/run_right_2.png",
+            "player/skins/player_skin_def_3/run/run_right_3.png",
+            "player/skins/player_skin_def_3/run/run_right_3_1.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_3/run/run_up_0.png",
+            "player/skins/player_skin_def_3/run/run_up_1.png",
+            "player/skins/player_skin_def_3/run/run_up_2.png",
+            "player/skins/player_skin_def_3/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_def_3/axe/axe_down_0.png",
+            "player/skins/player_skin_def_3/axe/axe_down_1.png",
+            "player/skins/player_skin_def_3/axe/axe_down_1_1.png",
+            "player/skins/player_skin_def_3/axe/axe_down_2.png",
+            "player/skins/player_skin_def_3/axe/axe_down_2_1.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_3/axe/axe_left_0.png",
+            "player/skins/player_skin_def_3/axe/axe_left_1.png",
+            "player/skins/player_skin_def_3/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_3/axe/axe_right_0.png",
+            "player/skins/player_skin_def_3/axe/axe_right_1.png",
+            "player/skins/player_skin_def_3/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_3/axe/axe_up_0.png",
+            "player/skins/player_skin_def_3/axe/axe_up_1.png",
+            "player/skins/player_skin_def_3/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_def_3/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_3/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_3/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_3/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_def_3/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_def_3/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_def_3/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_def_3/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_def_3/using/using_item_0.png",
+            "player/skins/player_skin_def_3/using/using_item_1.png",
+            "player/skins/player_skin_def_3/using/using_item_2.png",
+            "player/skins/player_skin_def_3/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/def3/die_0.png",
+        "player/dead/def3/die_1.png",
+        "player/dead/def3/die_2.png",
+        "player/dead/def3/die_3.png",
+        "player/dead/def3/die_4.png",
+        "player/dead/def3/die_5.png"
+      ]
+    },
+    "player_skin_doc": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_doc/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_doc/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_doc/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_doc/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_doc/run/run_down_0.png",
+            "player/skins/player_skin_doc/run/run_down_1.png",
+            "player/skins/player_skin_doc/run/run_down_2.png",
+            "player/skins/player_skin_doc/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_doc/run/run_left_0.png",
+            "player/skins/player_skin_doc/run/run_left_1.png",
+            "player/skins/player_skin_doc/run/run_left_2.png",
+            "player/skins/player_skin_doc/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_doc/run/run_right_0.png",
+            "player/skins/player_skin_doc/run/run_right_1.png",
+            "player/skins/player_skin_doc/run/run_right_2.png",
+            "player/skins/player_skin_doc/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_doc/run/run_up_0.png",
+            "player/skins/player_skin_doc/run/run_up_1.png",
+            "player/skins/player_skin_doc/run/run_up_2.png",
+            "player/skins/player_skin_doc/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_doc/axe/axe_down_0.png",
+            "player/skins/player_skin_doc/axe/axe_down_1.png",
+            "player/skins/player_skin_doc/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_doc/axe/axe_left_0.png",
+            "player/skins/player_skin_doc/axe/axe_left_1.png",
+            "player/skins/player_skin_doc/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_doc/axe/axe_right_0.png",
+            "player/skins/player_skin_doc/axe/axe_right_1.png",
+            "player/skins/player_skin_doc/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_doc/axe/axe_up_0.png",
+            "player/skins/player_skin_doc/axe/axe_up_1.png",
+            "player/skins/player_skin_doc/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_doc/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_doc/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_doc/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_doc/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_doc/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_doc/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_doc/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_doc/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_doc/using/using_item_0.png",
+            "player/skins/player_skin_doc/using/using_item_1.png",
+            "player/skins/player_skin_doc/using/using_item_2.png",
+            "player/skins/player_skin_doc/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/doc/die_0.png",
+        "player/dead/doc/die_1.png",
+        "player/dead/doc/die_2.png",
+        "player/dead/doc/die_3.png",
+        "player/dead/doc/die_4.png",
+        "player/dead/doc/die_5.png"
+      ]
+    },
+    "player_skin_ganzo": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_ganzo/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_ganzo/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_ganzo/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_ganzo/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_ganzo/run/run_down_0.png",
+            "player/skins/player_skin_ganzo/run/run_down_1.png",
+            "player/skins/player_skin_ganzo/run/run_down_2.png",
+            "player/skins/player_skin_ganzo/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_ganzo/run/run_left_0.png",
+            "player/skins/player_skin_ganzo/run/run_left_1.png",
+            "player/skins/player_skin_ganzo/run/run_left_2.png",
+            "player/skins/player_skin_ganzo/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_ganzo/run/run_right_0.png",
+            "player/skins/player_skin_ganzo/run/run_right_1.png",
+            "player/skins/player_skin_ganzo/run/run_right_2.png",
+            "player/skins/player_skin_ganzo/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_ganzo/run/run_up_0.png",
+            "player/skins/player_skin_ganzo/run/run_up_1.png",
+            "player/skins/player_skin_ganzo/run/run_up_2.png",
+            "player/skins/player_skin_ganzo/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_ganzo/axe/axe_down_0.png",
+            "player/skins/player_skin_ganzo/axe/axe_down_1.png",
+            "player/skins/player_skin_ganzo/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_ganzo/axe/axe_left_0.png",
+            "player/skins/player_skin_ganzo/axe/axe_left_1.png",
+            "player/skins/player_skin_ganzo/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_ganzo/axe/axe_right_0.png",
+            "player/skins/player_skin_ganzo/axe/axe_right_1.png",
+            "player/skins/player_skin_ganzo/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_ganzo/axe/axe_up_0.png",
+            "player/skins/player_skin_ganzo/axe/axe_up_1.png",
+            "player/skins/player_skin_ganzo/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_ganzo/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_ganzo/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_ganzo/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_ganzo/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_ganzo/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_ganzo/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_ganzo/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_ganzo/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_ganzo/using/using_item_0.png",
+            "player/skins/player_skin_ganzo/using/using_item_1.png",
+            "player/skins/player_skin_ganzo/using/using_item_2.png",
+            "player/skins/player_skin_ganzo/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/ganzo/die_0.png",
+        "player/dead/ganzo/die_1.png",
+        "player/dead/ganzo/die_2.png",
+        "player/dead/ganzo/die_3.png",
+        "player/dead/ganzo/die_4.png",
+        "player/dead/ganzo/die_5.png"
+      ]
+    },
+    "player_skin_guard": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_guard/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_guard/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_guard/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_guard/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_guard/run/run_down_0.png",
+            "player/skins/player_skin_guard/run/run_down_1.png",
+            "player/skins/player_skin_guard/run/run_down_2.png",
+            "player/skins/player_skin_guard/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_guard/run/run_left_0.png",
+            "player/skins/player_skin_guard/run/run_left_1.png",
+            "player/skins/player_skin_guard/run/run_left_2.png",
+            "player/skins/player_skin_guard/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_guard/run/run_right_0.png",
+            "player/skins/player_skin_guard/run/run_right_1.png",
+            "player/skins/player_skin_guard/run/run_right_2.png",
+            "player/skins/player_skin_guard/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_guard/run/run_up_0.png",
+            "player/skins/player_skin_guard/run/run_up_1.png",
+            "player/skins/player_skin_guard/run/run_up_2.png",
+            "player/skins/player_skin_guard/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_guard/axe/axe_down_0.png",
+            "player/skins/player_skin_guard/axe/axe_down_1.png",
+            "player/skins/player_skin_guard/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_guard/axe/axe_left_0.png",
+            "player/skins/player_skin_guard/axe/axe_left_1.png",
+            "player/skins/player_skin_guard/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_guard/axe/axe_right_0.png",
+            "player/skins/player_skin_guard/axe/axe_right_1.png",
+            "player/skins/player_skin_guard/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_guard/axe/axe_up_0.png",
+            "player/skins/player_skin_guard/axe/axe_up_1.png",
+            "player/skins/player_skin_guard/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_guard/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_guard/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_guard/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_guard/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_guard/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_guard/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_guard/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_guard/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_guard/using/using_item_0.png",
+            "player/skins/player_skin_guard/using/using_item_1.png",
+            "player/skins/player_skin_guard/using/using_item_2.png",
+            "player/skins/player_skin_guard/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/guard/die_0.png",
+        "player/dead/guard/die_1.png",
+        "player/dead/guard/die_2.png",
+        "player/dead/guard/die_3.png",
+        "player/dead/guard/die_4.png",
+        "player/dead/guard/die_5.png"
+      ]
+    },
+    "player_skin_jager": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_jager/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_jager/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_jager/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_jager/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_jager/run/run_down_0.png",
+            "player/skins/player_skin_jager/run/run_down_1.png",
+            "player/skins/player_skin_jager/run/run_down_2.png",
+            "player/skins/player_skin_jager/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_jager/run/run_left_0.png",
+            "player/skins/player_skin_jager/run/run_left_1.png",
+            "player/skins/player_skin_jager/run/run_left_2.png",
+            "player/skins/player_skin_jager/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_jager/run/run_right_0.png",
+            "player/skins/player_skin_jager/run/run_right_1.png",
+            "player/skins/player_skin_jager/run/run_right_2.png",
+            "player/skins/player_skin_jager/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_jager/run/run_up_0.png",
+            "player/skins/player_skin_jager/run/run_up_1.png",
+            "player/skins/player_skin_jager/run/run_up_2.png",
+            "player/skins/player_skin_jager/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_jager/axe/axe_down_0.png",
+            "player/skins/player_skin_jager/axe/axe_down_1.png",
+            "player/skins/player_skin_jager/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_jager/axe/axe_left_0.png",
+            "player/skins/player_skin_jager/axe/axe_left_1.png",
+            "player/skins/player_skin_jager/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_jager/axe/axe_right_0.png",
+            "player/skins/player_skin_jager/axe/axe_right_1.png",
+            "player/skins/player_skin_jager/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_jager/axe/axe_up_0.png",
+            "player/skins/player_skin_jager/axe/axe_up_1.png",
+            "player/skins/player_skin_jager/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_jager/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_jager/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_jager/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_jager/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_jager/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_jager/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_jager/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_jager/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_jager/using/using_item_0.png",
+            "player/skins/player_skin_jager/using/using_item_1.png",
+            "player/skins/player_skin_jager/using/using_item_2.png",
+            "player/skins/player_skin_jager/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/jager/die_0.png",
+        "player/dead/jager/die_1.png",
+        "player/dead/jager/die_2.png",
+        "player/dead/jager/die_3.png",
+        "player/dead/jager/die_4.png",
+        "player/dead/jager/die_5.png"
+      ]
+    },
+    "player_skin_jasmine": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_jasmine/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_jasmine/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_jasmine/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_jasmine/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_jasmine/run/run_down_0.png",
+            "player/skins/player_skin_jasmine/run/run_down_1.png",
+            "player/skins/player_skin_jasmine/run/run_down_2.png",
+            "player/skins/player_skin_jasmine/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_jasmine/run/run_left_0.png",
+            "player/skins/player_skin_jasmine/run/run_left_1.png",
+            "player/skins/player_skin_jasmine/run/run_left_2.png",
+            "player/skins/player_skin_jasmine/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_jasmine/run/run_right_0.png",
+            "player/skins/player_skin_jasmine/run/run_right_1.png",
+            "player/skins/player_skin_jasmine/run/run_right_2.png",
+            "player/skins/player_skin_jasmine/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_jasmine/run/run_up_0.png",
+            "player/skins/player_skin_jasmine/run/run_up_1.png",
+            "player/skins/player_skin_jasmine/run/run_up_2.png",
+            "player/skins/player_skin_jasmine/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_jasmine/axe/axe_down_0.png",
+            "player/skins/player_skin_jasmine/axe/axe_down_1.png",
+            "player/skins/player_skin_jasmine/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_jasmine/axe/axe_left_0.png",
+            "player/skins/player_skin_jasmine/axe/axe_left_1.png",
+            "player/skins/player_skin_jasmine/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_jasmine/axe/axe_right_0.png",
+            "player/skins/player_skin_jasmine/axe/axe_right_1.png",
+            "player/skins/player_skin_jasmine/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_jasmine/axe/axe_up_0.png",
+            "player/skins/player_skin_jasmine/axe/axe_up_1.png",
+            "player/skins/player_skin_jasmine/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_jasmine/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_jasmine/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_jasmine/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_jasmine/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_jasmine/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_jasmine/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_jasmine/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_jasmine/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_jasmine/using/using_item_0.png",
+            "player/skins/player_skin_jasmine/using/using_item_1.png",
+            "player/skins/player_skin_jasmine/using/using_item_2.png",
+            "player/skins/player_skin_jasmine/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/jasmine/die_0.png",
+        "player/dead/jasmine/die_1.png",
+        "player/dead/jasmine/die_2.png",
+        "player/dead/jasmine/die_3.png",
+        "player/dead/jasmine/die_4.png",
+        "player/dead/jasmine/die_5.png"
+      ]
+    },
+    "player_skin_kate": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_kate/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_kate/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_kate/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_kate/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_kate/run/run_down_0.png",
+            "player/skins/player_skin_kate/run/run_down_1.png",
+            "player/skins/player_skin_kate/run/run_down_2.png",
+            "player/skins/player_skin_kate/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_kate/run/run_left_0.png",
+            "player/skins/player_skin_kate/run/run_left_1.png",
+            "player/skins/player_skin_kate/run/run_left_2.png",
+            "player/skins/player_skin_kate/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_kate/run/run_right_0.png",
+            "player/skins/player_skin_kate/run/run_right_1.png",
+            "player/skins/player_skin_kate/run/run_right_2.png",
+            "player/skins/player_skin_kate/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_kate/run/run_up_0.png",
+            "player/skins/player_skin_kate/run/run_up_1.png",
+            "player/skins/player_skin_kate/run/run_up_2.png",
+            "player/skins/player_skin_kate/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_kate/axe/axe_down_0.png",
+            "player/skins/player_skin_kate/axe/axe_down_1.png",
+            "player/skins/player_skin_kate/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_kate/axe/axe_left_0.png",
+            "player/skins/player_skin_kate/axe/axe_left_1.png",
+            "player/skins/player_skin_kate/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_kate/axe/axe_right_0.png",
+            "player/skins/player_skin_kate/axe/axe_right_1.png",
+            "player/skins/player_skin_kate/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_kate/axe/axe_up_0.png",
+            "player/skins/player_skin_kate/axe/axe_up_1.png",
+            "player/skins/player_skin_kate/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_kate/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_kate/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_kate/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_kate/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_kate/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_kate/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_kate/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_kate/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_kate/using/using_item_0.png",
+            "player/skins/player_skin_kate/using/using_item_1.png",
+            "player/skins/player_skin_kate/using/using_item_2.png",
+            "player/skins/player_skin_kate/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/kate/die_0.png",
+        "player/dead/kate/die_1.png",
+        "player/dead/kate/die_2.png",
+        "player/dead/kate/die_3.png",
+        "player/dead/kate/die_4.png",
+        "player/dead/kate/die_5.png"
+      ]
+    },
+    "player_skin_maniac": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_maniac/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_maniac/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_maniac/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_maniac/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_maniac/run/run_down_0.png",
+            "player/skins/player_skin_maniac/run/run_down_1.png",
+            "player/skins/player_skin_maniac/run/run_down_2.png",
+            "player/skins/player_skin_maniac/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_maniac/run/run_left_0.png",
+            "player/skins/player_skin_maniac/run/run_left_1.png",
+            "player/skins/player_skin_maniac/run/run_left_2.png",
+            "player/skins/player_skin_maniac/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_maniac/run/run_right_0.png",
+            "player/skins/player_skin_maniac/run/run_right_1.png",
+            "player/skins/player_skin_maniac/run/run_right_2.png",
+            "player/skins/player_skin_maniac/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_maniac/run/run_up_0.png",
+            "player/skins/player_skin_maniac/run/run_up_1.png",
+            "player/skins/player_skin_maniac/run/run_up_2.png",
+            "player/skins/player_skin_maniac/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_maniac/axe/axe_down_0.png",
+            "player/skins/player_skin_maniac/axe/axe_down_1.png",
+            "player/skins/player_skin_maniac/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_maniac/axe/axe_left_0.png",
+            "player/skins/player_skin_maniac/axe/axe_left_1.png",
+            "player/skins/player_skin_maniac/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_maniac/axe/axe_right_0.png",
+            "player/skins/player_skin_maniac/axe/axe_right_1.png",
+            "player/skins/player_skin_maniac/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_maniac/axe/axe_up_0.png",
+            "player/skins/player_skin_maniac/axe/axe_up_1.png",
+            "player/skins/player_skin_maniac/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_maniac/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_maniac/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_maniac/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_maniac/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_maniac/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_maniac/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_maniac/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_maniac/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_maniac/using/using_item_0.png",
+            "player/skins/player_skin_maniac/using/using_item_1.png",
+            "player/skins/player_skin_maniac/using/using_item_2.png",
+            "player/skins/player_skin_maniac/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/maniac/die_0.png",
+        "player/dead/maniac/die_1.png",
+        "player/dead/maniac/die_2.png",
+        "player/dead/maniac/die_3.png",
+        "player/dead/maniac/die_4.png",
+        "player/dead/maniac/die_5.png"
+      ]
+    },
+    "player_skin_pilot": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_pilot/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_pilot/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_pilot/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_pilot/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_pilot/run/run_down_0.png",
+            "player/skins/player_skin_pilot/run/run_down_1.png",
+            "player/skins/player_skin_pilot/run/run_down_2.png",
+            "player/skins/player_skin_pilot/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_pilot/run/run_left_0.png",
+            "player/skins/player_skin_pilot/run/run_left_1.png",
+            "player/skins/player_skin_pilot/run/run_left_2.png",
+            "player/skins/player_skin_pilot/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_pilot/run/run_right_0.png",
+            "player/skins/player_skin_pilot/run/run_right_1.png",
+            "player/skins/player_skin_pilot/run/run_right_2.png",
+            "player/skins/player_skin_pilot/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_pilot/run/run_up_0.png",
+            "player/skins/player_skin_pilot/run/run_up_1.png",
+            "player/skins/player_skin_pilot/run/run_up_2.png",
+            "player/skins/player_skin_pilot/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_pilot/axe/axe_down_0.png",
+            "player/skins/player_skin_pilot/axe/axe_down_1.png",
+            "player/skins/player_skin_pilot/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_pilot/axe/axe_left_0.png",
+            "player/skins/player_skin_pilot/axe/axe_left_1.png",
+            "player/skins/player_skin_pilot/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_pilot/axe/axe_right_0.png",
+            "player/skins/player_skin_pilot/axe/axe_right_1.png",
+            "player/skins/player_skin_pilot/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_pilot/axe/axe_up_0.png",
+            "player/skins/player_skin_pilot/axe/axe_up_1.png",
+            "player/skins/player_skin_pilot/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_pilot/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_pilot/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_pilot/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_pilot/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_pilot/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_pilot/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_pilot/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_pilot/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_pilot/using/using_item_0.png",
+            "player/skins/player_skin_pilot/using/using_item_1.png",
+            "player/skins/player_skin_pilot/using/using_item_2.png",
+            "player/skins/player_skin_pilot/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/pilot/die_0.png",
+        "player/dead/pilot/die_1.png",
+        "player/dead/pilot/die_2.png",
+        "player/dead/pilot/die_3.png",
+        "player/dead/pilot/die_4.png",
+        "player/dead/pilot/die_5.png"
+      ]
+    },
+    "player_skin_redneck": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_redneck/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_redneck/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_redneck/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_redneck/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_redneck/run/run_down_0.png",
+            "player/skins/player_skin_redneck/run/run_down_1.png",
+            "player/skins/player_skin_redneck/run/run_down_2.png",
+            "player/skins/player_skin_redneck/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_redneck/run/run_left_0.png",
+            "player/skins/player_skin_redneck/run/run_left_1.png",
+            "player/skins/player_skin_redneck/run/run_left_2.png",
+            "player/skins/player_skin_redneck/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_redneck/run/run_right_0.png",
+            "player/skins/player_skin_redneck/run/run_right_1.png",
+            "player/skins/player_skin_redneck/run/run_right_2.png",
+            "player/skins/player_skin_redneck/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_redneck/run/run_up_0.png",
+            "player/skins/player_skin_redneck/run/run_up_1.png",
+            "player/skins/player_skin_redneck/run/run_up_2.png",
+            "player/skins/player_skin_redneck/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_redneck/axe/axe_down_0.png",
+            "player/skins/player_skin_redneck/axe/axe_down_1.png",
+            "player/skins/player_skin_redneck/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_redneck/axe/axe_left_0.png",
+            "player/skins/player_skin_redneck/axe/axe_left_1.png",
+            "player/skins/player_skin_redneck/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_redneck/axe/axe_right_0.png",
+            "player/skins/player_skin_redneck/axe/axe_right_1.png",
+            "player/skins/player_skin_redneck/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_redneck/axe/axe_up_0.png",
+            "player/skins/player_skin_redneck/axe/axe_up_1.png",
+            "player/skins/player_skin_redneck/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_redneck/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_redneck/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_redneck/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_redneck/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_redneck/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_redneck/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_redneck/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_redneck/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_redneck/using/using_item_0.png",
+            "player/skins/player_skin_redneck/using/using_item_1.png",
+            "player/skins/player_skin_redneck/using/using_item_2.png",
+            "player/skins/player_skin_redneck/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/redneck/die_0.png",
+        "player/dead/redneck/die_1.png",
+        "player/dead/redneck/die_2.png",
+        "player/dead/redneck/die_3.png",
+        "player/dead/redneck/die_4.png",
+        "player/dead/redneck/die_5.png"
+      ]
+    },
+    "player_skin_scientist": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_scientist/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_scientist/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_scientist/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_scientist/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_scientist/run/run_down_0.png",
+            "player/skins/player_skin_scientist/run/run_down_1.png",
+            "player/skins/player_skin_scientist/run/run_down_2.png",
+            "player/skins/player_skin_scientist/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_scientist/run/run_left_0.png",
+            "player/skins/player_skin_scientist/run/run_left_1.png",
+            "player/skins/player_skin_scientist/run/run_left_2.png",
+            "player/skins/player_skin_scientist/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_scientist/run/run_right_0.png",
+            "player/skins/player_skin_scientist/run/run_right_1.png",
+            "player/skins/player_skin_scientist/run/run_right_2.png",
+            "player/skins/player_skin_scientist/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_scientist/run/run_up_0.png",
+            "player/skins/player_skin_scientist/run/run_up_1.png",
+            "player/skins/player_skin_scientist/run/run_up_2.png",
+            "player/skins/player_skin_scientist/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_scientist/axe/axe_down_0.png",
+            "player/skins/player_skin_scientist/axe/axe_down_1.png",
+            "player/skins/player_skin_scientist/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_scientist/axe/axe_left_0.png",
+            "player/skins/player_skin_scientist/axe/axe_left_1.png",
+            "player/skins/player_skin_scientist/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_scientist/axe/axe_right_0.png",
+            "player/skins/player_skin_scientist/axe/axe_right_1.png",
+            "player/skins/player_skin_scientist/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_scientist/axe/axe_up_0.png",
+            "player/skins/player_skin_scientist/axe/axe_up_1.png",
+            "player/skins/player_skin_scientist/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_scientist/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_scientist/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_scientist/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_scientist/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_scientist/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_scientist/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_scientist/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_scientist/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_scientist/using/using_item_0.png",
+            "player/skins/player_skin_scientist/using/using_item_1.png",
+            "player/skins/player_skin_scientist/using/using_item_2.png",
+            "player/skins/player_skin_scientist/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/scientist/die_0.png",
+        "player/dead/scientist/die_1.png",
+        "player/dead/scientist/die_2.png",
+        "player/dead/scientist/die_3.png",
+        "player/dead/scientist/die_4.png",
+        "player/dead/scientist/die_5.png"
+      ]
+    },
+    "player_skin_survivalist": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_survivalist/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_survivalist/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_survivalist/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_survivalist/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_survivalist/run/run_down_0.png",
+            "player/skins/player_skin_survivalist/run/run_down_1.png",
+            "player/skins/player_skin_survivalist/run/run_down_2.png",
+            "player/skins/player_skin_survivalist/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_survivalist/run/run_left_0.png",
+            "player/skins/player_skin_survivalist/run/run_left_1.png",
+            "player/skins/player_skin_survivalist/run/run_left_2.png",
+            "player/skins/player_skin_survivalist/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_survivalist/run/run_right_0.png",
+            "player/skins/player_skin_survivalist/run/run_right_1.png",
+            "player/skins/player_skin_survivalist/run/run_right_2.png",
+            "player/skins/player_skin_survivalist/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_survivalist/run/run_up_0.png",
+            "player/skins/player_skin_survivalist/run/run_up_1.png",
+            "player/skins/player_skin_survivalist/run/run_up_2.png",
+            "player/skins/player_skin_survivalist/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_survivalist/axe/axe_down_0.png",
+            "player/skins/player_skin_survivalist/axe/axe_down_1.png",
+            "player/skins/player_skin_survivalist/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_survivalist/axe/axe_left_0.png",
+            "player/skins/player_skin_survivalist/axe/axe_left_1.png",
+            "player/skins/player_skin_survivalist/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_survivalist/axe/axe_right_0.png",
+            "player/skins/player_skin_survivalist/axe/axe_right_1.png",
+            "player/skins/player_skin_survivalist/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_survivalist/axe/axe_up_0.png",
+            "player/skins/player_skin_survivalist/axe/axe_up_1.png",
+            "player/skins/player_skin_survivalist/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_survivalist/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_survivalist/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_survivalist/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_survivalist/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_survivalist/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_survivalist/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_survivalist/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_survivalist/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_survivalist/using/using_item_0.png",
+            "player/skins/player_skin_survivalist/using/using_item_1.png",
+            "player/skins/player_skin_survivalist/using/using_item_2.png",
+            "player/skins/player_skin_survivalist/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/survivalist/die_0.png",
+        "player/dead/survivalist/die_1.png",
+        "player/dead/survivalist/die_2.png",
+        "player/dead/survivalist/die_3.png",
+        "player/dead/survivalist/die_4.png",
+        "player/dead/survivalist/die_5.png"
+      ]
+    },
+    "player_skin_veteran": {
+      "poses": {
+        "idle": {
+          "down": [
+            "player/skins/player_skin_veteran/idle/idle_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_veteran/idle/idle_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_veteran/idle/idle_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_veteran/idle/idle_up_0.png"
+          ]
+        },
+        "run": {
+          "down": [
+            "player/skins/player_skin_veteran/run/run_down_0.png",
+            "player/skins/player_skin_veteran/run/run_down_1.png",
+            "player/skins/player_skin_veteran/run/run_down_2.png",
+            "player/skins/player_skin_veteran/run/run_down_3.png"
+          ],
+          "left": [
+            "player/skins/player_skin_veteran/run/run_left_0.png",
+            "player/skins/player_skin_veteran/run/run_left_1.png",
+            "player/skins/player_skin_veteran/run/run_left_2.png",
+            "player/skins/player_skin_veteran/run/run_left_3.png"
+          ],
+          "right": [
+            "player/skins/player_skin_veteran/run/run_right_0.png",
+            "player/skins/player_skin_veteran/run/run_right_1.png",
+            "player/skins/player_skin_veteran/run/run_right_2.png",
+            "player/skins/player_skin_veteran/run/run_right_3.png"
+          ],
+          "up": [
+            "player/skins/player_skin_veteran/run/run_up_0.png",
+            "player/skins/player_skin_veteran/run/run_up_1.png",
+            "player/skins/player_skin_veteran/run/run_up_2.png",
+            "player/skins/player_skin_veteran/run/run_up_3.png"
+          ]
+        },
+        "axe": {
+          "down": [
+            "player/skins/player_skin_veteran/axe/axe_down_0.png",
+            "player/skins/player_skin_veteran/axe/axe_down_1.png",
+            "player/skins/player_skin_veteran/axe/axe_down_2.png"
+          ],
+          "left": [
+            "player/skins/player_skin_veteran/axe/axe_left_0.png",
+            "player/skins/player_skin_veteran/axe/axe_left_1.png",
+            "player/skins/player_skin_veteran/axe/axe_left_2.png"
+          ],
+          "right": [
+            "player/skins/player_skin_veteran/axe/axe_right_0.png",
+            "player/skins/player_skin_veteran/axe/axe_right_1.png",
+            "player/skins/player_skin_veteran/axe/axe_right_2.png"
+          ],
+          "up": [
+            "player/skins/player_skin_veteran/axe/axe_up_0.png",
+            "player/skins/player_skin_veteran/axe/axe_up_1.png",
+            "player/skins/player_skin_veteran/axe/axe_up_2.png"
+          ]
+        },
+        "pistol": {
+          "down": [
+            "player/skins/player_skin_veteran/pistol/pistol_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_veteran/pistol/pistol_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_veteran/pistol/pistol_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_veteran/pistol/pistol_up_0.png"
+          ]
+        },
+        "twohand": {
+          "down": [
+            "player/skins/player_skin_veteran/twohand/twohand_down_0.png"
+          ],
+          "left": [
+            "player/skins/player_skin_veteran/twohand/twohand_left_0.png"
+          ],
+          "right": [
+            "player/skins/player_skin_veteran/twohand/twohand_right_0.png"
+          ],
+          "up": [
+            "player/skins/player_skin_veteran/twohand/twohand_up_0.png"
+          ]
+        },
+        "using": {
+          "frames": [
+            "player/skins/player_skin_veteran/using/using_item_0.png",
+            "player/skins/player_skin_veteran/using/using_item_1.png",
+            "player/skins/player_skin_veteran/using/using_item_2.png",
+            "player/skins/player_skin_veteran/using/using_item_3.png"
+          ]
+        }
+      },
+      "dead": [
+        "player/dead/veteran/die_0.png",
+        "player/dead/veteran/die_1.png",
+        "player/dead/veteran/die_2.png",
+        "player/dead/veteran/die_3.png",
+        "player/dead/veteran/die_4.png",
+        "player/dead/veteran/die_5.png"
+      ]
+    }
+  },
+  "hands": {
+    "player_hands_asian": {
+      "idle": {
+        "down": [
+          "player/hands/player_hands_asian/idle/idle_down_0.png"
+        ],
+        "left": [
+          "player/hands/player_hands_asian/idle/idle_left_0.png"
+        ],
+        "right": [
+          "player/hands/player_hands_asian/idle/idle_right_0.png"
+        ],
+        "up": [
+          "player/hands/player_hands_asian/idle/idle_up_0.png"
+        ]
+      },
+      "run": {
+        "down": [
+          "player/hands/player_hands_asian/run/run_down_0.png",
+          "player/hands/player_hands_asian/run/run_down_1.png",
+          "player/hands/player_hands_asian/run/run_down_2.png",
+          "player/hands/player_hands_asian/run/run_down_3.png"
+        ],
+        "left": [
+          "player/hands/player_hands_asian/run/run_left_0.png",
+          "player/hands/player_hands_asian/run/run_left_1.png",
+          "player/hands/player_hands_asian/run/run_left_2.png",
+          "player/hands/player_hands_asian/run/run_left_3.png"
+        ],
+        "right": [
+          "player/hands/player_hands_asian/run/run_right_0.png",
+          "player/hands/player_hands_asian/run/run_right_1.png",
+          "player/hands/player_hands_asian/run/run_right_2.png",
+          "player/hands/player_hands_asian/run/run_right_3.png"
+        ],
+        "up": [
+          "player/hands/player_hands_asian/run/run_up_0.png",
+          "player/hands/player_hands_asian/run/run_up_1.png",
+          "player/hands/player_hands_asian/run/run_up_2.png",
+          "player/hands/player_hands_asian/run/run_up_3.png"
+        ]
+      },
+      "axe": {
+        "down": [
+          "player/hands/player_hands_asian/axe/axe_down_0.png",
+          "player/hands/player_hands_asian/axe/axe_down_1.png",
+          "player/hands/player_hands_asian/axe/axe_down_2.png"
+        ],
+        "left": [
+          "player/hands/player_hands_asian/axe/axe_left_0.png",
+          "player/hands/player_hands_asian/axe/axe_left_1.png",
+          "player/hands/player_hands_asian/axe/axe_left_2.png"
+        ],
+        "right": [
+          "player/hands/player_hands_asian/axe/axe_right_0.png",
+          "player/hands/player_hands_asian/axe/axe_right_1.png",
+          "player/hands/player_hands_asian/axe/axe_right_2.png"
+        ],
+        "up": [
+          "player/hands/player_hands_asian/axe/axe_up_0.png",
+          "player/hands/player_hands_asian/axe/axe_up_2.png"
+        ]
+      },
+      "pistol": {
+        "down": [
+          "player/hands/player_hands_asian/pistol/pistol_down_0.png"
+        ],
+        "left": [
+          "player/hands/player_hands_asian/pistol/pistol_left_0.png"
+        ],
+        "right": [
+          "player/hands/player_hands_asian/pistol/pistol_right_0.png"
+        ]
+      },
+      "twohand": {
+        "down": [
+          "player/hands/player_hands_asian/twohand/twohand_down_0.png"
+        ],
+        "left": [
+          "player/hands/player_hands_asian/twohand/twohand_left_0.png"
+        ],
+        "right": [
+          "player/hands/player_hands_asian/twohand/twohand_right_0.png"
+        ],
+        "up": [
+          "player/hands/player_hands_asian/twohand/twohand_up_0.png"
+        ]
+      },
+      "using": {
+        "frames": [
+          "player/hands/player_hands_asian/using/using_item_0.png",
+          "player/hands/player_hands_asian/using/using_item_1.png",
+          "player/hands/player_hands_asian/using/using_item_2.png",
+          "player/hands/player_hands_asian/using/using_item_3.png"
+        ]
+      }
+    },
+    "player_hands_bandit": {
+      "idle": {
+        "down": [
+          "player/hands/player_hands_bandit/idle/idle_down_0.png"
+        ],
+        "left": [
+          "player/hands/player_hands_bandit/idle/idle_left_0.png"
+        ],
+        "right": [
+          "player/hands/player_hands_bandit/idle/idle_right_0.png"
+        ],
+        "up": [
+          "player/hands/player_hands_bandit/idle/idle_up_0.png"
+        ]
+      },
+      "run": {
+        "down": [
+          "player/hands/player_hands_bandit/run/run_down_0.png",
+          "player/hands/player_hands_bandit/run/run_down_1.png",
+          "player/hands/player_hands_bandit/run/run_down_2.png",
+          "player/hands/player_hands_bandit/run/run_down_3.png"
+        ],
+        "left": [
+          "player/hands/player_hands_bandit/run/run_left_0.png",
+          "player/hands/player_hands_bandit/run/run_left_1.png",
+          "player/hands/player_hands_bandit/run/run_left_2.png",
+          "player/hands/player_hands_bandit/run/run_left_3.png"
+        ],
+        "right": [
+          "player/hands/player_hands_bandit/run/run_right_0.png",
+          "player/hands/player_hands_bandit/run/run_right_1.png",
+          "player/hands/player_hands_bandit/run/run_right_2.png",
+          "player/hands/player_hands_bandit/run/run_right_3.png"
+        ],
+        "up": [
+          "player/hands/player_hands_bandit/run/run_up_0.png",
+          "player/hands/player_hands_bandit/run/run_up_1.png",
+          "player/hands/player_hands_bandit/run/run_up_2.png",
+          "player/hands/player_hands_bandit/run/run_up_3.png"
+        ]
+      },
+      "axe": {
+        "down": [
+          "player/hands/player_hands_bandit/axe/axe_down_0.png",
+          "player/hands/player_hands_bandit/axe/axe_down_1.png",
+          "player/hands/player_hands_bandit/axe/axe_down_2.png"
+        ],
+        "left": [
+          "player/hands/player_hands_bandit/axe/axe_left_0.png",
+          "player/hands/player_hands_bandit/axe/axe_left_1.png",
+          "player/hands/player_hands_bandit/axe/axe_left_2.png"
+        ],
+        "right": [
+          "player/hands/player_hands_bandit/axe/axe_right_0.png",
+          "player/hands/player_hands_bandit/axe/axe_right_1.png",
+          "player/hands/player_hands_bandit/axe/axe_right_2.png"
+        ],
+        "up": [
+          "player/hands/player_hands_bandit/axe/axe_up_0.png",
+          "player/hands/player_hands_bandit/axe/axe_up_2.png"
+        ]
+      },
+      "pistol": {
+        "down": [
+          "player/hands/player_hands_bandit/pistol/pistol_down_0.png"
+        ],
+        "left": [
+          "player/hands/player_hands_bandit/pistol/pistol_left_0.png"
+        ],
+        "right": [
+          "player/hands/player_hands_bandit/pistol/pistol_right_0.png"
+        ]
+      },
+      "twohand": {
+        "down": [
+          "player/hands/player_hands_bandit/twohand/twohand_down_0.png"
+        ],
+        "left": [
+          "player/hands/player_hands_bandit/twohand/twohand_left_0.png"
+        ],
+        "right": [
+          "player/hands/player_hands_bandit/twohand/twohand_right_0.png"
+        ],
+        "up": [
+          "player/hands/player_hands_bandit/twohand/twohand_up_0.png"
+        ]
+      },
+      "using": {
+        "frames": [
+          "player/hands/player_hands_bandit/using/using_item_0.png",
+          "player/hands/player_hands_bandit/using/using_item_1.png",
+          "player/hands/player_hands_bandit/using/using_item_2.png",
+          "player/hands/player_hands_bandit/using/using_item_3.png"
+        ]
+      }
+    },
+    "player_hands_black": {
+      "idle": {
+        "down": [
+          "player/hands/player_hands_black/idle/idle_down_0.png"
+        ],
+        "left": [
+          "player/hands/player_hands_black/idle/idle_left_0.png"
+        ],
+        "right": [
+          "player/hands/player_hands_black/idle/idle_right_0.png"
+        ],
+        "up": [
+          "player/hands/player_hands_black/idle/idle_up_0.png"
+        ]
+      },
+      "run": {
+        "down": [
+          "player/hands/player_hands_black/run/run_down_0.png",
+          "player/hands/player_hands_black/run/run_down_1.png",
+          "player/hands/player_hands_black/run/run_down_2.png",
+          "player/hands/player_hands_black/run/run_down_3.png"
+        ],
+        "left": [
+          "player/hands/player_hands_black/run/run_left_0.png",
+          "player/hands/player_hands_black/run/run_left_1.png",
+          "player/hands/player_hands_black/run/run_left_2.png",
+          "player/hands/player_hands_black/run/run_left_3.png"
+        ],
+        "right": [
+          "player/hands/player_hands_black/run/run_right_0.png",
+          "player/hands/player_hands_black/run/run_right_1.png",
+          "player/hands/player_hands_black/run/run_right_2.png",
+          "player/hands/player_hands_black/run/run_right_3.png"
+        ],
+        "up": [
+          "player/hands/player_hands_black/run/run_up_0.png",
+          "player/hands/player_hands_black/run/run_up_1.png",
+          "player/hands/player_hands_black/run/run_up_2.png",
+          "player/hands/player_hands_black/run/run_up_3.png"
+        ]
+      },
+      "axe": {
+        "down": [
+          "player/hands/player_hands_black/axe/axe_down_0.png",
+          "player/hands/player_hands_black/axe/axe_down_1.png",
+          "player/hands/player_hands_black/axe/axe_down_2.png"
+        ],
+        "left": [
+          "player/hands/player_hands_black/axe/axe_left_0.png",
+          "player/hands/player_hands_black/axe/axe_left_1.png",
+          "player/hands/player_hands_black/axe/axe_left_2.png"
+        ],
+        "right": [
+          "player/hands/player_hands_black/axe/axe_right_0.png",
+          "player/hands/player_hands_black/axe/axe_right_1.png",
+          "player/hands/player_hands_black/axe/axe_right_2.png"
+        ],
+        "up": [
+          "player/hands/player_hands_black/axe/axe_up_0.png",
+          "player/hands/player_hands_black/axe/axe_up_2.png"
+        ]
+      },
+      "pistol": {
+        "down": [
+          "player/hands/player_hands_black/pistol/pistol_down_0.png"
+        ],
+        "left": [
+          "player/hands/player_hands_black/pistol/pistol_left_0.png"
+        ],
+        "right": [
+          "player/hands/player_hands_black/pistol/pistol_right_0.png"
+        ]
+      },
+      "twohand": {
+        "down": [
+          "player/hands/player_hands_black/twohand/twohand_down_0.png"
+        ],
+        "left": [
+          "player/hands/player_hands_black/twohand/twohand_left_0.png"
+        ],
+        "right": [
+          "player/hands/player_hands_black/twohand/twohand_right_0.png"
+        ],
+        "up": [
+          "player/hands/player_hands_black/twohand/twohand_up_0.png"
+        ]
+      },
+      "using": {
+        "frames": [
+          "player/hands/player_hands_black/using/using_item_0.png",
+          "player/hands/player_hands_black/using/using_item_1.png",
+          "player/hands/player_hands_black/using/using_item_2.png",
+          "player/hands/player_hands_black/using/using_item_3.png"
+        ]
+      }
+    },
+    "player_hands_white": {
+      "idle": {
+        "down": [
+          "player/hands/player_hands_white/idle/idle_down_0.png"
+        ],
+        "left": [
+          "player/hands/player_hands_white/idle/idle_left_0.png"
+        ],
+        "right": [
+          "player/hands/player_hands_white/idle/idle_right_0.png"
+        ],
+        "up": [
+          "player/hands/player_hands_white/idle/idle_up_0.png"
+        ]
+      },
+      "run": {
+        "down": [
+          "player/hands/player_hands_white/run/run_down_0.png",
+          "player/hands/player_hands_white/run/run_down_1.png",
+          "player/hands/player_hands_white/run/run_down_2.png",
+          "player/hands/player_hands_white/run/run_down_3.png"
+        ],
+        "left": [
+          "player/hands/player_hands_white/run/run_left_0.png",
+          "player/hands/player_hands_white/run/run_left_1.png",
+          "player/hands/player_hands_white/run/run_left_2.png",
+          "player/hands/player_hands_white/run/run_left_3.png"
+        ],
+        "right": [
+          "player/hands/player_hands_white/run/run_right_0.png",
+          "player/hands/player_hands_white/run/run_right_1.png",
+          "player/hands/player_hands_white/run/run_right_2.png",
+          "player/hands/player_hands_white/run/run_right_3.png"
+        ],
+        "up": [
+          "player/hands/player_hands_white/run/run_up_0.png",
+          "player/hands/player_hands_white/run/run_up_1.png",
+          "player/hands/player_hands_white/run/run_up_2.png",
+          "player/hands/player_hands_white/run/run_up_3.png"
+        ]
+      },
+      "axe": {
+        "down": [
+          "player/hands/player_hands_white/axe/axe_down_0.png",
+          "player/hands/player_hands_white/axe/axe_down_1.png",
+          "player/hands/player_hands_white/axe/axe_down_2.png"
+        ],
+        "left": [
+          "player/hands/player_hands_white/axe/axe_left_0.png",
+          "player/hands/player_hands_white/axe/axe_left_1.png",
+          "player/hands/player_hands_white/axe/axe_left_2.png"
+        ],
+        "right": [
+          "player/hands/player_hands_white/axe/axe_right_0.png",
+          "player/hands/player_hands_white/axe/axe_right_1.png",
+          "player/hands/player_hands_white/axe/axe_right_2.png"
+        ],
+        "up": [
+          "player/hands/player_hands_white/axe/axe_up_0.png",
+          "player/hands/player_hands_white/axe/axe_up_1.png",
+          "player/hands/player_hands_white/axe/axe_up_2.png"
+        ]
+      },
+      "pistol": {
+        "down": [
+          "player/hands/player_hands_white/pistol/pistol_down_0.png"
+        ],
+        "left": [
+          "player/hands/player_hands_white/pistol/pistol_left_0.png"
+        ],
+        "right": [
+          "player/hands/player_hands_white/pistol/pistol_right_0.png"
+        ],
+        "up": [
+          "player/hands/player_hands_white/pistol/pistol_up_0.png"
+        ]
+      },
+      "twohand": {
+        "down": [
+          "player/hands/player_hands_white/twohand/twohand_down_0.png"
+        ],
+        "left": [
+          "player/hands/player_hands_white/twohand/twohand_left_0.png"
+        ],
+        "right": [
+          "player/hands/player_hands_white/twohand/twohand_right_0.png"
+        ],
+        "up": [
+          "player/hands/player_hands_white/twohand/twohand_up_0.png"
+        ]
+      },
+      "using": {
+        "frames": [
+          "player/hands/player_hands_white/using/using_item_0.png",
+          "player/hands/player_hands_white/using/using_item_1.png",
+          "player/hands/player_hands_white/using/using_item_2.png",
+          "player/hands/player_hands_white/using/using_item_3.png"
+        ]
+      }
+    }
+  }
+}

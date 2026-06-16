@@ -1,0 +1,2945 @@
+{
+  "_comment": "Zed (zombie) renderer config. All paths relative to assets/. Each zed_type has 'skins' (alive variants), 'dead' (death animation variants), and optionally 'spawn_fx' (buried emerge), 'shadow' (jumper shadow layer). Poses in 'available_poses' are the only ones that exist for that skin \u2014 if a pose has directional frames they are keyed by direction (down/left/right/up); directionless animations (scream, stun, fly, etc.) use 'frames' key instead.",
+  "sfx": {
+    "zed_bio_explode": [
+      "enemy/zed/sfx/zed_bio_explode/default/Default_0.png",
+      "enemy/zed/sfx/zed_bio_explode/default/Default_1.png",
+      "enemy/zed/sfx/zed_bio_explode/default/Default_2.png",
+      "enemy/zed/sfx/zed_bio_explode/default/Default_3.png",
+      "enemy/zed/sfx/zed_bio_explode/default/Default_4.png"
+    ],
+    "zed_bio_splash": [
+      "enemy/zed/sfx/zed_bio_splash/default/Default_0.png"
+    ],
+    "zed_bullet": [
+      "enemy/zed/sfx/zed_bullet/default/Default_0.png",
+      "enemy/zed/sfx/zed_bullet/default/Default_1.png",
+      "enemy/zed/sfx/zed_bullet/default/Default_2.png"
+    ]
+  },
+  "zed_types": {
+    "army": {
+      "skins": {
+        "zed_army_skin1": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/army/zed_army_skin1/attack/attack_down_0.png",
+                "enemy/zed/army/zed_army_skin1/attack/attack_down_1.png",
+                "enemy/zed/army/zed_army_skin1/attack/attack_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin1/attack/attack_left_0.png",
+                "enemy/zed/army/zed_army_skin1/attack/attack_left_1.png",
+                "enemy/zed/army/zed_army_skin1/attack/attack_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin1/attack/attack_right_0.png",
+                "enemy/zed/army/zed_army_skin1/attack/attack_right_1.png",
+                "enemy/zed/army/zed_army_skin1/attack/attack_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin1/attack/attack_up_0.png",
+                "enemy/zed/army/zed_army_skin1/attack/attack_up_1.png",
+                "enemy/zed/army/zed_army_skin1/attack/attack_up_2.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/army/zed_army_skin1/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin1/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin1/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin1/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/army/zed_army_skin1/run/run_down_0.png",
+                "enemy/zed/army/zed_army_skin1/run/run_down_1.png",
+                "enemy/zed/army/zed_army_skin1/run/run_down_2.png",
+                "enemy/zed/army/zed_army_skin1/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin1/run/run_left_0.png",
+                "enemy/zed/army/zed_army_skin1/run/run_left_1.png",
+                "enemy/zed/army/zed_army_skin1/run/run_left_2.png",
+                "enemy/zed/army/zed_army_skin1/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin1/run/run_right_0.png",
+                "enemy/zed/army/zed_army_skin1/run/run_right_1.png",
+                "enemy/zed/army/zed_army_skin1/run/run_right_2.png",
+                "enemy/zed/army/zed_army_skin1/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin1/run/run_up_0.png",
+                "enemy/zed/army/zed_army_skin1/run/run_up_1.png",
+                "enemy/zed/army/zed_army_skin1/run/run_up_2.png",
+                "enemy/zed/army/zed_army_skin1/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/army/zed_army_skin1/walk/walk_down_0.png",
+                "enemy/zed/army/zed_army_skin1/walk/walk_down_1.png",
+                "enemy/zed/army/zed_army_skin1/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin1/walk/walk_left_0.png",
+                "enemy/zed/army/zed_army_skin1/walk/walk_left_1.png",
+                "enemy/zed/army/zed_army_skin1/walk/walk_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin1/walk/walk_right_0.png",
+                "enemy/zed/army/zed_army_skin1/walk/walk_right_1.png",
+                "enemy/zed/army/zed_army_skin1/walk/walk_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin1/walk/walk_up_0.png",
+                "enemy/zed/army/zed_army_skin1/walk/walk_up_1.png",
+                "enemy/zed/army/zed_army_skin1/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_army_skin2": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/army/zed_army_skin2/attack/attack_down_0.png",
+                "enemy/zed/army/zed_army_skin2/attack/attack_down_1.png",
+                "enemy/zed/army/zed_army_skin2/attack/attack_down_2.png",
+                "enemy/zed/army/zed_army_skin2/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin2/attack/attack_left_0.png",
+                "enemy/zed/army/zed_army_skin2/attack/attack_left_1.png",
+                "enemy/zed/army/zed_army_skin2/attack/attack_left_2.png",
+                "enemy/zed/army/zed_army_skin2/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin2/attack/attack_right_0.png",
+                "enemy/zed/army/zed_army_skin2/attack/attack_right_1.png",
+                "enemy/zed/army/zed_army_skin2/attack/attack_right_2.png",
+                "enemy/zed/army/zed_army_skin2/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin2/attack/attack_up_0.png",
+                "enemy/zed/army/zed_army_skin2/attack/attack_up_1.png",
+                "enemy/zed/army/zed_army_skin2/attack/attack_up_2.png",
+                "enemy/zed/army/zed_army_skin2/attack/attack_up_3.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/army/zed_army_skin2/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin2/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin2/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin2/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/army/zed_army_skin2/run/run_down_0.png",
+                "enemy/zed/army/zed_army_skin2/run/run_down_1.png",
+                "enemy/zed/army/zed_army_skin2/run/run_down_2.png",
+                "enemy/zed/army/zed_army_skin2/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin2/run/run_left_0.png",
+                "enemy/zed/army/zed_army_skin2/run/run_left_1.png",
+                "enemy/zed/army/zed_army_skin2/run/run_left_2.png",
+                "enemy/zed/army/zed_army_skin2/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin2/run/run_right_0.png",
+                "enemy/zed/army/zed_army_skin2/run/run_right_1.png",
+                "enemy/zed/army/zed_army_skin2/run/run_right_2.png",
+                "enemy/zed/army/zed_army_skin2/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin2/run/run_up_0.png",
+                "enemy/zed/army/zed_army_skin2/run/run_up_1.png",
+                "enemy/zed/army/zed_army_skin2/run/run_up_2.png",
+                "enemy/zed/army/zed_army_skin2/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/army/zed_army_skin2/walk/walk_down_0.png",
+                "enemy/zed/army/zed_army_skin2/walk/walk_down_1.png",
+                "enemy/zed/army/zed_army_skin2/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin2/walk/walk_left_0.png",
+                "enemy/zed/army/zed_army_skin2/walk/walk_left_1.png",
+                "enemy/zed/army/zed_army_skin2/walk/walk_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin2/walk/walk_right_0.png",
+                "enemy/zed/army/zed_army_skin2/walk/walk_right_1.png",
+                "enemy/zed/army/zed_army_skin2/walk/walk_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin2/walk/walk_up_0.png",
+                "enemy/zed/army/zed_army_skin2/walk/walk_up_1.png",
+                "enemy/zed/army/zed_army_skin2/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_army_skin3": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/army/zed_army_skin3/attack/attack_down_0.png",
+                "enemy/zed/army/zed_army_skin3/attack/attack_down_1.png",
+                "enemy/zed/army/zed_army_skin3/attack/attack_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin3/attack/attack_left_0.png",
+                "enemy/zed/army/zed_army_skin3/attack/attack_left_1.png",
+                "enemy/zed/army/zed_army_skin3/attack/attack_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin3/attack/attack_right_0.png",
+                "enemy/zed/army/zed_army_skin3/attack/attack_right_1.png",
+                "enemy/zed/army/zed_army_skin3/attack/attack_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin3/attack/attack_up_0.png",
+                "enemy/zed/army/zed_army_skin3/attack/attack_up_1.png",
+                "enemy/zed/army/zed_army_skin3/attack/attack_up_2.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/army/zed_army_skin3/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin3/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin3/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin3/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/army/zed_army_skin3/run/run_down_0.png",
+                "enemy/zed/army/zed_army_skin3/run/run_down_1.png",
+                "enemy/zed/army/zed_army_skin3/run/run_down_2.png",
+                "enemy/zed/army/zed_army_skin3/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin3/run/run_left_0.png",
+                "enemy/zed/army/zed_army_skin3/run/run_left_1.png",
+                "enemy/zed/army/zed_army_skin3/run/run_left_2.png",
+                "enemy/zed/army/zed_army_skin3/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin3/run/run_right_0.png",
+                "enemy/zed/army/zed_army_skin3/run/run_right_1.png",
+                "enemy/zed/army/zed_army_skin3/run/run_right_2.png",
+                "enemy/zed/army/zed_army_skin3/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin3/run/run_up_0.png",
+                "enemy/zed/army/zed_army_skin3/run/run_up_1.png",
+                "enemy/zed/army/zed_army_skin3/run/run_up_2.png",
+                "enemy/zed/army/zed_army_skin3/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/army/zed_army_skin3/walk/walk_down_0.png",
+                "enemy/zed/army/zed_army_skin3/walk/walk_down_1.png",
+                "enemy/zed/army/zed_army_skin3/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin3/walk/walk_left_0.png",
+                "enemy/zed/army/zed_army_skin3/walk/walk_left_1.png",
+                "enemy/zed/army/zed_army_skin3/walk/walk_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin3/walk/walk_right_0.png",
+                "enemy/zed/army/zed_army_skin3/walk/walk_right_1.png",
+                "enemy/zed/army/zed_army_skin3/walk/walk_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin3/walk/walk_up_0.png",
+                "enemy/zed/army/zed_army_skin3/walk/walk_up_1.png",
+                "enemy/zed/army/zed_army_skin3/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_army_skin4": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/army/zed_army_skin4/attack/attack_down_0.png",
+                "enemy/zed/army/zed_army_skin4/attack/attack_down_1.png",
+                "enemy/zed/army/zed_army_skin4/attack/attack_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin4/attack/attack_left_0.png",
+                "enemy/zed/army/zed_army_skin4/attack/attack_left_1.png",
+                "enemy/zed/army/zed_army_skin4/attack/attack_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin4/attack/attack_right_0.png",
+                "enemy/zed/army/zed_army_skin4/attack/attack_right_1.png",
+                "enemy/zed/army/zed_army_skin4/attack/attack_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin4/attack/attack_up_0.png",
+                "enemy/zed/army/zed_army_skin4/attack/attack_up_1.png",
+                "enemy/zed/army/zed_army_skin4/attack/attack_up_2.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/army/zed_army_skin4/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin4/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin4/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin4/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/army/zed_army_skin4/run/run_down_0.png",
+                "enemy/zed/army/zed_army_skin4/run/run_down_1.png",
+                "enemy/zed/army/zed_army_skin4/run/run_down_2.png",
+                "enemy/zed/army/zed_army_skin4/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin4/run/run_left_0.png",
+                "enemy/zed/army/zed_army_skin4/run/run_left_1.png",
+                "enemy/zed/army/zed_army_skin4/run/run_left_2.png",
+                "enemy/zed/army/zed_army_skin4/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin4/run/run_right_0.png",
+                "enemy/zed/army/zed_army_skin4/run/run_right_1.png",
+                "enemy/zed/army/zed_army_skin4/run/run_right_2.png",
+                "enemy/zed/army/zed_army_skin4/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin4/run/run_up_0.png",
+                "enemy/zed/army/zed_army_skin4/run/run_up_1.png",
+                "enemy/zed/army/zed_army_skin4/run/run_up_2.png",
+                "enemy/zed/army/zed_army_skin4/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/army/zed_army_skin4/walk/walk_down_0.png",
+                "enemy/zed/army/zed_army_skin4/walk/walk_down_1.png",
+                "enemy/zed/army/zed_army_skin4/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/army/zed_army_skin4/walk/walk_left_0.png",
+                "enemy/zed/army/zed_army_skin4/walk/walk_left_1.png",
+                "enemy/zed/army/zed_army_skin4/walk/walk_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/army/zed_army_skin4/walk/walk_right_0.png",
+                "enemy/zed/army/zed_army_skin4/walk/walk_right_1.png",
+                "enemy/zed/army/zed_army_skin4/walk/walk_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/army/zed_army_skin4/walk/walk_up_0.png",
+                "enemy/zed/army/zed_army_skin4/walk/walk_up_1.png",
+                "enemy/zed/army/zed_army_skin4/walk/walk_up_2.png"
+              ]
+            }
+          }
+        }
+      },
+      "dead": {
+        "zed_army_dead_skin1": {
+          "die1": [
+            "enemy/zed/army/dead/zed_army_dead_skin1/die1/die1_0.png",
+            "enemy/zed/army/dead/zed_army_dead_skin1/die1/die1_1.png",
+            "enemy/zed/army/dead/zed_army_dead_skin1/die1/die1_2.png",
+            "enemy/zed/army/dead/zed_army_dead_skin1/die1/die1_3.png",
+            "enemy/zed/army/dead/zed_army_dead_skin1/die1/die1_4.png"
+          ],
+          "die2": [
+            "enemy/zed/army/dead/zed_army_dead_skin1/die2/die2_0.png",
+            "enemy/zed/army/dead/zed_army_dead_skin1/die2/die2_1.png",
+            "enemy/zed/army/dead/zed_army_dead_skin1/die2/die2_2.png",
+            "enemy/zed/army/dead/zed_army_dead_skin1/die2/die2_3.png",
+            "enemy/zed/army/dead/zed_army_dead_skin1/die2/die2_4.png"
+          ]
+        },
+        "zed_army_dead_skin2": {
+          "die1": [
+            "enemy/zed/army/dead/zed_army_dead_skin2/die1/die1_0.png",
+            "enemy/zed/army/dead/zed_army_dead_skin2/die1/die1_1.png",
+            "enemy/zed/army/dead/zed_army_dead_skin2/die1/die1_2.png",
+            "enemy/zed/army/dead/zed_army_dead_skin2/die1/die1_3.png"
+          ]
+        },
+        "zed_army_dead_skin3": {
+          "die1": [
+            "enemy/zed/army/dead/zed_army_dead_skin3/die1/die1_0.png",
+            "enemy/zed/army/dead/zed_army_dead_skin3/die1/die1_1.png",
+            "enemy/zed/army/dead/zed_army_dead_skin3/die1/die1_2.png",
+            "enemy/zed/army/dead/zed_army_dead_skin3/die1/die1_3.png",
+            "enemy/zed/army/dead/zed_army_dead_skin3/die1/die1_4.png"
+          ],
+          "die2": [
+            "enemy/zed/army/dead/zed_army_dead_skin3/die2/die2_0.png",
+            "enemy/zed/army/dead/zed_army_dead_skin3/die2/die2_1.png",
+            "enemy/zed/army/dead/zed_army_dead_skin3/die2/die2_2.png",
+            "enemy/zed/army/dead/zed_army_dead_skin3/die2/die2_3.png"
+          ]
+        },
+        "zed_army_dead_skin4": {
+          "die1": [
+            "enemy/zed/army/dead/zed_army_dead_skin4/die1/die1_0.png",
+            "enemy/zed/army/dead/zed_army_dead_skin4/die1/die1_1.png",
+            "enemy/zed/army/dead/zed_army_dead_skin4/die1/die1_2.png",
+            "enemy/zed/army/dead/zed_army_dead_skin4/die1/die1_3.png"
+          ]
+        }
+      }
+    },
+    "buried": {
+      "skins": {
+        "zed_buried_skin": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/buried/zed_buried_skin/attack/attack_down_0.png",
+                "enemy/zed/buried/zed_buried_skin/attack/attack_down_1.png",
+                "enemy/zed/buried/zed_buried_skin/attack/attack_down_2.png",
+                "enemy/zed/buried/zed_buried_skin/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/buried/zed_buried_skin/attack/attack_left_0.png",
+                "enemy/zed/buried/zed_buried_skin/attack/attack_left_1.png",
+                "enemy/zed/buried/zed_buried_skin/attack/attack_left_2.png",
+                "enemy/zed/buried/zed_buried_skin/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/buried/zed_buried_skin/attack/attack_right_0.png",
+                "enemy/zed/buried/zed_buried_skin/attack/attack_right_1.png",
+                "enemy/zed/buried/zed_buried_skin/attack/attack_right_2.png",
+                "enemy/zed/buried/zed_buried_skin/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/buried/zed_buried_skin/attack/attack_up_0.png",
+                "enemy/zed/buried/zed_buried_skin/attack/attack_up_1.png",
+                "enemy/zed/buried/zed_buried_skin/attack/attack_up_2.png",
+                "enemy/zed/buried/zed_buried_skin/attack/attack_up_3.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/buried/zed_buried_skin/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/buried/zed_buried_skin/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/buried/zed_buried_skin/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/buried/zed_buried_skin/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/buried/zed_buried_skin/run/run_down_0.png",
+                "enemy/zed/buried/zed_buried_skin/run/run_down_1.png",
+                "enemy/zed/buried/zed_buried_skin/run/run_down_2.png",
+                "enemy/zed/buried/zed_buried_skin/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/buried/zed_buried_skin/run/run_left_0.png",
+                "enemy/zed/buried/zed_buried_skin/run/run_left_1.png",
+                "enemy/zed/buried/zed_buried_skin/run/run_left_2.png",
+                "enemy/zed/buried/zed_buried_skin/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/buried/zed_buried_skin/run/run_right_0.png",
+                "enemy/zed/buried/zed_buried_skin/run/run_right_1.png",
+                "enemy/zed/buried/zed_buried_skin/run/run_right_2.png",
+                "enemy/zed/buried/zed_buried_skin/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/buried/zed_buried_skin/run/run_up_0.png",
+                "enemy/zed/buried/zed_buried_skin/run/run_up_1.png",
+                "enemy/zed/buried/zed_buried_skin/run/run_up_2.png",
+                "enemy/zed/buried/zed_buried_skin/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/buried/zed_buried_skin/walk/walk_down_0.png",
+                "enemy/zed/buried/zed_buried_skin/walk/walk_down_1.png",
+                "enemy/zed/buried/zed_buried_skin/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/buried/zed_buried_skin/walk/walk_left_0.png",
+                "enemy/zed/buried/zed_buried_skin/walk/walk_left_1.png",
+                "enemy/zed/buried/zed_buried_skin/walk/walk_left_2.png",
+                "enemy/zed/buried/zed_buried_skin/walk/walk_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/buried/zed_buried_skin/walk/walk_right_0.png",
+                "enemy/zed/buried/zed_buried_skin/walk/walk_right_1.png",
+                "enemy/zed/buried/zed_buried_skin/walk/walk_right_2.png",
+                "enemy/zed/buried/zed_buried_skin/walk/walk_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/buried/zed_buried_skin/walk/walk_up_0.png",
+                "enemy/zed/buried/zed_buried_skin/walk/walk_up_1.png",
+                "enemy/zed/buried/zed_buried_skin/walk/walk_up_2.png"
+              ]
+            }
+          }
+        }
+      },
+      "dead": {
+        "zed_buried_skin_dead": {
+          "die1": [
+            "enemy/zed/buried/zed_buried_skin_dead/die1/die1_0.png",
+            "enemy/zed/buried/zed_buried_skin_dead/die1/die1_1.png",
+            "enemy/zed/buried/zed_buried_skin_dead/die1/die1_2.png",
+            "enemy/zed/buried/zed_buried_skin_dead/die1/die1_3.png",
+            "enemy/zed/buried/zed_buried_skin_dead/die1/die1_4.png"
+          ]
+        }
+      },
+      "spawn_fx": {
+        "available_poses": [
+          "hidden1",
+          "hidden2",
+          "jump1",
+          "jump2"
+        ],
+        "poses": {
+          "hidden1": {
+            "frames": [
+              "enemy/zed/buried/zed_buried_hidden/hidden1/hidden1_0.png",
+              "enemy/zed/buried/zed_buried_hidden/hidden1/hidden1_1.png"
+            ]
+          },
+          "hidden2": {
+            "frames": [
+              "enemy/zed/buried/zed_buried_hidden/hidden2/hidden2_0.png",
+              "enemy/zed/buried/zed_buried_hidden/hidden2/hidden2_1.png"
+            ]
+          },
+          "jump1": {
+            "frames": [
+              "enemy/zed/buried/zed_buried_hidden/jump1/jump1_0.png",
+              "enemy/zed/buried/zed_buried_hidden/jump1/jump1_1.png",
+              "enemy/zed/buried/zed_buried_hidden/jump1/jump1_2.png",
+              "enemy/zed/buried/zed_buried_hidden/jump1/jump1_3.png",
+              "enemy/zed/buried/zed_buried_hidden/jump1/jump1_4.png"
+            ]
+          },
+          "jump2": {
+            "frames": [
+              "enemy/zed/buried/zed_buried_hidden/jump2/jump2_0.png",
+              "enemy/zed/buried/zed_buried_hidden/jump2/jump2_1.png",
+              "enemy/zed/buried/zed_buried_hidden/jump2/jump2_2.png",
+              "enemy/zed/buried/zed_buried_hidden/jump2/jump2_3.png",
+              "enemy/zed/buried/zed_buried_hidden/jump2/jump2_4.png"
+            ]
+          }
+        }
+      }
+    },
+    "fast": {
+      "skins": {
+        "zed_fast_skin1": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/fast/zed_fast_skin1/attack/attack_down_0.png",
+                "enemy/zed/fast/zed_fast_skin1/attack/attack_down_1.png",
+                "enemy/zed/fast/zed_fast_skin1/attack/attack_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/fast/zed_fast_skin1/attack/attack_left_0.png",
+                "enemy/zed/fast/zed_fast_skin1/attack/attack_left_1.png",
+                "enemy/zed/fast/zed_fast_skin1/attack/attack_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/fast/zed_fast_skin1/attack/attack_right_0.png",
+                "enemy/zed/fast/zed_fast_skin1/attack/attack_right_1.png",
+                "enemy/zed/fast/zed_fast_skin1/attack/attack_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/fast/zed_fast_skin1/attack/attack_up_0.png",
+                "enemy/zed/fast/zed_fast_skin1/attack/attack_up_1.png",
+                "enemy/zed/fast/zed_fast_skin1/attack/attack_up_2.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/fast/zed_fast_skin1/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/fast/zed_fast_skin1/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/fast/zed_fast_skin1/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/fast/zed_fast_skin1/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/fast/zed_fast_skin1/run/run_down_0.png",
+                "enemy/zed/fast/zed_fast_skin1/run/run_down_1.png",
+                "enemy/zed/fast/zed_fast_skin1/run/run_down_2.png",
+                "enemy/zed/fast/zed_fast_skin1/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/fast/zed_fast_skin1/run/run_left_0.png",
+                "enemy/zed/fast/zed_fast_skin1/run/run_left_1.png",
+                "enemy/zed/fast/zed_fast_skin1/run/run_left_2.png",
+                "enemy/zed/fast/zed_fast_skin1/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/fast/zed_fast_skin1/run/run_right_0.png",
+                "enemy/zed/fast/zed_fast_skin1/run/run_right_1.png",
+                "enemy/zed/fast/zed_fast_skin1/run/run_right_2.png",
+                "enemy/zed/fast/zed_fast_skin1/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/fast/zed_fast_skin1/run/run_up_0.png",
+                "enemy/zed/fast/zed_fast_skin1/run/run_up_1.png",
+                "enemy/zed/fast/zed_fast_skin1/run/run_up_2.png",
+                "enemy/zed/fast/zed_fast_skin1/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/fast/zed_fast_skin1/walk/walk_down_0.png",
+                "enemy/zed/fast/zed_fast_skin1/walk/walk_down_1.png",
+                "enemy/zed/fast/zed_fast_skin1/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/fast/zed_fast_skin1/walk/walk_left_0.png",
+                "enemy/zed/fast/zed_fast_skin1/walk/walk_left_1.png",
+                "enemy/zed/fast/zed_fast_skin1/walk/walk_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/fast/zed_fast_skin1/walk/walk_right_0.png",
+                "enemy/zed/fast/zed_fast_skin1/walk/walk_right_1.png",
+                "enemy/zed/fast/zed_fast_skin1/walk/walk_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/fast/zed_fast_skin1/walk/walk_up_0.png",
+                "enemy/zed/fast/zed_fast_skin1/walk/walk_up_1.png",
+                "enemy/zed/fast/zed_fast_skin1/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_fast_skin2": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/fast/zed_fast_skin2/attack/attack_down_0.png",
+                "enemy/zed/fast/zed_fast_skin2/attack/attack_down_1.png",
+                "enemy/zed/fast/zed_fast_skin2/attack/attack_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/fast/zed_fast_skin2/attack/attack_left_0.png",
+                "enemy/zed/fast/zed_fast_skin2/attack/attack_left_1.png",
+                "enemy/zed/fast/zed_fast_skin2/attack/attack_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/fast/zed_fast_skin2/attack/attack_right_0.png",
+                "enemy/zed/fast/zed_fast_skin2/attack/attack_right_1.png",
+                "enemy/zed/fast/zed_fast_skin2/attack/attack_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/fast/zed_fast_skin2/attack/attack_up_0.png",
+                "enemy/zed/fast/zed_fast_skin2/attack/attack_up_1.png",
+                "enemy/zed/fast/zed_fast_skin2/attack/attack_up_2.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/fast/zed_fast_skin2/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/fast/zed_fast_skin2/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/fast/zed_fast_skin2/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/fast/zed_fast_skin2/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/fast/zed_fast_skin2/run/run_down_0.png",
+                "enemy/zed/fast/zed_fast_skin2/run/run_down_1.png",
+                "enemy/zed/fast/zed_fast_skin2/run/run_down_2.png",
+                "enemy/zed/fast/zed_fast_skin2/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/fast/zed_fast_skin2/run/run_left_0.png",
+                "enemy/zed/fast/zed_fast_skin2/run/run_left_1.png",
+                "enemy/zed/fast/zed_fast_skin2/run/run_left_2.png",
+                "enemy/zed/fast/zed_fast_skin2/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/fast/zed_fast_skin2/run/run_right_0.png",
+                "enemy/zed/fast/zed_fast_skin2/run/run_right_1.png",
+                "enemy/zed/fast/zed_fast_skin2/run/run_right_2.png",
+                "enemy/zed/fast/zed_fast_skin2/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/fast/zed_fast_skin2/run/run_up_0.png",
+                "enemy/zed/fast/zed_fast_skin2/run/run_up_1.png",
+                "enemy/zed/fast/zed_fast_skin2/run/run_up_2.png",
+                "enemy/zed/fast/zed_fast_skin2/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/fast/zed_fast_skin2/walk/walk_down_0.png",
+                "enemy/zed/fast/zed_fast_skin2/walk/walk_down_1.png",
+                "enemy/zed/fast/zed_fast_skin2/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/fast/zed_fast_skin2/walk/walk_left_0.png",
+                "enemy/zed/fast/zed_fast_skin2/walk/walk_left_1.png",
+                "enemy/zed/fast/zed_fast_skin2/walk/walk_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/fast/zed_fast_skin2/walk/walk_right_0.png",
+                "enemy/zed/fast/zed_fast_skin2/walk/walk_right_1.png",
+                "enemy/zed/fast/zed_fast_skin2/walk/walk_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/fast/zed_fast_skin2/walk/walk_up_0.png",
+                "enemy/zed/fast/zed_fast_skin2/walk/walk_up_1.png",
+                "enemy/zed/fast/zed_fast_skin2/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_fast_skin3": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/fast/zed_fast_skin3/attack/attack_down_0.png",
+                "enemy/zed/fast/zed_fast_skin3/attack/attack_down_1.png",
+                "enemy/zed/fast/zed_fast_skin3/attack/attack_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/fast/zed_fast_skin3/attack/attack_left_0.png",
+                "enemy/zed/fast/zed_fast_skin3/attack/attack_left_1.png",
+                "enemy/zed/fast/zed_fast_skin3/attack/attack_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/fast/zed_fast_skin3/attack/attack_right_0.png",
+                "enemy/zed/fast/zed_fast_skin3/attack/attack_right_1.png",
+                "enemy/zed/fast/zed_fast_skin3/attack/attack_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/fast/zed_fast_skin3/attack/attack_up_0.png",
+                "enemy/zed/fast/zed_fast_skin3/attack/attack_up_1.png",
+                "enemy/zed/fast/zed_fast_skin3/attack/attack_up_2.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/fast/zed_fast_skin3/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/fast/zed_fast_skin3/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/fast/zed_fast_skin3/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/fast/zed_fast_skin3/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/fast/zed_fast_skin3/run/run_down_0.png",
+                "enemy/zed/fast/zed_fast_skin3/run/run_down_1.png",
+                "enemy/zed/fast/zed_fast_skin3/run/run_down_2.png",
+                "enemy/zed/fast/zed_fast_skin3/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/fast/zed_fast_skin3/run/run_left_0.png",
+                "enemy/zed/fast/zed_fast_skin3/run/run_left_1.png",
+                "enemy/zed/fast/zed_fast_skin3/run/run_left_2.png",
+                "enemy/zed/fast/zed_fast_skin3/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/fast/zed_fast_skin3/run/run_right_0.png",
+                "enemy/zed/fast/zed_fast_skin3/run/run_right_1.png",
+                "enemy/zed/fast/zed_fast_skin3/run/run_right_2.png",
+                "enemy/zed/fast/zed_fast_skin3/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/fast/zed_fast_skin3/run/run_up_0.png",
+                "enemy/zed/fast/zed_fast_skin3/run/run_up_1.png",
+                "enemy/zed/fast/zed_fast_skin3/run/run_up_2.png",
+                "enemy/zed/fast/zed_fast_skin3/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/fast/zed_fast_skin3/walk/walk_down_0.png",
+                "enemy/zed/fast/zed_fast_skin3/walk/walk_down_1.png",
+                "enemy/zed/fast/zed_fast_skin3/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/fast/zed_fast_skin3/walk/walk_left_0.png",
+                "enemy/zed/fast/zed_fast_skin3/walk/walk_left_1.png",
+                "enemy/zed/fast/zed_fast_skin3/walk/walk_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/fast/zed_fast_skin3/walk/walk_right_0.png",
+                "enemy/zed/fast/zed_fast_skin3/walk/walk_right_1.png",
+                "enemy/zed/fast/zed_fast_skin3/walk/walk_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/fast/zed_fast_skin3/walk/walk_up_0.png",
+                "enemy/zed/fast/zed_fast_skin3/walk/walk_up_1.png",
+                "enemy/zed/fast/zed_fast_skin3/walk/walk_up_2.png"
+              ]
+            }
+          }
+        }
+      },
+      "dead": {
+        "zed_fast_skin1_dead": {
+          "die1": [
+            "enemy/zed/fast/dead/zed_fast_skin1_dead/die1/die1_0.png",
+            "enemy/zed/fast/dead/zed_fast_skin1_dead/die1/die1_1.png",
+            "enemy/zed/fast/dead/zed_fast_skin1_dead/die1/die1_2.png",
+            "enemy/zed/fast/dead/zed_fast_skin1_dead/die1/die1_3.png",
+            "enemy/zed/fast/dead/zed_fast_skin1_dead/die1/die1_4.png"
+          ],
+          "die2": [
+            "enemy/zed/fast/dead/zed_fast_skin1_dead/die2/die2_0.png",
+            "enemy/zed/fast/dead/zed_fast_skin1_dead/die2/die2_1.png",
+            "enemy/zed/fast/dead/zed_fast_skin1_dead/die2/die2_2.png",
+            "enemy/zed/fast/dead/zed_fast_skin1_dead/die2/die2_3.png",
+            "enemy/zed/fast/dead/zed_fast_skin1_dead/die2/die2_4.png"
+          ]
+        },
+        "zed_fast_skin2_dead": {
+          "die1": [
+            "enemy/zed/fast/dead/zed_fast_skin2_dead/die1/die1_0.png",
+            "enemy/zed/fast/dead/zed_fast_skin2_dead/die1/die1_1.png",
+            "enemy/zed/fast/dead/zed_fast_skin2_dead/die1/die1_2.png",
+            "enemy/zed/fast/dead/zed_fast_skin2_dead/die1/die1_3.png"
+          ],
+          "die2": [
+            "enemy/zed/fast/dead/zed_fast_skin2_dead/die2/die2_0.png",
+            "enemy/zed/fast/dead/zed_fast_skin2_dead/die2/die2_1.png",
+            "enemy/zed/fast/dead/zed_fast_skin2_dead/die2/die2_2.png",
+            "enemy/zed/fast/dead/zed_fast_skin2_dead/die2/die2_3.png"
+          ]
+        },
+        "zed_fast_skin3_dead": {
+          "die1": [
+            "enemy/zed/fast/dead/zed_fast_skin3_dead/die1/die1_0.png",
+            "enemy/zed/fast/dead/zed_fast_skin3_dead/die1/die1_1.png",
+            "enemy/zed/fast/dead/zed_fast_skin3_dead/die1/die1_2.png",
+            "enemy/zed/fast/dead/zed_fast_skin3_dead/die1/die1_3.png"
+          ],
+          "die2": [
+            "enemy/zed/fast/dead/zed_fast_skin3_dead/die2/die2_0.png",
+            "enemy/zed/fast/dead/zed_fast_skin3_dead/die2/die2_1.png",
+            "enemy/zed/fast/dead/zed_fast_skin3_dead/die2/die2_2.png",
+            "enemy/zed/fast/dead/zed_fast_skin3_dead/die2/die2_3.png",
+            "enemy/zed/fast/dead/zed_fast_skin3_dead/die2/die2_4.png"
+          ]
+        }
+      }
+    },
+    "jumper": {
+      "skins": {
+        "zed_jumper_skin": {
+          "available_poses": [
+            "attack",
+            "default",
+            "fly",
+            "idle",
+            "run",
+            "scream",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/jumper/zed_jumper_skin/attack/attack_down_0.png",
+                "enemy/zed/jumper/zed_jumper_skin/attack/attack_down_1.png",
+                "enemy/zed/jumper/zed_jumper_skin/attack/attack_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/jumper/zed_jumper_skin/attack/attack_left_0.png",
+                "enemy/zed/jumper/zed_jumper_skin/attack/attack_left_1.png",
+                "enemy/zed/jumper/zed_jumper_skin/attack/attack_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/jumper/zed_jumper_skin/attack/attack_right_0.png",
+                "enemy/zed/jumper/zed_jumper_skin/attack/attack_right_1.png",
+                "enemy/zed/jumper/zed_jumper_skin/attack/attack_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/jumper/zed_jumper_skin/attack/attack_up_0.png",
+                "enemy/zed/jumper/zed_jumper_skin/attack/attack_up_1.png",
+                "enemy/zed/jumper/zed_jumper_skin/attack/attack_up_2.png"
+              ]
+            },
+            "default": {
+              "frames": [
+                "enemy/zed/jumper/zed_jumper_skin/default/Default_0.png"
+              ]
+            },
+            "fly": {
+              "down": [
+                "enemy/zed/jumper/zed_jumper_skin/fly/fly_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/jumper/zed_jumper_skin/fly/fly_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/jumper/zed_jumper_skin/fly/fly_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/jumper/zed_jumper_skin/fly/fly_up_0.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/jumper/zed_jumper_skin/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/jumper/zed_jumper_skin/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/jumper/zed_jumper_skin/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/jumper/zed_jumper_skin/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/jumper/zed_jumper_skin/run/run_down_0.png",
+                "enemy/zed/jumper/zed_jumper_skin/run/run_down_1.png",
+                "enemy/zed/jumper/zed_jumper_skin/run/run_down_2.png",
+                "enemy/zed/jumper/zed_jumper_skin/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/jumper/zed_jumper_skin/run/run_left_0.png",
+                "enemy/zed/jumper/zed_jumper_skin/run/run_left_1.png",
+                "enemy/zed/jumper/zed_jumper_skin/run/run_left_2.png",
+                "enemy/zed/jumper/zed_jumper_skin/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/jumper/zed_jumper_skin/run/run_right_0.png",
+                "enemy/zed/jumper/zed_jumper_skin/run/run_right_1.png",
+                "enemy/zed/jumper/zed_jumper_skin/run/run_right_2.png",
+                "enemy/zed/jumper/zed_jumper_skin/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/jumper/zed_jumper_skin/run/run_up_0.png",
+                "enemy/zed/jumper/zed_jumper_skin/run/run_up_1.png",
+                "enemy/zed/jumper/zed_jumper_skin/run/run_up_2.png",
+                "enemy/zed/jumper/zed_jumper_skin/run/run_up_3.png"
+              ]
+            },
+            "scream": {
+              "frames": [
+                "enemy/zed/jumper/zed_jumper_skin/scream/scream_0.png",
+                "enemy/zed/jumper/zed_jumper_skin/scream/scream_1.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/jumper/zed_jumper_skin/walk/walk_down_0.png",
+                "enemy/zed/jumper/zed_jumper_skin/walk/walk_down_1.png",
+                "enemy/zed/jumper/zed_jumper_skin/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/jumper/zed_jumper_skin/walk/walk_left_0.png",
+                "enemy/zed/jumper/zed_jumper_skin/walk/walk_left_1.png",
+                "enemy/zed/jumper/zed_jumper_skin/walk/walk_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/jumper/zed_jumper_skin/walk/walk_right_0.png",
+                "enemy/zed/jumper/zed_jumper_skin/walk/walk_right_1.png",
+                "enemy/zed/jumper/zed_jumper_skin/walk/walk_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/jumper/zed_jumper_skin/walk/walk_up_0.png",
+                "enemy/zed/jumper/zed_jumper_skin/walk/walk_up_1.png",
+                "enemy/zed/jumper/zed_jumper_skin/walk/walk_up_2.png"
+              ]
+            }
+          }
+        }
+      },
+      "dead": {
+        "zed_jumper_skin_dead": {
+          "default": [
+            "enemy/zed/jumper/zed_jumper_skin_dead/default/Default_1.png",
+            "enemy/zed/jumper/zed_jumper_skin_dead/default/Default_2.png",
+            "enemy/zed/jumper/zed_jumper_skin_dead/default/Default_3.png"
+          ]
+        }
+      },
+      "shadow": {
+        "available_poses": [
+          "default"
+        ],
+        "poses": {
+          "default": {
+            "frames": [
+              "enemy/zed/jumper/zed_jumper_shadow/default/Default_0.png"
+            ]
+          }
+        }
+      }
+    },
+    "normal": {
+      "skins": {
+        "zed_normal_skin1": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_down_0.png",
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_down_1.png",
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_down_2.png",
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_left_0.png",
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_left_1.png",
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_left_2.png",
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_right_0.png",
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_right_1.png",
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_right_2.png",
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_up_0.png",
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_up_1.png",
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_up_2.png",
+                "enemy/zed/normal/zed_normal_skin1/attack/attack_up_3.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin1/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin1/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin1/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin1/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin1/run/run_down_0.png",
+                "enemy/zed/normal/zed_normal_skin1/run/run_down_1.png",
+                "enemy/zed/normal/zed_normal_skin1/run/run_down_2.png",
+                "enemy/zed/normal/zed_normal_skin1/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin1/run/run_left_0.png",
+                "enemy/zed/normal/zed_normal_skin1/run/run_left_1.png",
+                "enemy/zed/normal/zed_normal_skin1/run/run_left_2.png",
+                "enemy/zed/normal/zed_normal_skin1/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin1/run/run_right_0.png",
+                "enemy/zed/normal/zed_normal_skin1/run/run_right_1.png",
+                "enemy/zed/normal/zed_normal_skin1/run/run_right_2.png",
+                "enemy/zed/normal/zed_normal_skin1/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin1/run/run_up_0.png",
+                "enemy/zed/normal/zed_normal_skin1/run/run_up_1.png",
+                "enemy/zed/normal/zed_normal_skin1/run/run_up_2.png",
+                "enemy/zed/normal/zed_normal_skin1/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_down_0.png",
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_down_1.png",
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_left_0.png",
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_left_1.png",
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_left_2.png",
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_right_0.png",
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_right_1.png",
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_right_2.png",
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_up_0.png",
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_up_1.png",
+                "enemy/zed/normal/zed_normal_skin1/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_normal_skin10": {
+          "available_poses": [
+            "attack",
+            "dodge",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_down_0.png",
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_down_1.png",
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_down_2.png",
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_left_0.png",
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_left_1.png",
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_left_2.png",
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_right_0.png",
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_right_1.png",
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_right_2.png",
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_up_0.png",
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_up_1.png",
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_up_2.png",
+                "enemy/zed/normal/zed_normal_skin10/attack/attack_up_3.png"
+              ]
+            },
+            "dodge": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_down_0.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_down_1.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_down_2.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_down_3.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_down_4.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_down_5.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_left_0.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_left_1.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_left_2.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_left_3.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_left_4.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_left_5.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_right_0.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_right_1.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_right_2.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_right_3.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_right_4.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_right_5.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_up_0.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_up_1.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_up_2.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_up_3.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_up_4.png",
+                "enemy/zed/normal/zed_normal_skin10/dodge/dodge_up_5.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin10/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin10/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin10/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin10/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin10/run/run_down_0.png",
+                "enemy/zed/normal/zed_normal_skin10/run/run_down_1.png",
+                "enemy/zed/normal/zed_normal_skin10/run/run_down_2.png",
+                "enemy/zed/normal/zed_normal_skin10/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin10/run/run_left_0.png",
+                "enemy/zed/normal/zed_normal_skin10/run/run_left_1.png",
+                "enemy/zed/normal/zed_normal_skin10/run/run_left_2.png",
+                "enemy/zed/normal/zed_normal_skin10/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin10/run/run_right_0.png",
+                "enemy/zed/normal/zed_normal_skin10/run/run_right_1.png",
+                "enemy/zed/normal/zed_normal_skin10/run/run_right_2.png",
+                "enemy/zed/normal/zed_normal_skin10/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin10/run/run_up_0.png",
+                "enemy/zed/normal/zed_normal_skin10/run/run_up_1.png",
+                "enemy/zed/normal/zed_normal_skin10/run/run_up_2.png",
+                "enemy/zed/normal/zed_normal_skin10/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_down_0.png",
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_down_1.png",
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_left_0.png",
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_left_1.png",
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_left_2.png",
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_right_0.png",
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_right_1.png",
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_right_2.png",
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_up_0.png",
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_up_1.png",
+                "enemy/zed/normal/zed_normal_skin10/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_normal_skin11": {
+          "available_poses": [
+            "attack",
+            "dodge",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_down_0.png",
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_down_1.png",
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_down_2.png",
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_left_0.png",
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_left_1.png",
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_left_2.png",
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_right_0.png",
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_right_1.png",
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_right_2.png",
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_up_0.png",
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_up_1.png",
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_up_2.png",
+                "enemy/zed/normal/zed_normal_skin11/attack/attack_up_3.png"
+              ]
+            },
+            "dodge": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_down_0.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_down_1.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_down_2.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_down_3.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_down_4.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_left_0.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_left_1.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_left_2.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_left_3.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_left_4.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_left_5.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_right_0.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_right_1.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_right_2.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_right_3.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_right_4.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_right_5.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_up_0.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_up_1.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_up_2.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_up_3.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_up_4.png",
+                "enemy/zed/normal/zed_normal_skin11/dodge/dodge_up_5.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin11/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin11/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin11/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin11/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin11/run/run_down_0.png",
+                "enemy/zed/normal/zed_normal_skin11/run/run_down_1.png",
+                "enemy/zed/normal/zed_normal_skin11/run/run_down_2.png",
+                "enemy/zed/normal/zed_normal_skin11/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin11/run/run_left_0.png",
+                "enemy/zed/normal/zed_normal_skin11/run/run_left_1.png",
+                "enemy/zed/normal/zed_normal_skin11/run/run_left_2.png",
+                "enemy/zed/normal/zed_normal_skin11/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin11/run/run_right_0.png",
+                "enemy/zed/normal/zed_normal_skin11/run/run_right_1.png",
+                "enemy/zed/normal/zed_normal_skin11/run/run_right_2.png",
+                "enemy/zed/normal/zed_normal_skin11/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin11/run/run_up_0.png",
+                "enemy/zed/normal/zed_normal_skin11/run/run_up_1.png",
+                "enemy/zed/normal/zed_normal_skin11/run/run_up_2.png",
+                "enemy/zed/normal/zed_normal_skin11/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_down_0.png",
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_down_1.png",
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_left_0.png",
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_left_1.png",
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_left_2.png",
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_right_0.png",
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_right_1.png",
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_right_2.png",
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_up_0.png",
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_up_1.png",
+                "enemy/zed/normal/zed_normal_skin11/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_normal_skin2": {
+          "available_poses": [
+            "attack",
+            "die2",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_down_0.png",
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_down_1.png",
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_down_2.png",
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_left_0.png",
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_left_1.png",
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_left_2.png",
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_right_0.png",
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_right_1.png",
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_right_2.png",
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_up_0.png",
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_up_1.png",
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_up_2.png",
+                "enemy/zed/normal/zed_normal_skin2/attack/attack_up_3.png"
+              ]
+            },
+            "die2": {
+              "frames": [
+                "enemy/zed/normal/zed_normal_skin2/die2/die2_0.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin2/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin2/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin2/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin2/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin2/run/run_down_0.png",
+                "enemy/zed/normal/zed_normal_skin2/run/run_down_1.png",
+                "enemy/zed/normal/zed_normal_skin2/run/run_down_2.png",
+                "enemy/zed/normal/zed_normal_skin2/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin2/run/run_left_0.png",
+                "enemy/zed/normal/zed_normal_skin2/run/run_left_1.png",
+                "enemy/zed/normal/zed_normal_skin2/run/run_left_2.png",
+                "enemy/zed/normal/zed_normal_skin2/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin2/run/run_right_0.png",
+                "enemy/zed/normal/zed_normal_skin2/run/run_right_1.png",
+                "enemy/zed/normal/zed_normal_skin2/run/run_right_2.png",
+                "enemy/zed/normal/zed_normal_skin2/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin2/run/run_up_0.png",
+                "enemy/zed/normal/zed_normal_skin2/run/run_up_1.png",
+                "enemy/zed/normal/zed_normal_skin2/run/run_up_2.png",
+                "enemy/zed/normal/zed_normal_skin2/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_down_0.png",
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_down_1.png",
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_left_0.png",
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_left_1.png",
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_left_2.png",
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_right_0.png",
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_right_1.png",
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_right_2.png",
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_up_0.png",
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_up_1.png",
+                "enemy/zed/normal/zed_normal_skin2/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_normal_skin3": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_down_0.png",
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_down_1.png",
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_down_2.png",
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_left_0.png",
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_left_1.png",
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_left_2.png",
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_right_0.png",
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_right_1.png",
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_right_2.png",
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_up_0.png",
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_up_1.png",
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_up_2.png",
+                "enemy/zed/normal/zed_normal_skin3/attack/attack_up_3.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin3/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin3/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin3/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin3/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin3/run/run_down_0.png",
+                "enemy/zed/normal/zed_normal_skin3/run/run_down_1.png",
+                "enemy/zed/normal/zed_normal_skin3/run/run_down_2.png",
+                "enemy/zed/normal/zed_normal_skin3/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin3/run/run_left_0.png",
+                "enemy/zed/normal/zed_normal_skin3/run/run_left_1.png",
+                "enemy/zed/normal/zed_normal_skin3/run/run_left_2.png",
+                "enemy/zed/normal/zed_normal_skin3/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin3/run/run_right_0.png",
+                "enemy/zed/normal/zed_normal_skin3/run/run_right_1.png",
+                "enemy/zed/normal/zed_normal_skin3/run/run_right_2.png",
+                "enemy/zed/normal/zed_normal_skin3/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin3/run/run_up_0.png",
+                "enemy/zed/normal/zed_normal_skin3/run/run_up_1.png",
+                "enemy/zed/normal/zed_normal_skin3/run/run_up_2.png",
+                "enemy/zed/normal/zed_normal_skin3/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_down_0.png",
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_down_1.png",
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_left_0.png",
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_left_1.png",
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_left_2.png",
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_right_0.png",
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_right_1.png",
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_right_2.png",
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_up_0.png",
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_up_1.png",
+                "enemy/zed/normal/zed_normal_skin3/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_normal_skin4": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_down_0.png",
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_down_1.png",
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_down_2.png",
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_left_0.png",
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_left_1.png",
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_left_2.png",
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_right_0.png",
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_right_1.png",
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_right_2.png",
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_up_0.png",
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_up_1.png",
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_up_2.png",
+                "enemy/zed/normal/zed_normal_skin4/attack/attack_up_3.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin4/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin4/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin4/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin4/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin4/run/run_down_0.png",
+                "enemy/zed/normal/zed_normal_skin4/run/run_down_1.png",
+                "enemy/zed/normal/zed_normal_skin4/run/run_down_2.png",
+                "enemy/zed/normal/zed_normal_skin4/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin4/run/run_left_0.png",
+                "enemy/zed/normal/zed_normal_skin4/run/run_left_1.png",
+                "enemy/zed/normal/zed_normal_skin4/run/run_left_2.png",
+                "enemy/zed/normal/zed_normal_skin4/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin4/run/run_right_0.png",
+                "enemy/zed/normal/zed_normal_skin4/run/run_right_1.png",
+                "enemy/zed/normal/zed_normal_skin4/run/run_right_2.png",
+                "enemy/zed/normal/zed_normal_skin4/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin4/run/run_up_0.png",
+                "enemy/zed/normal/zed_normal_skin4/run/run_up_1.png",
+                "enemy/zed/normal/zed_normal_skin4/run/run_up_2.png",
+                "enemy/zed/normal/zed_normal_skin4/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_down_0.png",
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_down_1.png",
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_left_0.png",
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_left_1.png",
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_left_2.png",
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_right_0.png",
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_right_1.png",
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_right_2.png",
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_up_0.png",
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_up_1.png",
+                "enemy/zed/normal/zed_normal_skin4/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_normal_skin5": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_down_0.png",
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_down_1.png",
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_down_2.png",
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_left_0.png",
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_left_1.png",
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_left_2.png",
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_right_0.png",
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_right_1.png",
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_right_2.png",
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_up_0.png",
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_up_1.png",
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_up_2.png",
+                "enemy/zed/normal/zed_normal_skin5/attack/attack_up_3.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin5/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin5/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin5/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin5/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin5/run/run_down_0.png",
+                "enemy/zed/normal/zed_normal_skin5/run/run_down_1.png",
+                "enemy/zed/normal/zed_normal_skin5/run/run_down_2.png",
+                "enemy/zed/normal/zed_normal_skin5/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin5/run/run_left_0.png",
+                "enemy/zed/normal/zed_normal_skin5/run/run_left_1.png",
+                "enemy/zed/normal/zed_normal_skin5/run/run_left_2.png",
+                "enemy/zed/normal/zed_normal_skin5/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin5/run/run_right_0.png",
+                "enemy/zed/normal/zed_normal_skin5/run/run_right_1.png",
+                "enemy/zed/normal/zed_normal_skin5/run/run_right_2.png",
+                "enemy/zed/normal/zed_normal_skin5/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin5/run/run_up_0.png",
+                "enemy/zed/normal/zed_normal_skin5/run/run_up_1.png",
+                "enemy/zed/normal/zed_normal_skin5/run/run_up_2.png",
+                "enemy/zed/normal/zed_normal_skin5/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_down_0.png",
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_down_1.png",
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_left_0.png",
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_left_1.png",
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_left_2.png",
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_right_0.png",
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_right_1.png",
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_right_2.png",
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_up_0.png",
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_up_1.png",
+                "enemy/zed/normal/zed_normal_skin5/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_normal_skin6": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_down_0.png",
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_down_1.png",
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_down_2.png",
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_left_0.png",
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_left_1.png",
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_left_2.png",
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_right_0.png",
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_right_1.png",
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_right_2.png",
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_up_0.png",
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_up_1.png",
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_up_2.png",
+                "enemy/zed/normal/zed_normal_skin6/attack/attack_up_3.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin6/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin6/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin6/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin6/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin6/run/run_down_0.png",
+                "enemy/zed/normal/zed_normal_skin6/run/run_down_1.png",
+                "enemy/zed/normal/zed_normal_skin6/run/run_down_2.png",
+                "enemy/zed/normal/zed_normal_skin6/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin6/run/run_left_0.png",
+                "enemy/zed/normal/zed_normal_skin6/run/run_left_1.png",
+                "enemy/zed/normal/zed_normal_skin6/run/run_left_2.png",
+                "enemy/zed/normal/zed_normal_skin6/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin6/run/run_right_0.png",
+                "enemy/zed/normal/zed_normal_skin6/run/run_right_1.png",
+                "enemy/zed/normal/zed_normal_skin6/run/run_right_2.png",
+                "enemy/zed/normal/zed_normal_skin6/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin6/run/run_up_0.png",
+                "enemy/zed/normal/zed_normal_skin6/run/run_up_1.png",
+                "enemy/zed/normal/zed_normal_skin6/run/run_up_2.png",
+                "enemy/zed/normal/zed_normal_skin6/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_down_0.png",
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_down_1.png",
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_left_0.png",
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_left_1.png",
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_left_2.png",
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_right_0.png",
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_right_1.png",
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_right_2.png",
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_up_0.png",
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_up_1.png",
+                "enemy/zed/normal/zed_normal_skin6/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_normal_skin7": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_down_0.png",
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_down_1.png",
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_down_2.png",
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_left_0.png",
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_left_1.png",
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_left_2.png",
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_right_0.png",
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_right_1.png",
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_right_2.png",
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_up_0.png",
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_up_1.png",
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_up_2.png",
+                "enemy/zed/normal/zed_normal_skin7/attack/attack_up_3.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin7/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin7/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin7/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin7/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin7/run/run_down_0.png",
+                "enemy/zed/normal/zed_normal_skin7/run/run_down_1.png",
+                "enemy/zed/normal/zed_normal_skin7/run/run_down_2.png",
+                "enemy/zed/normal/zed_normal_skin7/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin7/run/run_left_0.png",
+                "enemy/zed/normal/zed_normal_skin7/run/run_left_1.png",
+                "enemy/zed/normal/zed_normal_skin7/run/run_left_2.png",
+                "enemy/zed/normal/zed_normal_skin7/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin7/run/run_right_0.png",
+                "enemy/zed/normal/zed_normal_skin7/run/run_right_1.png",
+                "enemy/zed/normal/zed_normal_skin7/run/run_right_2.png",
+                "enemy/zed/normal/zed_normal_skin7/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin7/run/run_up_0.png",
+                "enemy/zed/normal/zed_normal_skin7/run/run_up_1.png",
+                "enemy/zed/normal/zed_normal_skin7/run/run_up_2.png",
+                "enemy/zed/normal/zed_normal_skin7/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_down_0.png",
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_down_1.png",
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_left_0.png",
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_left_1.png",
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_left_2.png",
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_right_0.png",
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_right_1.png",
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_right_2.png",
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_up_0.png",
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_up_1.png",
+                "enemy/zed/normal/zed_normal_skin7/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_normal_skin8": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_down_0.png",
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_down_1.png",
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_down_2.png",
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_left_0.png",
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_left_1.png",
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_left_2.png",
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_right_0.png",
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_right_1.png",
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_right_2.png",
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_up_0.png",
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_up_1.png",
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_up_2.png",
+                "enemy/zed/normal/zed_normal_skin8/attack/attack_up_3.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin8/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin8/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin8/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin8/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin8/run/run_down_0.png",
+                "enemy/zed/normal/zed_normal_skin8/run/run_down_1.png",
+                "enemy/zed/normal/zed_normal_skin8/run/run_down_2.png",
+                "enemy/zed/normal/zed_normal_skin8/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin8/run/run_left_0.png",
+                "enemy/zed/normal/zed_normal_skin8/run/run_left_1.png",
+                "enemy/zed/normal/zed_normal_skin8/run/run_left_2.png",
+                "enemy/zed/normal/zed_normal_skin8/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin8/run/run_right_0.png",
+                "enemy/zed/normal/zed_normal_skin8/run/run_right_1.png",
+                "enemy/zed/normal/zed_normal_skin8/run/run_right_2.png",
+                "enemy/zed/normal/zed_normal_skin8/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin8/run/run_up_0.png",
+                "enemy/zed/normal/zed_normal_skin8/run/run_up_1.png",
+                "enemy/zed/normal/zed_normal_skin8/run/run_up_2.png",
+                "enemy/zed/normal/zed_normal_skin8/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_down_0.png",
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_down_1.png",
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_left_0.png",
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_left_1.png",
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_left_2.png",
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_right_0.png",
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_right_1.png",
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_right_2.png",
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_up_0.png",
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_up_1.png",
+                "enemy/zed/normal/zed_normal_skin8/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_normal_skin9": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_down_0.png",
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_down_1.png",
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_down_2.png",
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_left_0.png",
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_left_1.png",
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_left_2.png",
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_right_0.png",
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_right_1.png",
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_right_2.png",
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_up_0.png",
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_up_1.png",
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_up_2.png",
+                "enemy/zed/normal/zed_normal_skin9/attack/attack_up_3.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin9/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin9/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin9/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin9/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin9/run/run_down_0.png",
+                "enemy/zed/normal/zed_normal_skin9/run/run_down_1.png",
+                "enemy/zed/normal/zed_normal_skin9/run/run_down_2.png",
+                "enemy/zed/normal/zed_normal_skin9/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin9/run/run_left_0.png",
+                "enemy/zed/normal/zed_normal_skin9/run/run_left_1.png",
+                "enemy/zed/normal/zed_normal_skin9/run/run_left_2.png",
+                "enemy/zed/normal/zed_normal_skin9/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin9/run/run_right_0.png",
+                "enemy/zed/normal/zed_normal_skin9/run/run_right_1.png",
+                "enemy/zed/normal/zed_normal_skin9/run/run_right_2.png",
+                "enemy/zed/normal/zed_normal_skin9/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin9/run/run_up_0.png",
+                "enemy/zed/normal/zed_normal_skin9/run/run_up_1.png",
+                "enemy/zed/normal/zed_normal_skin9/run/run_up_2.png",
+                "enemy/zed/normal/zed_normal_skin9/run/run_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_down_0.png",
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_down_1.png",
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_left_0.png",
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_left_1.png",
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_left_2.png",
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_right_0.png",
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_right_1.png",
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_right_2.png",
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_up_0.png",
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_up_1.png",
+                "enemy/zed/normal/zed_normal_skin9/walk/walk_up_2.png"
+              ]
+            }
+          }
+        }
+      },
+      "dead": {
+        "zed_normal_skin10_dead": {
+          "die1": [
+            "enemy/zed/normal/dead/zed_normal_skin10_dead/die1/die1_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin10_dead/die1/die1_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin10_dead/die1/die1_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin10_dead/die1/die1_3.png"
+          ]
+        },
+        "zed_normal_skin11_dead": {
+          "die1": [
+            "enemy/zed/normal/dead/zed_normal_skin11_dead/die1/die1_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin11_dead/die1/die1_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin11_dead/die1/die1_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin11_dead/die1/die1_3.png"
+          ]
+        },
+        "zed_normal_skin1_dead": {
+          "die1": [
+            "enemy/zed/normal/dead/zed_normal_skin1_dead/die1/die1_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin1_dead/die1/die1_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin1_dead/die1/die1_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin1_dead/die1/die1_3.png",
+            "enemy/zed/normal/dead/zed_normal_skin1_dead/die1/die1_4.png"
+          ],
+          "die2": [
+            "enemy/zed/normal/dead/zed_normal_skin1_dead/die2/die2_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin1_dead/die2/die2_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin1_dead/die2/die2_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin1_dead/die2/die2_3.png",
+            "enemy/zed/normal/dead/zed_normal_skin1_dead/die2/die2_4.png"
+          ]
+        },
+        "zed_normal_skin2_dead": {
+          "die1": [
+            "enemy/zed/normal/dead/zed_normal_skin2_dead/die1/die1_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin2_dead/die1/die1_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin2_dead/die1/die1_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin2_dead/die1/die1_3.png"
+          ],
+          "die2": [
+            "enemy/zed/normal/dead/zed_normal_skin2_dead/die2/die2_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin2_dead/die2/die2_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin2_dead/die2/die2_3.png",
+            "enemy/zed/normal/dead/zed_normal_skin2_dead/die2/die2_4.png"
+          ]
+        },
+        "zed_normal_skin3_dead": {
+          "die2": [
+            "enemy/zed/normal/dead/zed_normal_skin3_dead/die2/die2_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin3_dead/die2/die2_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin3_dead/die2/die2_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin3_dead/die2/die2_3.png"
+          ]
+        },
+        "zed_normal_skin4_dead": {
+          "die1": [
+            "enemy/zed/normal/dead/zed_normal_skin4_dead/die1/die1_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin4_dead/die1/die1_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin4_dead/die1/die1_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin4_dead/die1/die1_3.png"
+          ],
+          "die2": [
+            "enemy/zed/normal/dead/zed_normal_skin4_dead/die2/die2_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin4_dead/die2/die2_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin4_dead/die2/die2_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin4_dead/die2/die2_3.png"
+          ]
+        },
+        "zed_normal_skin5_dead": {
+          "die1": [
+            "enemy/zed/normal/dead/zed_normal_skin5_dead/die1/die1_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin5_dead/die1/die1_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin5_dead/die1/die1_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin5_dead/die1/die1_3.png"
+          ],
+          "die2": [
+            "enemy/zed/normal/dead/zed_normal_skin5_dead/die2/die2_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin5_dead/die2/die2_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin5_dead/die2/die2_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin5_dead/die2/die2_3.png",
+            "enemy/zed/normal/dead/zed_normal_skin5_dead/die2/die2_4.png"
+          ]
+        },
+        "zed_normal_skin6_dead": {
+          "die1": [
+            "enemy/zed/normal/dead/zed_normal_skin6_dead/die1/die1_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin6_dead/die1/die1_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin6_dead/die1/die1_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin6_dead/die1/die1_3.png"
+          ],
+          "die2": [
+            "enemy/zed/normal/dead/zed_normal_skin6_dead/die2/die2_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin6_dead/die2/die2_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin6_dead/die2/die2_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin6_dead/die2/die2_3.png"
+          ]
+        },
+        "zed_normal_skin7_dead": {
+          "die1": [
+            "enemy/zed/normal/dead/zed_normal_skin7_dead/die1/die1_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin7_dead/die1/die1_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin7_dead/die1/die1_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin7_dead/die1/die1_3.png"
+          ],
+          "die2": [
+            "enemy/zed/normal/dead/zed_normal_skin7_dead/die2/die2_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin7_dead/die2/die2_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin7_dead/die2/die2_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin7_dead/die2/die2_3.png",
+            "enemy/zed/normal/dead/zed_normal_skin7_dead/die2/die2_4.png"
+          ]
+        },
+        "zed_normal_skin8_dead": {
+          "die1": [
+            "enemy/zed/normal/dead/zed_normal_skin8_dead/die1/die1_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin8_dead/die1/die1_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin8_dead/die1/die1_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin8_dead/die1/die1_3.png"
+          ]
+        },
+        "zed_normal_skin9_dead": {
+          "die1": [
+            "enemy/zed/normal/dead/zed_normal_skin9_dead/die1/die1_0.png",
+            "enemy/zed/normal/dead/zed_normal_skin9_dead/die1/die1_1.png",
+            "enemy/zed/normal/dead/zed_normal_skin9_dead/die1/die1_2.png",
+            "enemy/zed/normal/dead/zed_normal_skin9_dead/die1/die1_3.png"
+          ]
+        }
+      }
+    },
+    "screamer": {
+      "skins": {
+        "zed_screamer_skin": {
+          "available_poses": [
+            "idle",
+            "run",
+            "scream"
+          ],
+          "poses": {
+            "idle": {
+              "down": [
+                "enemy/zed/screamer/zed_screamer_skin/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/screamer/zed_screamer_skin/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/screamer/zed_screamer_skin/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/screamer/zed_screamer_skin/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/screamer/zed_screamer_skin/run/run_down_0.png",
+                "enemy/zed/screamer/zed_screamer_skin/run/run_down_1.png",
+                "enemy/zed/screamer/zed_screamer_skin/run/run_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/screamer/zed_screamer_skin/run/run_left_0.png",
+                "enemy/zed/screamer/zed_screamer_skin/run/run_left_1.png",
+                "enemy/zed/screamer/zed_screamer_skin/run/run_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/screamer/zed_screamer_skin/run/run_right_0.png",
+                "enemy/zed/screamer/zed_screamer_skin/run/run_right_1.png",
+                "enemy/zed/screamer/zed_screamer_skin/run/run_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/screamer/zed_screamer_skin/run/run_up_0.png",
+                "enemy/zed/screamer/zed_screamer_skin/run/run_up_1.png",
+                "enemy/zed/screamer/zed_screamer_skin/run/run_up_2.png"
+              ]
+            },
+            "scream": {
+              "frames": [
+                "enemy/zed/screamer/zed_screamer_skin/scream/scream_0.png",
+                "enemy/zed/screamer/zed_screamer_skin/scream/scream_1.png",
+                "enemy/zed/screamer/zed_screamer_skin/scream/scream_2.png",
+                "enemy/zed/screamer/zed_screamer_skin/scream/scream_3.png",
+                "enemy/zed/screamer/zed_screamer_skin/scream/scream_4.png",
+                "enemy/zed/screamer/zed_screamer_skin/scream/scream_5.png",
+                "enemy/zed/screamer/zed_screamer_skin/scream/scream_6.png"
+              ]
+            }
+          }
+        }
+      },
+      "dead": {
+        "zed_screamer_skin_dead": {
+          "die1": [
+            "enemy/zed/screamer/zed_screamer_skin_dead/die1/die1_0.png",
+            "enemy/zed/screamer/zed_screamer_skin_dead/die1/die1_1.png",
+            "enemy/zed/screamer/zed_screamer_skin_dead/die1/die1_2.png",
+            "enemy/zed/screamer/zed_screamer_skin_dead/die1/die1_3.png"
+          ]
+        }
+      }
+    },
+    "shooter": {
+      "skins": {
+        "zed_shooter_skin": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/shooter/zed_shooter_skin/attack/attack_down_0.png",
+                "enemy/zed/shooter/zed_shooter_skin/attack/attack_down_1.png",
+                "enemy/zed/shooter/zed_shooter_skin/attack/attack_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/shooter/zed_shooter_skin/attack/attack_left_0.png",
+                "enemy/zed/shooter/zed_shooter_skin/attack/attack_left_1.png",
+                "enemy/zed/shooter/zed_shooter_skin/attack/attack_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/shooter/zed_shooter_skin/attack/attack_right_0.png",
+                "enemy/zed/shooter/zed_shooter_skin/attack/attack_right_1.png",
+                "enemy/zed/shooter/zed_shooter_skin/attack/attack_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/shooter/zed_shooter_skin/attack/attack_up_0.png",
+                "enemy/zed/shooter/zed_shooter_skin/attack/attack_up_1.png",
+                "enemy/zed/shooter/zed_shooter_skin/attack/attack_up_2.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/shooter/zed_shooter_skin/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/shooter/zed_shooter_skin/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/shooter/zed_shooter_skin/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/shooter/zed_shooter_skin/idle/idle_up_0.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/shooter/zed_shooter_skin/walk/walk_down_0.png",
+                "enemy/zed/shooter/zed_shooter_skin/walk/walk_down_1.png",
+                "enemy/zed/shooter/zed_shooter_skin/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/shooter/zed_shooter_skin/walk/walk_left_0.png",
+                "enemy/zed/shooter/zed_shooter_skin/walk/walk_left_1.png",
+                "enemy/zed/shooter/zed_shooter_skin/walk/walk_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/shooter/zed_shooter_skin/walk/walk_right_0.png",
+                "enemy/zed/shooter/zed_shooter_skin/walk/walk_right_1.png",
+                "enemy/zed/shooter/zed_shooter_skin/walk/walk_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/shooter/zed_shooter_skin/walk/walk_up_0.png",
+                "enemy/zed/shooter/zed_shooter_skin/walk/walk_up_1.png",
+                "enemy/zed/shooter/zed_shooter_skin/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_shooter_skin2": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/shooter/zed_shooter_skin2/attack/attack_down_0.png",
+                "enemy/zed/shooter/zed_shooter_skin2/attack/attack_down_1.png",
+                "enemy/zed/shooter/zed_shooter_skin2/attack/attack_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/shooter/zed_shooter_skin2/attack/attack_left_0.png",
+                "enemy/zed/shooter/zed_shooter_skin2/attack/attack_left_1.png",
+                "enemy/zed/shooter/zed_shooter_skin2/attack/attack_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/shooter/zed_shooter_skin2/attack/attack_right_0.png",
+                "enemy/zed/shooter/zed_shooter_skin2/attack/attack_right_1.png",
+                "enemy/zed/shooter/zed_shooter_skin2/attack/attack_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/shooter/zed_shooter_skin2/attack/attack_up_0.png",
+                "enemy/zed/shooter/zed_shooter_skin2/attack/attack_up_1.png",
+                "enemy/zed/shooter/zed_shooter_skin2/attack/attack_up_2.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/shooter/zed_shooter_skin2/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/shooter/zed_shooter_skin2/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/shooter/zed_shooter_skin2/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/shooter/zed_shooter_skin2/idle/idle_up_0.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/shooter/zed_shooter_skin2/walk/walk_down_0.png",
+                "enemy/zed/shooter/zed_shooter_skin2/walk/walk_down_1.png",
+                "enemy/zed/shooter/zed_shooter_skin2/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/shooter/zed_shooter_skin2/walk/walk_left_0.png",
+                "enemy/zed/shooter/zed_shooter_skin2/walk/walk_left_1.png",
+                "enemy/zed/shooter/zed_shooter_skin2/walk/walk_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/shooter/zed_shooter_skin2/walk/walk_right_0.png",
+                "enemy/zed/shooter/zed_shooter_skin2/walk/walk_right_1.png",
+                "enemy/zed/shooter/zed_shooter_skin2/walk/walk_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/shooter/zed_shooter_skin2/walk/walk_up_0.png",
+                "enemy/zed/shooter/zed_shooter_skin2/walk/walk_up_1.png",
+                "enemy/zed/shooter/zed_shooter_skin2/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_shooter_skin3": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/shooter/zed_shooter_skin3/attack/attack_down_0.png",
+                "enemy/zed/shooter/zed_shooter_skin3/attack/attack_down_1.png",
+                "enemy/zed/shooter/zed_shooter_skin3/attack/attack_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/shooter/zed_shooter_skin3/attack/attack_left_0.png",
+                "enemy/zed/shooter/zed_shooter_skin3/attack/attack_left_1.png",
+                "enemy/zed/shooter/zed_shooter_skin3/attack/attack_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/shooter/zed_shooter_skin3/attack/attack_right_0.png",
+                "enemy/zed/shooter/zed_shooter_skin3/attack/attack_right_1.png",
+                "enemy/zed/shooter/zed_shooter_skin3/attack/attack_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/shooter/zed_shooter_skin3/attack/attack_up_0.png",
+                "enemy/zed/shooter/zed_shooter_skin3/attack/attack_up_1.png",
+                "enemy/zed/shooter/zed_shooter_skin3/attack/attack_up_2.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/shooter/zed_shooter_skin3/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/shooter/zed_shooter_skin3/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/shooter/zed_shooter_skin3/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/shooter/zed_shooter_skin3/idle/idle_up_0.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/shooter/zed_shooter_skin3/walk/walk_down_0.png",
+                "enemy/zed/shooter/zed_shooter_skin3/walk/walk_down_1.png",
+                "enemy/zed/shooter/zed_shooter_skin3/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/shooter/zed_shooter_skin3/walk/walk_left_0.png",
+                "enemy/zed/shooter/zed_shooter_skin3/walk/walk_left_1.png",
+                "enemy/zed/shooter/zed_shooter_skin3/walk/walk_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/shooter/zed_shooter_skin3/walk/walk_right_0.png",
+                "enemy/zed/shooter/zed_shooter_skin3/walk/walk_right_1.png",
+                "enemy/zed/shooter/zed_shooter_skin3/walk/walk_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/shooter/zed_shooter_skin3/walk/walk_up_0.png",
+                "enemy/zed/shooter/zed_shooter_skin3/walk/walk_up_1.png",
+                "enemy/zed/shooter/zed_shooter_skin3/walk/walk_up_2.png"
+              ]
+            }
+          }
+        },
+        "zed_shooter_skin4": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "spit",
+            "walk"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_down_0.png",
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_down_1.png",
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_down_2.png",
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_left_0.png",
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_left_1.png",
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_left_2.png",
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_right_0.png",
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_right_1.png",
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_right_2.png",
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_up_0.png",
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_up_1.png",
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_up_2.png",
+                "enemy/zed/shooter/zed_shooter_skin4/attack/attack_up_3.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/shooter/zed_shooter_skin4/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/shooter/zed_shooter_skin4/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/shooter/zed_shooter_skin4/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/shooter/zed_shooter_skin4/idle/idle_up_0.png"
+              ]
+            },
+            "spit": {
+              "down": [
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_down_0.png",
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_down_1.png",
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_down_2.png",
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_left_0.png",
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_left_1.png",
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_left_2.png",
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_right_0.png",
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_right_1.png",
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_right_2.png",
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_up_0.png",
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_up_1.png",
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_up_2.png",
+                "enemy/zed/shooter/zed_shooter_skin4/spit/spit_up_3.png"
+              ]
+            },
+            "walk": {
+              "down": [
+                "enemy/zed/shooter/zed_shooter_skin4/walk/walk_down_0.png",
+                "enemy/zed/shooter/zed_shooter_skin4/walk/walk_down_1.png",
+                "enemy/zed/shooter/zed_shooter_skin4/walk/walk_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/shooter/zed_shooter_skin4/walk/walk_left_0.png",
+                "enemy/zed/shooter/zed_shooter_skin4/walk/walk_left_1.png",
+                "enemy/zed/shooter/zed_shooter_skin4/walk/walk_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/shooter/zed_shooter_skin4/walk/walk_right_0.png",
+                "enemy/zed/shooter/zed_shooter_skin4/walk/walk_right_1.png",
+                "enemy/zed/shooter/zed_shooter_skin4/walk/walk_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/shooter/zed_shooter_skin4/walk/walk_up_0.png",
+                "enemy/zed/shooter/zed_shooter_skin4/walk/walk_up_1.png",
+                "enemy/zed/shooter/zed_shooter_skin4/walk/walk_up_2.png"
+              ]
+            }
+          }
+        }
+      },
+      "dead": {
+        "zed_shooter_skin_dead": {
+          "die1": [
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead/die1/die1_0.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead/die1/die1_1.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead/die1/die1_2.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead/die1/die1_3.png"
+          ],
+          "die2": [
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead/die2/die2_0.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead/die2/die2_1.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead/die2/die2_2.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead/die2/die2_3.png"
+          ]
+        },
+        "zed_shooter_skin_dead2": {
+          "die1": [
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead2/die1/die1_0.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead2/die1/die1_1.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead2/die1/die1_2.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead2/die1/die1_3.png"
+          ],
+          "die2": [
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead2/die2/die2_0.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead2/die2/die2_1.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead2/die2/die2_2.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead2/die2/die2_3.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead2/die2/die2_4.png"
+          ]
+        },
+        "zed_shooter_skin_dead3": {
+          "die1": [
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead3/die1/die1_0.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead3/die1/die1_1.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead3/die1/die1_2.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead3/die1/die1_3.png"
+          ]
+        },
+        "zed_shooter_skin_dead4": {
+          "die1": [
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead4/die1/die1_0.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead4/die1/die1_1.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead4/die1/die1_2.png",
+            "enemy/zed/shooter/dead/zed_shooter_skin_dead4/die1/die1_3.png"
+          ]
+        }
+      }
+    },
+    "tank": {
+      "skins": {
+        "zed_tank_skin": {
+          "available_poses": [
+            "attack",
+            "idle",
+            "run",
+            "scream",
+            "stun",
+            "throw"
+          ],
+          "poses": {
+            "attack": {
+              "down": [
+                "enemy/zed/tank/zed_tank_skin/attack/attack_down_0.png",
+                "enemy/zed/tank/zed_tank_skin/attack/attack_down_1.png",
+                "enemy/zed/tank/zed_tank_skin/attack/attack_down_2.png"
+              ],
+              "left": [
+                "enemy/zed/tank/zed_tank_skin/attack/attack_left_0.png",
+                "enemy/zed/tank/zed_tank_skin/attack/attack_left_1.png",
+                "enemy/zed/tank/zed_tank_skin/attack/attack_left_2.png"
+              ],
+              "right": [
+                "enemy/zed/tank/zed_tank_skin/attack/attack_right_0.png",
+                "enemy/zed/tank/zed_tank_skin/attack/attack_right_1.png",
+                "enemy/zed/tank/zed_tank_skin/attack/attack_right_2.png"
+              ],
+              "up": [
+                "enemy/zed/tank/zed_tank_skin/attack/attack_up_0.png",
+                "enemy/zed/tank/zed_tank_skin/attack/attack_up_1.png",
+                "enemy/zed/tank/zed_tank_skin/attack/attack_up_2.png"
+              ]
+            },
+            "idle": {
+              "down": [
+                "enemy/zed/tank/zed_tank_skin/idle/idle_down_0.png"
+              ],
+              "left": [
+                "enemy/zed/tank/zed_tank_skin/idle/idle_left_0.png"
+              ],
+              "right": [
+                "enemy/zed/tank/zed_tank_skin/idle/idle_right_0.png"
+              ],
+              "up": [
+                "enemy/zed/tank/zed_tank_skin/idle/idle_up_0.png"
+              ]
+            },
+            "run": {
+              "down": [
+                "enemy/zed/tank/zed_tank_skin/run/run_down_0.png",
+                "enemy/zed/tank/zed_tank_skin/run/run_down_1.png",
+                "enemy/zed/tank/zed_tank_skin/run/run_down_2.png",
+                "enemy/zed/tank/zed_tank_skin/run/run_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/tank/zed_tank_skin/run/run_left_0.png",
+                "enemy/zed/tank/zed_tank_skin/run/run_left_1.png",
+                "enemy/zed/tank/zed_tank_skin/run/run_left_2.png",
+                "enemy/zed/tank/zed_tank_skin/run/run_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/tank/zed_tank_skin/run/run_right_0.png",
+                "enemy/zed/tank/zed_tank_skin/run/run_right_1.png",
+                "enemy/zed/tank/zed_tank_skin/run/run_right_2.png",
+                "enemy/zed/tank/zed_tank_skin/run/run_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/tank/zed_tank_skin/run/run_up_0.png",
+                "enemy/zed/tank/zed_tank_skin/run/run_up_1.png",
+                "enemy/zed/tank/zed_tank_skin/run/run_up_2.png",
+                "enemy/zed/tank/zed_tank_skin/run/run_up_3.png"
+              ]
+            },
+            "scream": {
+              "frames": [
+                "enemy/zed/tank/zed_tank_skin/scream/scream_0.png",
+                "enemy/zed/tank/zed_tank_skin/scream/scream_1.png"
+              ]
+            },
+            "stun": {
+              "frames": [
+                "enemy/zed/tank/zed_tank_skin/stun/stun_0.png",
+                "enemy/zed/tank/zed_tank_skin/stun/stun_1.png"
+              ]
+            },
+            "throw": {
+              "down": [
+                "enemy/zed/tank/zed_tank_skin/throw/throw_down_0.png",
+                "enemy/zed/tank/zed_tank_skin/throw/throw_down_1.png",
+                "enemy/zed/tank/zed_tank_skin/throw/throw_down_2.png",
+                "enemy/zed/tank/zed_tank_skin/throw/throw_down_3.png"
+              ],
+              "left": [
+                "enemy/zed/tank/zed_tank_skin/throw/throw_left_0.png",
+                "enemy/zed/tank/zed_tank_skin/throw/throw_left_1.png",
+                "enemy/zed/tank/zed_tank_skin/throw/throw_left_2.png",
+                "enemy/zed/tank/zed_tank_skin/throw/throw_left_3.png"
+              ],
+              "right": [
+                "enemy/zed/tank/zed_tank_skin/throw/throw_right_0.png",
+                "enemy/zed/tank/zed_tank_skin/throw/throw_right_1.png",
+                "enemy/zed/tank/zed_tank_skin/throw/throw_right_2.png",
+                "enemy/zed/tank/zed_tank_skin/throw/throw_right_3.png"
+              ],
+              "up": [
+                "enemy/zed/tank/zed_tank_skin/throw/throw_up_0.png",
+                "enemy/zed/tank/zed_tank_skin/throw/throw_up_1.png",
+                "enemy/zed/tank/zed_tank_skin/throw/throw_up_2.png",
+                "enemy/zed/tank/zed_tank_skin/throw/throw_up_3.png"
+              ]
+            }
+          }
+        }
+      },
+      "dead": {
+        "zed_tank_skin_dead": {
+          "default": [
+            "enemy/zed/tank/dead/zed_tank_skin_dead/default/Default_0.png",
+            "enemy/zed/tank/dead/zed_tank_skin_dead/default/Default_1.png",
+            "enemy/zed/tank/dead/zed_tank_skin_dead/default/Default_2.png",
+            "enemy/zed/tank/dead/zed_tank_skin_dead/default/Default_3.png"
+          ]
+        }
+      }
+    }
+  }
+}
