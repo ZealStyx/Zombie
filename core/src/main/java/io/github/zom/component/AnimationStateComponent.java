@@ -5,40 +5,50 @@ import com.artemis.Component;
 /**
  * Tracks the active animation pose and accumulated time for one entity.
  *
- * Updated every tick by AnimationStateSystem.
- * Read by PlayerRenderSystem / ZedRenderSystem to pick the correct frame.
- *
- * pose       — e.g. "idle", "run", "walk", "attack", "axe", "pistol",
- *              "twohand", "using", "scream", "stun", "throw", "dodge",
- *              "fly", "dead", "die1", "die2", "hidden1", "hidden2", "jump1", "jump2"
- * stateTime  — seconds accumulated in the current pose (resets on pose change)
- * locked     — when true a one-shot animation is playing; movement logic must not
- *              interrupt it until AnimationStateSystem clears the flag
+ * FIX 1.5: Added playOnce(String pose, float duration) overload so callers
+ * can specify an exact unlock duration instead of relying on the system default.
  */
 public class AnimationStateComponent extends Component {
 
     public String  pose        = "idle";
     public float   stateTime   = 0f;
     public boolean locked      = false;
+    /** Minimum seconds to stay locked; 0 means use AnimationStateSystem default. */
     public float   minDuration = 0f;
 
     /** Switch to a new pose and reset the timer. No-op if pose unchanged. */
     public void setPose(String newPose) {
         if (!this.pose.equals(newPose)) {
-            this.pose      = newPose;
-            this.stateTime = 0f;
-            this.locked    = false;
+            this.pose        = newPose;
+            this.stateTime   = 0f;
+            this.locked      = false;
+            this.minDuration = 0f;
         }
     }
 
     /**
-     * Switch to a one-shot pose (attack, scream, using …).
-     * Sets locked=true so movement won't interrupt the animation.
+     * Start a one-shot pose. Uses AnimationStateSystem's default duration to
+     * determine when the lock is released.
      */
     public void playOnce(String newPose) {
-        this.pose      = newPose;
-        this.stateTime = 0f;
-        this.locked    = true;
+        this.pose        = newPose;
+        this.stateTime   = 0f;
+        this.locked      = true;
+        this.minDuration = 0f;
+    }
+
+    /**
+     * FIX 1.5 — Start a one-shot pose with an explicit unlock duration.
+     * The lock is released once stateTime >= duration.
+     *
+     * @param newPose  the animation pose name to play
+     * @param duration how long (in seconds) to hold the lock before releasing
+     */
+    public void playOnce(String newPose, float duration) {
+        this.pose        = newPose;
+        this.stateTime   = 0f;
+        this.locked      = true;
+        this.minDuration = duration;
     }
 
     /** Advance time. Called by AnimationStateSystem each frame. */

@@ -7,16 +7,14 @@ import com.artemis.systems.IteratingSystem;
 import io.github.zom.component.AnimationStateComponent;
 
 /**
- * Advances stateTime on every entity that has an AnimationStateComponent.
- * Also clears the locked flag once a one-shot animation has run long enough
- * (estimated by DEFAULT_ONESHOT_DURATION; precise detection happens in
- * PlayerRenderSystem / ZedRenderSystem which have access to the actual Animation).
+ * Advances stateTime on every animated entity and releases one-shot locks.
  *
- * Priority: run BEFORE render systems.
+ * FIX 1.4: When anim.minDuration > 0 the system uses that value as the unlock
+ * threshold instead of DEFAULT_ONESHOT_DURATION, so callers can specify exact
+ * durations via AnimationStateComponent.playOnce(pose, duration).
  */
 public class AnimationStateSystem extends IteratingSystem {
 
-    /** Fallback one-shot duration if we can't check the Animation directly. */
     private static final float DEFAULT_ONESHOT_DURATION = 0.5f;
 
     private ComponentMapper<AnimationStateComponent> mAnim;
@@ -30,9 +28,16 @@ public class AnimationStateSystem extends IteratingSystem {
         AnimationStateComponent anim = mAnim.get(entityId);
         anim.tick(world.getDelta());
 
-        // Release lock after a safe fallback duration
-        if (anim.locked && anim.stateTime >= DEFAULT_ONESHOT_DURATION) {
-            anim.locked = false;
+        if (anim.locked) {
+            // FIX 1.4 — use minDuration when set, otherwise fall back to default
+            float threshold = anim.minDuration > 0f
+                ? anim.minDuration
+                : DEFAULT_ONESHOT_DURATION;
+
+            if (anim.stateTime >= threshold) {
+                anim.locked      = false;
+                anim.minDuration = 0f;
+            }
         }
     }
 }

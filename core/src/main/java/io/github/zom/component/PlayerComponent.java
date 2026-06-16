@@ -3,44 +3,28 @@ package io.github.zom.component;
 import com.artemis.Component;
 
 /**
- * Marks an entity as the local player and holds all player-specific state
- * that drives the PlayerRenderer: skin, hands, and every equipment slot.
- *
- * Item IDs come from items.json (0 = slot empty).
- * skinName / handsName come from player.json available_skins / available_hands.
- *
- * Set dirty=true whenever any slot changes; PlayerRenderSystem will call
- * PlayerRenderer.rebuild() on the next frame and clear the flag.
+ * Player identity, equipment slots, and movement speed.
+ * Item IDs from items.json (0 = empty). Skin/hands names from player.json.
+ * dirty=true triggers PlayerRenderer.rebuild() on next frame.
  */
 public class PlayerComponent extends Component {
 
-    // ── Identity ─────────────────────────────────────────────────────────────
     public String skinName  = "player_skin_def_1";
     public String handsName = "player_hands_white";
 
-    // ── Weapon slots ─────────────────────────────────────────────────────────
-    /** Primary or melee weapon actively held and animated (layer 4). */
     public int heldItemId      = 0;
-    /** Secondary weapon holstered but visible on body (uses h_ poses). */
     public int holsteredItemId = 0;
+    public int vestId          = 0;
+    public int helmetId        = 0;
+    public int pantsId         = 0;
+    public int topId           = 0;
+    public int backpackId      = 0;
+    public int footwearId      = 0;
 
-    // ── Clothing slots ───────────────────────────────────────────────────────
-    public int vestId     = 0;
-    public int helmetId   = 0;
-    public int pantsId    = 0;
-    public int topId      = 0;
-    public int backpackId = 0;
-    public int footwearId = 0;
-
-    // ── Dirty flag ───────────────────────────────────────────────────────────
-    /** True when any equipment slot changed — PlayerRenderSystem rebuilds on next frame. */
     public boolean dirty = true;
 
-    // ── Speed ─────────────────────────────────────────────────────────────────
-    /** Walk / run speed in world units per second. */
-    public float speed = 4f;
-
-    // ── Convenience mutators ─────────────────────────────────────────────────
+    /** Movement speed in pixels/second (PPU=1, player sprite = 30px). */
+    public float speed = 120f;
 
     public void equip(String slot, int itemId) {
         switch (slot) {
@@ -56,7 +40,5 @@ public class PlayerComponent extends Component {
         dirty = true;
     }
 
-    public void unequip(String slot) {
-        equip(slot, 0);
-    }
+    public void unequip(String slot) { equip(slot, 0); }
 }

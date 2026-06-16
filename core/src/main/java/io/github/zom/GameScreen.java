@@ -3,6 +3,7 @@ package io.github.zom;
 import com.artemis.WorldConfiguration;
 import com.artemis.WorldConfigurationBuilder;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -10,11 +11,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import io.github.zom.system.AnimationStateSystem;
 import io.github.zom.system.CollisionSystem;
+import io.github.zom.system.CombatSystem;
+import io.github.zom.system.DebugConsoleSystem;
+import io.github.zom.system.HealthSystem;
 import io.github.zom.system.ItemPickupSystem;
 import io.github.zom.system.MovementSystem;
-import io.github.zom.system.PlayerRenderSystem;
-import io.github.zom.system.WorldItemRenderSystem;
-import io.github.zom.system.ZedRenderSystem;
+import io.github.zom.system.GameRenderSystem;
+import io.github.zom.system.HealthSystem;
+import io.github.zom.system.ItemPickupSystem;
+import io.github.zom.system.MovementSystem;
+import io.github.zom.system.ZedAISystem;
 import io.github.zom.util.EntityFactory;
 import io.github.zom.world.WorldCollision;
 
@@ -22,86 +28,107 @@ import io.github.zom.world.WorldCollision;
  * Main gameplay screen.
  *
  * System execution order each frame:
- *   1. AnimationStateSystem   — advance stateTime, release finished one-shots
- *   2. MovementSystem         — WASD input → velocity, direction, pose
- *   3. CollisionSystem        — resolve feet-box vs world obstacles, update all 3 collision rects
- *   4. ItemPickupSystem       — F key: scan nearby world items, add to inventory, destroy entity
- *   5. WorldItemRenderSystem  — draw dropped items (behind characters)
- *   6. ZedRenderSystem        — draw zeds
- *   7. PlayerRenderSystem     — draw player on top
+ * 1. AnimationStateSystem — advance stateTime, release finished one-shots
+ * 2. MovementSystem — WASD input → velocity, direction, pose; sets combat flags
+ * 3. ZedAISystem — steering + state machine (wander/chase/attack)
+ * 4. CollisionSystem — resolve feet vs world for ALL entities
+ * 5. CombatSystem — melee hitbox + hitscan, queue damage
+ * 6. HealthSystem — process damage queues, trigger death animations
+ * 7. ItemPickupSystem — F key: nearest item → inventory
+ * 8. DebugConsoleSystem — render console overlay (no-op when closed)
+ * 9. GameRenderSystem — draw all items, dead/alive zeds, and player sorted by
+ * feet Y-coordinate
  *
- * Camera: 1 world-unit ≈ one character tile (64 px at 1× scale).
- * The camera follows the player via MovementSystem.
+ * PPU (pixels per world unit) = 1. Sprites render at native pixel size via
+ * TransformComponent.w/h set from the actual texture dimensions in
+ * EntityFactory.
+ * The camera viewport is expressed in pixels, so 1 px = 1 unit on screen.
+ *
+ * InputMultiplexer: DebugConsoleSystem's Stage gets priority; game input is
+ * second.
  */
 public class GameScreen implements Screen {
 
-    private static final int VP_W = 20;   // viewport width  in world units
-    private static final int VP_H = 12;   // viewport height in world units
-    private static final int WORLD_W = 40;
-    private static final int WORLD_H = 24;
+    // Viewport in world units (= pixels at PPU=1)
+    // At PPU=1, player sprite is 30 px wide → ~21 players across the screen
+    // horizontally
+    public static final float PPU = 1f;
+    public static final int VP_W = 640;
+    public static final int VP_H = 360;
+    public static final int WORLD_W = 1280;
+    public static final int WORLD_H = 720;
 
-    private SpriteBatch        batch;
+    private SpriteBatch batch;
     private OrthographicCamera camera;
-    private com.artemis.World  ecsWorld;
+    private com.artemis.World ecsWorld;
+    private DebugConsoleSystem debugConsole;
+    private InputMultiplexer inputMux;
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(null);
-
-        batch  = new SpriteBatch();
+        batch = new SpriteBatch();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, VP_W, VP_H);
 
         initWorldCollision();
 
+        debugConsole = new DebugConsoleSystem(camera);
+
+        ItemPickupSystem itemPickupSystem = new ItemPickupSystem();
+        GameRenderSystem gameRenderSystem = new GameRenderSystem(batch, camera);
+        gameRenderSystem.setPickupSystem(itemPickupSystem);
+
         WorldConfiguration cfg = new WorldConfigurationBuilder()
-            .with(
-                new AnimationStateSystem(),
-                new MovementSystem(camera),
-                new CollisionSystem(),
-                new ItemPickupSystem(),
-                new WorldItemRenderSystem(batch),
-                new ZedRenderSystem(batch),
-                new PlayerRenderSystem(batch)
-            )
-            .build();
+                .with(
+                        new AnimationStateSystem(),
+                        new MovementSystem(camera),
+                        new ZedAISystem(),
+                        new CollisionSystem(),
+                        new CombatSystem(),
+                        new HealthSystem(),
+                        itemPickupSystem,
+                        debugConsole,
+                        gameRenderSystem)
+                .build();
 
         ecsWorld = new com.artemis.World(cfg);
+
+        // InputMultiplexer: debug console Stage first (captures when open), game second
+        inputMux = new InputMultiplexer();
+        inputMux.addProcessor(debugConsole.getStage());
+        Gdx.input.setInputProcessor(inputMux);
 
         spawnTestEntities();
     }
 
     private void initWorldCollision() {
         WorldCollision.clear();
-
-        float wall = 0.5f;
+        float wall = 8f; // 8 px border walls
         WorldCollision.add(0f, 0f, WORLD_W, wall);
         WorldCollision.add(0f, WORLD_H - wall, WORLD_W, wall);
         WorldCollision.add(0f, 0f, wall, WORLD_H);
         WorldCollision.add(WORLD_W - wall, 0f, wall, WORLD_H);
 
-        WorldCollision.add(12f, 8f, 3f, 0.5f);
-        WorldCollision.add(24f, 14f, 0.5f, 4f);
-        WorldCollision.add(8f, 16f, 5f, 0.5f);
+        // Some interior obstacles (in pixels)
+        WorldCollision.add(320f, 200f, 80f, 16f);
+        WorldCollision.add(600f, 350f, 16f, 120f);
+        WorldCollision.add(200f, 400f, 130f, 16f);
     }
 
     private void spawnTestEntities() {
-        // Player at centre
-        EntityFactory.createPlayer(ecsWorld, WORLD_W / 2f - 0.5f, WORLD_H / 2f - 0.5f);
+        float cx = WORLD_W / 2f;
+        float cy = WORLD_H / 2f;
 
-        // Two test zeds
-        EntityFactory.createZed(ecsWorld,
-            WORLD_W / 2f - 3f, WORLD_H / 2f - 0.5f,
-            "normal", "zed_normal_skin1", "zed_normal_skin1_dead");
+        EntityFactory.createPlayer(ecsWorld, cx, cy);
 
-        EntityFactory.createZed(ecsWorld,
-            WORLD_W / 2f + 2f, WORLD_H / 2f - 0.5f,
-            "fast", "zed_fast_skin1", "zed_fast_skin1_dead");
+        EntityFactory.createZed(ecsWorld, cx - 80f, cy, "normal", "zed_normal_skin1", "zed_normal_skin1_dead");
+        EntityFactory.createZed(ecsWorld, cx + 60f, cy, "fast", "zed_fast_skin1", "zed_fast_skin1_dead");
+        EntityFactory.createZed(ecsWorld, cx, cy - 90f, "army", "zed_army_skin1", "zed_army_dead_skin1");
 
-        // Dropped items — walk near them and press F
-        EntityFactory.createWorldItem(ecsWorld, WORLD_W / 2f - 0.3f, WORLD_H / 2f - 2f, 175, 1);  // FNX 45
-        EntityFactory.createWorldItem(ecsWorld, WORLD_W / 2f + 1.2f, WORLD_H / 2f - 2f, 1,   3);  // Canned Beans
-        EntityFactory.createWorldItem(ecsWorld, WORLD_W / 2f + 0.4f, WORLD_H / 2f - 3f, 192, 1);  // Mosin
+        // Dropped items near player — walk close and press F
+        EntityFactory.createWorldItem(ecsWorld, cx - 20f, cy - 60f, 175, 1); // FNX 45
+        EntityFactory.createWorldItem(ecsWorld, cx + 35f, cy - 60f, 1, 3); // Canned Beans
+        EntityFactory.createWorldItem(ecsWorld, cx + 10f, cy - 90f, 192, 1); // Mosin
     }
 
     @Override
@@ -116,21 +143,37 @@ public class GameScreen implements Screen {
         ecsWorld.setDelta(delta);
         ecsWorld.process();
         batch.end();
+
+        // Debug console Stage draws after the SpriteBatch to stay on top
+        debugConsole.drawStage(delta);
     }
 
     @Override
     public void resize(int width, int height) {
-        if (width <= 0 || height <= 0) return;
+        if (width <= 0 || height <= 0)
+            return;
         camera.setToOrtho(false, VP_W, VP_H);
+        debugConsole.resize(width, height);
     }
 
-    @Override public void pause()  {}
-    @Override public void resume() {}
-    @Override public void hide()   {}
+    @Override
+    public void pause() {
+    }
+
+    @Override
+    public void resume() {
+    }
+
+    @Override
+    public void hide() {
+        Gdx.input.setInputProcessor(null);
+    }
 
     @Override
     public void dispose() {
-        if (ecsWorld != null) ecsWorld.dispose();
-        if (batch    != null) batch.dispose();
+        if (ecsWorld != null)
+            ecsWorld.dispose();
+        if (batch != null)
+            batch.dispose();
     }
 }

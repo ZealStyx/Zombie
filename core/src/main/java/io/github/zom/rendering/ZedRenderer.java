@@ -77,6 +77,11 @@ public class ZedRenderer {
         drawLayer(batch, deadAnims, dieVariant, "none", stateTime, x, y, w, h);
     }
 
+    /** Returns true if this renderer has the specified death animation pose loaded. */
+    public boolean hasDeadPose(String pose) {
+        return deadAnims != null && deadAnims.hasPose(pose);
+    }
+
     // ── Helpers ───────────────────────────────────────────────────────────────
 
     private void drawLayer(SpriteBatch batch, AnimationSet anims,

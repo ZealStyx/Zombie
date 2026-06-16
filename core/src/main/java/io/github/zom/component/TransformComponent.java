@@ -3,18 +3,21 @@ package io.github.zom.component;
 import com.artemis.Component;
 
 /**
- * World position, rendered size, and facing direction for any entity.
+ * World position (in pixels, PPU=1) and rendered size for any entity.
  *
- * x, y      — bottom-left corner in world units.
- * w, h      — render size in world units (typically 1f × 1f for a character tile).
+ * x, y      — bottom-left corner in pixels.
+ * w, h      — render size in pixels (set from actual texture dimensions).
  * direction — "down" | "left" | "right" | "up"
+ *
+ * Sprites render at their native pixel size: a 30×30 player sprite gets w=30, h=30.
+ * A 8×8 on-ground item gets w=8, h=8. No artificial scaling is applied.
  */
 public class TransformComponent extends Component {
 
     public float  x         = 0f;
     public float  y         = 0f;
-    public float  w         = 1f;
-    public float  h         = 1f;
+    public float  w         = 30f;
+    public float  h         = 30f;
     public String direction = "down";
 
     public void set(float x, float y) {

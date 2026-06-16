@@ -2,6 +2,7 @@ package io.github.zom.config;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.math.MathUtils;
 
 /**
  * Deserialized from config/zed.json.
@@ -61,18 +62,39 @@ public class ZedConfig {
         return (t != null && t.skins != null) ? t.skins.get(skinName) : null;
     }
 
-    public String randomSkinName(String type, com.badlogic.gdx.math.MathUtils mu) {
+    public String randomSkinName(String type) {
         ZedTypeEntry t = getType(type);
         if (t == null || t.skins == null || t.skins.size == 0) return null;
         Array<String> keys = t.skins.keys().toArray();
-        return keys.get(mu.random(keys.size - 1));
+        return keys.get(MathUtils.random(keys.size - 1));
     }
 
-    public String randomDeadSkinName(String type, com.badlogic.gdx.math.MathUtils mu) {
+    public String randomDeadSkinName(String type) {
         ZedTypeEntry t = getType(type);
         if (t == null || t.dead == null || t.dead.size == 0) return null;
         Array<String> keys = t.dead.keys().toArray();
-        return keys.get(mu.random(keys.size - 1));
+        return keys.get(MathUtils.random(keys.size - 1));
+    }
+
+    public String getMatchingDeadSkinName(String type, String skinName) {
+        if (skinName == null) return null;
+        if ("army".equals(type)) {
+            // zed_army_skin1 -> zed_army_dead_skin1
+            return skinName.replace("skin", "dead_skin");
+        }
+        if ("shooter".equals(type)) {
+            // zed_shooter_skin -> zed_shooter_skin_dead
+            // zed_shooter_skin2 -> zed_shooter_skin_dead2
+            if (skinName.endsWith("skin")) {
+                return skinName + "_dead";
+            } else {
+                return skinName.replace("skin", "skin_dead");
+            }
+        }
+        // For normal, fast, tank, screamer, jumper, buried:
+        // zed_normal_skin1 -> zed_normal_skin1_dead
+        // zed_tank_skin -> zed_tank_skin_dead
+        return skinName + "_dead";
     }
 
     public Array<String> getDeadFrames(String type, String deadSkinName, String variant) {
