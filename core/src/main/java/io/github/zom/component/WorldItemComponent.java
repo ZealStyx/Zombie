@@ -1,6 +1,7 @@
 package io.github.zom.component;
 
 import com.artemis.Component;
+import io.github.zom.util.ItemInstance;
 
 /**
  * A world-dropped item entity.
@@ -12,4 +13,13 @@ import com.artemis.Component;
 public class WorldItemComponent extends Component {
     public int itemId   = 0;
     public int quantity = 1;
+    public ItemInstance itemInstance;
+
+    public ItemInstance getItemInstance() {
+        if (itemInstance == null) {
+            itemInstance = ItemInstance.create(itemId, quantity);
+        }
+        return itemInstance;
+    }
 }
+

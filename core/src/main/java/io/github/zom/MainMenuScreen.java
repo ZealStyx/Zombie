@@ -7,17 +7,21 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import io.github.zom.net.GameClient;
+import io.github.zom.net.Protocol;
 import io.github.zom.rendering.FontCache;
 
 /**
- * Title screen with Play and Quit buttons.
+ * Title screen with Play, Join Server, and Quit buttons.
  *
  * FIX 1.1: Stage and Skin are disposed in hide() rather than only in dispose(),
  * because Game.setScreen() calls hide() but not dispose() on the outgoing screen.
@@ -62,6 +66,13 @@ public class MainMenuScreen implements Screen {
             }
         });
 
+        TextButton joinBtn = new TextButton("Join Server", buttonStyle);
+        joinBtn.addListener(new ChangeListener() {
+            @Override public void changed(ChangeEvent event, Actor actor) {
+                showJoinDialog(buttonStyle);
+            }
+        });
+
         TextButton quitBtn = new TextButton("Quit", buttonStyle);
         quitBtn.addListener(new ChangeListener() {
             @Override public void changed(ChangeEvent event, Actor actor) {
@@ -71,9 +82,76 @@ public class MainMenuScreen implements Screen {
 
         root.add(title).padBottom(48f).row();
         root.add(playBtn).width(220f).height(48f).padBottom(12f).row();
+        root.add(joinBtn).width(220f).height(48f).padBottom(12f).row();
         root.add(quitBtn).width(220f).height(48f);
 
         stage.addActor(root);
+    }
+
+    private void showJoinDialog(TextButton.TextButtonStyle buttonStyle) {
+        Dialog dialog = new Dialog("Join Server", skin);
+
+        Label.LabelStyle labelStyle = new Label.LabelStyle(skin.get(Label.LabelStyle.class));
+        labelStyle.font = FontCache.get().regular(11);
+
+        Label ipLabel = new Label("Server IP:Port", labelStyle);
+        TextField ipField = new TextField("127.0.0.1:" + Protocol.DEFAULT_PORT, skin);
+        ipField.setMaxLength(40);
+
+        Label statusLabel = new Label("", labelStyle);
+
+        TextButton connectBtn = new TextButton("Connect", buttonStyle);
+        connectBtn.addListener(new ChangeListener() {
+            @Override public void changed(ChangeEvent event, Actor actor) {
+                String input = ipField.getText().trim();
+                String host = "127.0.0.1";
+                int port = Protocol.DEFAULT_PORT;
+
+                if (input.contains(":")) {
+                    String[] parts = input.split(":");
+                    host = parts[0];
+                    try { port = Integer.parseInt(parts[1]); } catch (NumberFormatException ignored) {}
+                } else if (!input.isEmpty()) {
+                    host = input;
+                }
+
+                statusLabel.setText("Connecting...");
+
+                // Connect on a background thread to avoid freezing the UI
+                final String fHost = host;
+                final int fPort = port;
+                new Thread(() -> {
+                    GameClient client = new GameClient();
+                    boolean ok = client.connect(fHost, fPort, "Player");
+                    Gdx.app.postRunnable(() -> {
+                        if (ok) {
+                            dialog.hide();
+                            game.setScreen(new GameScreen(client));
+                        } else {
+                            statusLabel.setText(client.getRejectReason());
+                        }
+                    });
+                }, "JoinConnect").start();
+            }
+        });
+
+        TextButton cancelBtn = new TextButton("Cancel", buttonStyle);
+        cancelBtn.addListener(new ChangeListener() {
+            @Override public void changed(ChangeEvent event, Actor actor) {
+                dialog.hide();
+            }
+        });
+
+        dialog.getContentTable().add(ipLabel).padBottom(8f).row();
+        dialog.getContentTable().add(ipField).width(280f).padBottom(8f).row();
+        dialog.getContentTable().add(statusLabel).padBottom(8f).row();
+
+        Table btnTable = new Table();
+        btnTable.add(connectBtn).width(130f).height(40f).padRight(8f);
+        btnTable.add(cancelBtn).width(130f).height(40f);
+        dialog.getContentTable().add(btnTable).row();
+
+        dialog.show(stage);
     }
 
     @Override

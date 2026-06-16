@@ -1,14 +1,13 @@
 package io.github.zom.util;
 
+import com.badlogic.gdx.utils.Array;
 import io.github.zom.config.ConfigLoader;
 import io.github.zom.config.ItemDef;
 
 /**
- * Fixed-size inventory grid (rows × cols).
- * Pure data — no UI, no rendering. The UI layer reads this to draw slots.
- *
- * Stacking: items of the same id stack up to MAX_STACK_SIZE.
- * Non-stackable types (weapons, clothing) always occupy their own slot.
+ * A 2D grid-based inventory.
+ * Items can occupy multiple grid cells (width x height).
+ * Supports stacking of 1x1 items, boundary checks, and collision/occupancy grids.
  */
 public class Inventory {
 
@@ -20,181 +19,266 @@ public class Inventory {
         "vest", "helmet", "pants", "top", "backpack", "footwear", "deployable"
     };
 
-    // ── Grid ─────────────────────────────────────────────────────────────────
+    public int rows;
+    public int cols;
+    public Array<ItemPlacement> placements = new Array<>();
 
-    private final InventorySlot[] slots;
-    public  final int rows;
-    public  final int cols;
+    // Keep track of which cells are occupied
+    protected transient boolean[][] occupied;
+
+    public Inventory() {}
 
     public Inventory(int rows, int cols) {
-        this.rows  = rows;
-        this.cols  = cols;
-        this.slots = new InventorySlot[rows * cols];
-        for (int i = 0; i < slots.length; i++) {
-            slots[i] = new InventorySlot();
-        }
+        this.rows = rows;
+        this.cols = cols;
+        rebuildOccupiedGrid();
     }
-
-    // ── Accessors ─────────────────────────────────────────────────────────────
-
-    public InventorySlot getSlot(int index) {
-        return slots[index];
-    }
-
-    public InventorySlot getSlot(int row, int col) {
-        return slots[row * cols + col];
-    }
-
-    public int totalSlots() {
-        return slots.length;
-    }
-
-    // ── Add items ─────────────────────────────────────────────────────────────
 
     /**
-     * Try to add the given quantity of itemId.
-     * Stacks into existing slots first, then fills empty slots.
-     * @return the quantity that could NOT be added (0 = full success)
+     * Recalculates the occupancy grid based on current item placements.
      */
-    public int add(int itemId, int quantity) {
-        if (quantity <= 0) return 0;
-        int remaining = quantity;
-
-        if (isStackable(itemId)) {
-            // Phase 1: fill existing partial stacks
-            for (InventorySlot s : slots) {
-                if (!s.isEmpty() && s.itemId == itemId && s.quantity < MAX_STACK_SIZE) {
-                    int canFit = MAX_STACK_SIZE - s.quantity;
-                    int take   = Math.min(canFit, remaining);
-                    s.quantity += take;
-                    remaining  -= take;
-                    if (remaining == 0) return 0;
+    public void rebuildOccupiedGrid() {
+        occupied = new boolean[rows][cols];
+        if (placements == null) {
+            placements = new Array<>();
+        }
+        for (ItemPlacement p : placements) {
+            ItemDef def = ConfigLoader.getItemDatabase().get(p.instance.itemId);
+            if (def == null) continue;
+            int w = Math.max(1, def.gridW);
+            int h = Math.max(1, def.gridH);
+            for (int r = p.r; r < p.r + h; r++) {
+                for (int c = p.c; c < p.c + w; c++) {
+                    if (r >= 0 && r < rows && c >= 0 && c < cols) {
+                        occupied[r][c] = true;
+                    }
                 }
             }
         }
-
-        // Phase 2: fill empty slots
-        for (InventorySlot s : slots) {
-            if (s.isEmpty()) {
-                int take = isStackable(itemId) ? Math.min(MAX_STACK_SIZE, remaining) : 1;
-                s.set(itemId, take);
-                remaining -= take;
-                if (remaining == 0) return 0;
-                if (!isStackable(itemId) && remaining > 0) continue;
-            }
-        }
-
-        return remaining; // leftover that didn't fit
     }
 
     /**
-     * Remove a quantity of itemId from the inventory.
-     * Removes from the last matching slot first.
-     * @return true if the full quantity was removed, false if there wasn't enough
+     * Checks if the cell (r, c) is occupied.
      */
-    public boolean remove(int itemId, int quantity) {
-        // Check we have enough first
-        if (count(itemId) < quantity) return false;
+    public boolean isCellOccupied(int r, int c) {
+        if (occupied == null) rebuildOccupiedGrid();
+        if (r < 0 || r >= rows || c < 0 || c >= cols) return true;
+        return occupied[r][c];
+    }
 
-        int remaining = quantity;
-        for (int i = slots.length - 1; i >= 0 && remaining > 0; i--) {
-            InventorySlot s = slots[i];
-            if (!s.isEmpty() && s.itemId == itemId) {
-                int take = Math.min(s.quantity, remaining);
-                s.quantity -= take;
-                remaining  -= take;
-                if (s.quantity <= 0) s.clear();
+    /**
+     * Gets the item placement covering the grid cell (r, c).
+     */
+    public ItemPlacement getPlacementAt(int r, int c) {
+        if (placements == null) return null;
+        for (ItemPlacement p : placements) {
+            ItemDef def = ConfigLoader.getItemDatabase().get(p.instance.itemId);
+            if (def == null) continue;
+            int w = Math.max(1, def.gridW);
+            int h = Math.max(1, def.gridH);
+            if (r >= p.r && r < p.r + h && c >= p.c && c < p.c + w) {
+                return p;
             }
         }
-        return remaining == 0;
+        return null;
     }
 
-    /** Remove exactly one item from a specific slot index. Returns the item id, or 0. */
-    public int removeFromSlot(int slotIndex, int quantity) {
-        InventorySlot s = slots[slotIndex];
-        if (s.isEmpty()) return 0;
-        int id   = s.itemId;
-        int take = Math.min(s.quantity, quantity);
-        s.quantity -= take;
-        if (s.quantity <= 0) s.clear();
-        return id;
+    /**
+     * Checks if an item of type def can fit at starting cell (startR, startC).
+     */
+    public boolean canFit(ItemDef def, int startR, int startC) {
+        return canFit(def, startR, startC, null);
     }
 
-    /** Swap the contents of two slots (for drag-and-drop). */
-    public void swapSlots(int indexA, int indexB) {
-        InventorySlot a = slots[indexA];
-        InventorySlot b = slots[indexB];
-        int tmpId = a.itemId, tmpQty = a.quantity;
-        a.set(b.itemId, b.quantity);
-        b.set(tmpId, tmpQty);
-    }
-
-    // ── Query ─────────────────────────────────────────────────────────────────
-
-    /** Total quantity of itemId across all slots. */
-    public int count(int itemId) {
-        int total = 0;
-        for (InventorySlot s : slots) {
-            if (!s.isEmpty() && s.itemId == itemId) total += s.quantity;
+    /**
+     * Checks if an item of type def can fit at starting cell (startR, startC), ignoring one instance.
+     */
+    public boolean canFit(ItemDef def, int startR, int startC, ItemInstance ignore) {
+        if (occupied == null) rebuildOccupiedGrid();
+        int w = Math.max(1, def.gridW);
+        int h = Math.max(1, def.gridH);
+        if (startR < 0 || startR + h > rows || startC < 0 || startC + w > cols) {
+            return false;
         }
-        return total;
-    }
 
-    /** True if at least 1 of itemId exists. */
-    public boolean contains(int itemId) {
-        return count(itemId) > 0;
-    }
-
-    /** Index of first slot holding itemId, or -1. */
-    public int findFirst(int itemId) {
-        for (int i = 0; i < slots.length; i++) {
-            if (!slots[i].isEmpty() && slots[i].itemId == itemId) return i;
-        }
-        return -1;
-    }
-
-    /** True if every slot is occupied. */
-    public boolean isFull() {
-        for (InventorySlot s : slots) {
-            if (s.isEmpty()) return false;
+        // Instead of reading the cached occupied array, check collision manually to respect ignore list
+        for (int r = startR; r < startR + h; r++) {
+            for (int c = startC; c < startC + w; c++) {
+                ItemPlacement p = getPlacementAt(r, c);
+                if (p != null) {
+                    if (ignore != null && p.instance.uuid.equals(ignore.uuid)) {
+                        continue;
+                    }
+                    return false;
+                }
+            }
         }
         return true;
     }
 
-    /** Number of empty slots. */
-    public int freeSlots() {
-        int count = 0;
-        for (InventorySlot s : slots) {
-            if (s.isEmpty()) count++;
+    /**
+     * Adds an item instance at a specific coordinate (r, c).
+     */
+    public boolean addAt(ItemInstance inst, int r, int c) {
+        ItemDef def = ConfigLoader.getItemDatabase().get(inst.itemId);
+        if (def == null) return false;
+        if (!canFit(def, r, c, inst)) return false;
+
+        // If it's already in the placements, remove it first (repositioning)
+        remove(inst);
+
+        placements.add(new ItemPlacement(inst, r, c));
+        rebuildOccupiedGrid();
+        return true;
+    }
+
+    /**
+     * Adds an item quantity of a certain ID. Creates instances as needed.
+     */
+    public int add(int itemId, int quantity) {
+        if (quantity <= 0) return 0;
+        ItemInstance inst = ItemInstance.create(itemId, quantity);
+        int leftover = add(inst);
+        return leftover;
+    }
+
+    /**
+     * Adds an item instance to the inventory.
+     * Stacks into existing items of the same ID first (if 1x1 stackable),
+     * then finds a free spot for the remainder.
+     * Returns the leftover quantity.
+     */
+    public int add(ItemInstance inst) {
+        ItemDef def = ConfigLoader.getItemDatabase().get(inst.itemId);
+        if (def == null) return inst.quantity;
+
+        boolean stackable = isStackable(inst.itemId);
+        if (stackable && def.gridW == 1 && def.gridH == 1) {
+            // Stack with existing
+            for (ItemPlacement p : placements) {
+                if (p.instance.itemId == inst.itemId && p.instance.quantity < MAX_STACK_SIZE) {
+                    int canFit = MAX_STACK_SIZE - p.instance.quantity;
+                    int take = Math.min(canFit, inst.quantity);
+                    p.instance.quantity += take;
+                    inst.quantity -= take;
+                    if (inst.quantity <= 0) {
+                        return 0;
+                    }
+                }
+            }
         }
-        return count;
+
+        // Find empty spot for the remaining item
+        int w = Math.max(1, def.gridW);
+        int h = Math.max(1, def.gridH);
+        for (int r = 0; r <= rows - h; r++) {
+            for (int c = 0; c <= cols - w; c++) {
+                if (canFit(def, r, c)) {
+                    placements.add(new ItemPlacement(inst, r, c));
+                    rebuildOccupiedGrid();
+                    return 0;
+                }
+            }
+        }
+
+        return inst.quantity;
     }
 
-    /** Clear all slots. */
+    /**
+     * Removes a quantity of itemId from the inventory.
+     * Returns true if the full quantity was removed, false if not.
+     */
+    public boolean remove(int itemId, int quantity) {
+        if (count(itemId) < quantity) return false;
+
+        int remaining = quantity;
+        for (int i = placements.size - 1; i >= 0 && remaining > 0; i--) {
+            ItemPlacement p = placements.get(i);
+            if (p.instance.itemId == itemId) {
+                int take = Math.min(p.instance.quantity, remaining);
+                p.instance.quantity -= take;
+                remaining -= take;
+                if (p.instance.quantity <= 0) {
+                    placements.removeIndex(i);
+                }
+            }
+        }
+        rebuildOccupiedGrid();
+        return remaining == 0;
+    }
+
+    /**
+     * Removes a specific item instance from the inventory.
+     */
+    public boolean remove(ItemInstance inst) {
+        if (placements == null) return false;
+        for (int i = 0; i < placements.size; i++) {
+            if (placements.get(i).instance.uuid.equals(inst.uuid)) {
+                placements.removeIndex(i);
+                rebuildOccupiedGrid();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Simulates original 1D slot index removal.
+     */
+    public int removeFromSlot(int slotIndex, int quantity) {
+        int r = slotIndex / cols;
+        int c = slotIndex % cols;
+        ItemPlacement p = getPlacementAt(r, c);
+        if (p == null) return 0;
+        int id = p.instance.itemId;
+        int take = Math.min(p.instance.quantity, quantity);
+        p.instance.quantity -= take;
+        if (p.instance.quantity <= 0) {
+            placements.removeValue(p, true);
+        }
+        rebuildOccupiedGrid();
+        return id;
+    }
+
+    /**
+     * Counts the total quantity of itemId in the inventory.
+     */
+    public int count(int itemId) {
+        int total = 0;
+        if (placements == null) return 0;
+        for (ItemPlacement p : placements) {
+            if (p.instance.itemId == itemId) {
+                total += p.instance.quantity;
+            }
+        }
+        return total;
+    }
+
+    public boolean contains(int itemId) {
+        return count(itemId) > 0;
+    }
+
+    public boolean isFull() {
+        if (occupied == null) rebuildOccupiedGrid();
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                if (!occupied[r][c]) return false;
+            }
+        }
+        return true;
+    }
+
     public void clear() {
-        for (InventorySlot s : slots) s.clear();
+        placements.clear();
+        rebuildOccupiedGrid();
     }
 
-    // ── Internal helpers ──────────────────────────────────────────────────────
-
-    private static boolean isStackable(int itemId) {
+    public static boolean isStackable(int itemId) {
         ItemDef def = ConfigLoader.getItemDatabase().get(itemId);
         if (def == null) return true;
         for (String t : NO_STACK_TYPES) {
             if (t.equals(def.type)) return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("Inventory[" + rows + "x" + cols + "]:\n");
-        for (int r = 0; r < rows; r++) {
-            for (int c = 0; c < cols; c++) {
-                sb.append("  [").append(r).append(",").append(c).append("] ")
-                  .append(getSlot(r, c)).append("\n");
-            }
-        }
-        return sb.toString();
     }
 }

@@ -11,6 +11,7 @@ import io.github.zom.component.AnimationStateComponent;
 import io.github.zom.component.CollisionComponent;
 import io.github.zom.component.CombatComponent;
 import io.github.zom.component.HealthComponent;
+import io.github.zom.component.InventoryComponent;
 import io.github.zom.component.PlayerComponent;
 import io.github.zom.component.TransformComponent;
 import io.github.zom.component.ZedComponent;
@@ -35,6 +36,7 @@ public class CombatSystem extends IteratingSystem {
     private ComponentMapper<CombatComponent>         mCombat;
     private ComponentMapper<HealthComponent>         mHealth;
     private ComponentMapper<ZedComponent>            mZed;
+    private ComponentMapper<InventoryComponent>      mInventory;
 
     private EntitySubscription zedSub;
 
@@ -65,6 +67,15 @@ public class CombatSystem extends IteratingSystem {
         combat.meleeTimer  = Math.max(0f, combat.meleeTimer  - delta);
         combat.rangedTimer = Math.max(0f, combat.rangedTimer - delta);
 
+        // Tick reload timer
+        if (combat.reloading) {
+            combat.reloadTimer -= delta;
+            if (combat.reloadTimer <= 0f) {
+                combat.reloading = false;
+                completeReload(entityId, combat);
+            }
+        }
+
         // ── Melee ─────────────────────────────────────────────────────────────
         if (combat.meleeRequested) {
             combat.meleeRequested = false;
@@ -76,15 +87,117 @@ public class CombatSystem extends IteratingSystem {
         }
 
         // ── Ranged ────────────────────────────────────────────────────────────
-        if (combat.rangedRequested && combat.hasRanged) {
-            combat.rangedRequested = false;
-            if (combat.rangedTimer <= 0f) {
+        boolean wantsToFire = false;
+        if (combat.hasRanged && !combat.reloading) {
+            if (combat.rangedRequested) {
+                wantsToFire = true;
+            } else if (combat.isAutoFiring && ("auto".equals(combat.fireMode) || "both".equals(combat.fireMode))) {
+                wantsToFire = true;
+            }
+        }
+        combat.rangedRequested = false;
+
+        if (wantsToFire && combat.rangedTimer <= 0f) {
+            if (combat.currentAmmo > 0) {
+                combat.currentAmmo--;
                 combat.rangedTimer = combat.rangedCooldown;
                 // pose depends on weapon type; "pistol" for secondary, "twohand" for primary
                 anim.playOnce("pistol", combat.rangedCooldown);
                 doRanged(transform, combat);
+            } else {
+                combat.reloadRequested = true;
             }
         }
+
+        // ── Reload request ────────────────────────────────────────────────────
+        if (combat.reloadRequested) {
+            combat.reloadRequested = false;
+            if (!combat.reloading && combat.currentAmmo < combat.clipSize && combat.hasRanged) {
+                int needed = combat.clipSize - combat.currentAmmo;
+                int found = countAmmoInInventory(entityId, combat.ammoItemId);
+                if (found > 0) {
+                    combat.reloading = true;
+                    combat.reloadTimer = combat.reloadDuration;
+                    com.badlogic.gdx.Gdx.app.log("Combat", "Started reloading... Needs " + needed + ", found " + found);
+                } else {
+                    com.badlogic.gdx.Gdx.app.log("Combat", "Cannot reload: Out of ammo of type " + combat.ammoItemId);
+                }
+            }
+        }
+    }
+
+    private void completeReload(int entityId, CombatComponent combat) {
+        int needed = combat.clipSize - combat.currentAmmo;
+        if (needed <= 0) return;
+
+        int consumed = consumeAmmoFromInventory(entityId, combat.ammoItemId, needed);
+        combat.currentAmmo += consumed;
+        com.badlogic.gdx.Gdx.app.log("Combat", "Reload completed! Loaded " + consumed + " rounds. Total: " + combat.currentAmmo);
+    }
+
+    private int countAmmoInInventory(int entityId, int ammoItemId) {
+        int count = 0;
+        if (mInventory.has(entityId)) {
+            InventoryComponent invComp = mInventory.get(entityId);
+            if (invComp.inventory != null) {
+                count += invComp.inventory.count(ammoItemId);
+            }
+        }
+        if (mPlayer.has(entityId)) {
+            PlayerComponent player = mPlayer.get(entityId);
+            if (player.equippedBackpack != null && player.equippedBackpack.container != null) {
+                count += player.equippedBackpack.container.count(ammoItemId);
+            }
+            if (player.equippedSlingBag != null && player.equippedSlingBag.container != null) {
+                count += player.equippedSlingBag.container.count(ammoItemId);
+            }
+        }
+        return count;
+    }
+
+    private int consumeAmmoFromInventory(int entityId, int ammoItemId, int amount) {
+        int remainingToConsume = amount;
+
+        // 1. Consume from base inventory first
+        if (mInventory.has(entityId)) {
+            InventoryComponent invComp = mInventory.get(entityId);
+            if (invComp.inventory != null) {
+                int available = invComp.inventory.count(ammoItemId);
+                int take = Math.min(available, remainingToConsume);
+                if (take > 0) {
+                    invComp.inventory.remove(ammoItemId, take);
+                    remainingToConsume -= take;
+                }
+            }
+        }
+
+        // 2. Consume from backpack
+        if (remainingToConsume > 0 && mPlayer.has(entityId)) {
+            PlayerComponent player = mPlayer.get(entityId);
+            if (player.equippedBackpack != null && player.equippedBackpack.container != null) {
+                int available = player.equippedBackpack.container.count(ammoItemId);
+                int take = Math.min(available, remainingToConsume);
+                if (take > 0) {
+                    player.equippedBackpack.container.remove(ammoItemId, take);
+                    remainingToConsume -= take;
+                }
+            }
+        }
+
+        // 3. Consume from sling bag
+        if (remainingToConsume > 0 && mPlayer.has(entityId)) {
+            PlayerComponent player = mPlayer.get(entityId);
+            if (player.equippedSlingBag != null && player.equippedSlingBag.container != null) {
+                int available = player.equippedSlingBag.container.count(ammoItemId);
+                int take = Math.min(available, remainingToConsume);
+                if (take > 0) {
+                    player.equippedSlingBag.container.remove(ammoItemId, take);
+                    remainingToConsume -= take;
+                }
+            }
+        }
+
+        return amount - remainingToConsume;
     }
 
     // ── Melee implementation ─────────────────────────────────────────────────

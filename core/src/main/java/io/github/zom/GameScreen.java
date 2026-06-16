@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import io.github.zom.net.GameClient;
 import io.github.zom.system.AnimationStateSystem;
 import io.github.zom.system.CollisionSystem;
 import io.github.zom.system.CombatSystem;
@@ -17,9 +18,6 @@ import io.github.zom.system.HealthSystem;
 import io.github.zom.system.ItemPickupSystem;
 import io.github.zom.system.MovementSystem;
 import io.github.zom.system.GameRenderSystem;
-import io.github.zom.system.HealthSystem;
-import io.github.zom.system.ItemPickupSystem;
-import io.github.zom.system.MovementSystem;
 import io.github.zom.system.ZedAISystem;
 import io.github.zom.util.EntityFactory;
 import io.github.zom.world.WorldCollision;
@@ -62,7 +60,22 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
     private com.artemis.World ecsWorld;
     private DebugConsoleSystem debugConsole;
+    private io.github.zom.system.AndroidControllerSystem androidController;
+    private io.github.zom.system.InventoryUiSystem inventoryUi;
     private InputMultiplexer inputMux;
+
+    /** Optional network client for multiplayer mode. Null = single-player. */
+    private final GameClient networkClient;
+
+    /** Single-player constructor. */
+    public GameScreen() {
+        this(null);
+    }
+
+    /** Multiplayer constructor — pass an already-connected GameClient. */
+    public GameScreen(GameClient client) {
+        this.networkClient = client;
+    }
 
     @Override
     public void show() {
@@ -73,6 +86,8 @@ public class GameScreen implements Screen {
         initWorldCollision();
 
         debugConsole = new DebugConsoleSystem(camera);
+        androidController = new io.github.zom.system.AndroidControllerSystem();
+        inventoryUi = new io.github.zom.system.InventoryUiSystem();
 
         ItemPickupSystem itemPickupSystem = new ItemPickupSystem();
         GameRenderSystem gameRenderSystem = new GameRenderSystem(batch, camera);
@@ -81,21 +96,24 @@ public class GameScreen implements Screen {
         WorldConfiguration cfg = new WorldConfigurationBuilder()
                 .with(
                         new AnimationStateSystem(),
+                        androidController,
                         new MovementSystem(camera),
                         new ZedAISystem(),
                         new CollisionSystem(),
                         new CombatSystem(),
                         new HealthSystem(),
                         itemPickupSystem,
+                        inventoryUi,
                         debugConsole,
                         gameRenderSystem)
                 .build();
 
         ecsWorld = new com.artemis.World(cfg);
 
-        // InputMultiplexer: debug console Stage first (captures when open), game second
+        // InputMultiplexer: debug console Stage first (captures when open), inventory Stage second, game input third
         inputMux = new InputMultiplexer();
         inputMux.addProcessor(debugConsole.getStage());
+        inputMux.addProcessor(inventoryUi.getStage());
         Gdx.input.setInputProcessor(inputMux);
 
         spawnTestEntities();
@@ -144,7 +162,8 @@ public class GameScreen implements Screen {
         ecsWorld.process();
         batch.end();
 
-        // Debug console Stage draws after the SpriteBatch to stay on top
+        // Stages draw after the SpriteBatch to stay on top
+        inventoryUi.drawStage();
         debugConsole.drawStage(delta);
     }
 
@@ -154,6 +173,8 @@ public class GameScreen implements Screen {
             return;
         camera.setToOrtho(false, VP_W, VP_H);
         debugConsole.resize(width, height);
+        inventoryUi.resize(width, height);
+        androidController.resize(width, height);
     }
 
     @Override

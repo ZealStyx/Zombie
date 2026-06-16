@@ -23,12 +23,28 @@ android {
     }
   }
   packagingOptions {
-		resources {
-			excludes += ['META-INF/robovm/ios/robovm.xml', 'META-INF/DEPENDENCIES.txt', 'META-INF/DEPENDENCIES',
-                   'META-INF/dependencies.txt', '**/*.gwt.xml']
-			pickFirsts += ['META-INF/LICENSE.txt', 'META-INF/LICENSE', 'META-INF/license.txt', 'META-INF/LGPL2.1',
-                     'META-INF/NOTICE.txt', 'META-INF/NOTICE', 'META-INF/notice.txt']
-		}
+    resources {
+      excludes += [
+        'META-INF/robovm/ios/robovm.xml',
+        'META-INF/DEPENDENCIES.txt',
+        'META-INF/DEPENDENCIES',
+        'META-INF/dependencies.txt',
+        '**/*.gwt.xml',
+        'META-INF/INDEX.LIST'
+      ]
+      pickFirsts += [
+        'META-INF/LICENSE.txt',
+        'META-INF/LICENSE',
+        'META-INF/license.txt',
+        'META-INF/LGPL2.1',
+        'META-INF/NOTICE.txt',
+        'META-INF/NOTICE',
+        'META-INF/notice.txt',
+        // --- ADD THESE TWO LINES BELOW ---
+        'META-INF/io.netty.versions.properties',
+        'META-INF/native-image/**'
+      ]
+    }
   }
   defaultConfig {
     applicationId 'io.github.zom'

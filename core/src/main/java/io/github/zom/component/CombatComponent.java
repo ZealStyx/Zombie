@@ -27,10 +27,31 @@ public class CombatComponent extends Component {
     public float   rangedCooldown = 0.4f;
     public float   rangedTimer    = 0f;
 
+    // ── Ammunition ────────────────────────────────────────────────────────────
+    /** Rounds currently loaded in the clip. */
+    public int     currentAmmo    = 0;
+    /** Maximum clip size for the equipped gun. */
+    public int     clipSize       = 0;
+    /** Item ID of the ammo type required by the equipped gun. */
+    public int     ammoItemId     = 0;
+
+    // ── Reload state ──────────────────────────────────────────────────────────
+    public boolean reloading       = false;
+    public float   reloadTimer     = 0f;
+    public float   reloadDuration  = 2.0f;  // seconds to reload
+
+    // ── Fire mode ─────────────────────────────────────────────────────────────
+    /** "semi", "auto", or "both". */
+    public String  fireMode        = "semi";
+    /** True while the fire button is held down (for auto-fire). */
+    public boolean isAutoFiring    = false;
+
     // ── Input flags (set by MovementSystem, cleared by CombatSystem) ──────────
     public boolean meleeRequested  = false;
     public boolean rangedRequested = false;
+    public boolean reloadRequested = false;
 
     // ── God mode (set by debug console) ──────────────────────────────────────
     public boolean godMode = false;
 }
+

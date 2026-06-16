@@ -47,6 +47,10 @@
 # You will probably need this line in most cases:
 -keep public class com.badlogic.gdx.graphics.Color { *; }
 
+# Keep Netty from being broken by ProGuard
+-keep class io.netty.** { *; }
+-dontwarn io.netty.**
+
 # These two lines are used with mapping files; see https://developer.android.com/build/shrink-code#retracing
 -keepattributes LineNumberTable,SourceFile
 -renamesourcefileattribute SourceFile

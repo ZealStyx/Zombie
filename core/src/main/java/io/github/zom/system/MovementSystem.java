@@ -50,11 +50,27 @@ public class MovementSystem extends IteratingSystem {
         // ── Combat input ─────────────────────────────────────────────────────
         if (mCombat.has(entityId)) {
             CombatComponent combat = mCombat.get(entityId);
-            if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-                combat.meleeRequested = true;
-            }
-            if (Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT) && combat.hasRanged) {
-                combat.rangedRequested = true;
+            boolean isAndroid = Gdx.app.getType() == com.badlogic.gdx.Application.ApplicationType.Android;
+            if (isAndroid) {
+                combat.isAutoFiring = AndroidControllerSystem.attackHeld && combat.hasRanged;
+                if (AndroidControllerSystem.attackPressed) {
+                    if (combat.hasRanged) {
+                        combat.rangedRequested = true;
+                    } else {
+                        combat.meleeRequested = true;
+                    }
+                }
+            } else {
+                combat.isAutoFiring = Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && combat.hasRanged;
+                if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+                    combat.meleeRequested = true;
+                }
+                if (Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT) && combat.hasRanged) {
+                    combat.rangedRequested = true;
+                }
+                if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+                    combat.reloadRequested = true;
+                }
             }
         }
 
