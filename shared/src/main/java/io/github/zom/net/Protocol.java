@@ -28,17 +28,21 @@ public final class Protocol {
     public static final String TYPE_WORLD_STATE       = "world_state";
     public static final String TYPE_PLAYER_DISCONNECT = "player_disconnect";
 
+    public static abstract class Packet {
+        public String type;
+    }
+
     // ── Join ─────────────────────────────────────────────────────────────────
 
     /** Sent by client to request joining the server. */
-    public static class JoinRequest {
-        public String type = TYPE_JOIN_REQUEST;
+    public static class JoinRequest extends Packet {
+        public JoinRequest() { type = TYPE_JOIN_REQUEST; }
         public String playerName = "Player";
     }
 
     /** Sent by server in response to a JoinRequest. */
-    public static class JoinResponse {
-        public String type = TYPE_JOIN_RESPONSE;
+    public static class JoinResponse extends Packet {
+        public JoinResponse() { type = TYPE_JOIN_RESPONSE; }
         public boolean accepted;
         public int assignedId;          // entity id assigned to this player (0 if rejected)
         public String rejectReason;     // null if accepted
@@ -47,8 +51,8 @@ public final class Protocol {
     // ── Player input (client → server) ───────────────────────────────────────
 
     /** Sent every frame (or on change) by the client to relay inputs. */
-    public static class PlayerInput {
-        public String type = TYPE_PLAYER_INPUT;
+    public static class PlayerInput extends Packet {
+        public PlayerInput() { type = TYPE_PLAYER_INPUT; }
         public float moveX;             // -1 .. 1
         public float moveY;             // -1 .. 1
         public boolean meleeRequested;
@@ -60,8 +64,8 @@ public final class Protocol {
     // ── World state (server → client) ────────────────────────────────────────
 
     /** Broadcasted by the server each tick with the state of all entities. */
-    public static class WorldStateUpdate {
-        public String type = TYPE_WORLD_STATE;
+    public static class WorldStateUpdate extends Packet {
+        public WorldStateUpdate() { type = TYPE_WORLD_STATE; }
         public EntitySnapshot[] entities;
     }
 
@@ -88,27 +92,28 @@ public final class Protocol {
     }
 
     /** Sent by server when a player disconnects. */
-    public static class PlayerDisconnect {
-        public String type = TYPE_PLAYER_DISCONNECT;
+    public static class PlayerDisconnect extends Packet {
+        public PlayerDisconnect() { type = TYPE_PLAYER_DISCONNECT; }
         public int playerId;
     }
 
     // ── Serialization helpers ────────────────────────────────────────────────
 
-    private static final Json json = new Json();
-    static {
-        json.setOutputType(JsonWriter.OutputType.json);
-        json.setIgnoreUnknownFields(true);
-    }
+    private static final ThreadLocal<Json> jsonThreadLocal = ThreadLocal.withInitial(() -> {
+        Json j = new Json();
+        j.setOutputType(JsonWriter.OutputType.json);
+        j.setIgnoreUnknownFields(true);
+        return j;
+    });
 
     /** Serialize any packet object to a JSON string. */
     public static String toJson(Object packet) {
-        return json.toJson(packet);
+        return jsonThreadLocal.get().toJson(packet);
     }
 
     /** Deserialize a JSON string to a packet object of the given type. */
     public static <T> T fromJson(Class<T> type, String jsonStr) {
-        return json.fromJson(type, jsonStr);
+        return jsonThreadLocal.get().fromJson(type, jsonStr);
     }
 
     /**

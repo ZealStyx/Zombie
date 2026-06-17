@@ -52,8 +52,9 @@ public class GameServer {
         while (running) {
             try {
                 Socket socket = serverSocket.accept();
-                handleNewConnection(socket);
-            } catch (SocketException e) {
+                // Handle in a new thread so one stalling client doesn't block the accept loop
+                new Thread(() -> handleNewConnection(socket), "ConnectionHandler").start();
+            } catch (Exception e) {
                 if (running) {
                     System.err.println("[Server] Accept error: " + e.getMessage());
                 }
@@ -75,48 +76,55 @@ public class GameServer {
 
     // ── Connection handling ──────────────────────────────────────────────────
 
-    private synchronized void handleNewConnection(Socket socket) {
+    private void handleNewConnection(Socket socket) {
         try {
+            socket.setSoTimeout(5000); // 5s timeout for join handshake
             // Read the join request
             String joinJson = readMessage(socket.getInputStream());
+            System.out.println("[Server] DEBUG: Received raw JSON: " + joinJson);
             String type = Protocol.peekType(joinJson);
 
             if (!Protocol.TYPE_JOIN_REQUEST.equals(type)) {
+                System.err.println("[Server] Received invalid join request type: " + type);
                 socket.close();
                 return;
             }
 
             Protocol.JoinRequest req = Protocol.fromJson(Protocol.JoinRequest.class, joinJson);
 
-            if (clients.size() >= maxPlayers) {
-                // Reject — server full
+            synchronized (this) {
+                if (clients.size() >= maxPlayers) {
+                    // Reject — server full
+                    Protocol.JoinResponse resp = new Protocol.JoinResponse();
+                    resp.accepted = false;
+                    resp.rejectReason = "Server is full (" + maxPlayers + "/" + maxPlayers + ")";
+                    sendMessage(socket.getOutputStream(), Protocol.toJson(resp));
+                    socket.close();
+                    System.out.println("[Server] Rejected " + req.playerName + " — server full.");
+                    return;
+                }
+
+                int playerId = nextPlayerId++;
                 Protocol.JoinResponse resp = new Protocol.JoinResponse();
-                resp.accepted = false;
-                resp.rejectReason = "Server is full (" + maxPlayers + "/" + maxPlayers + ")";
+                resp.accepted = true;
+                resp.assignedId = playerId;
                 sendMessage(socket.getOutputStream(), Protocol.toJson(resp));
-                socket.close();
-                System.out.println("[Server] Rejected " + req.playerName + " — server full.");
-                return;
+
+                ClientConnection cc = new ClientConnection(playerId, req.playerName, socket);
+                clients.put(playerId, cc);
+                socket.setSoTimeout(0); // Reset timeout for normal gameplay
+
+                System.out.println("[Server] " + req.playerName + " joined as player " + playerId
+                        + " (" + clients.size() + "/" + maxPlayers + ")");
+
+                // Start reader thread for this client
+                Thread reader = new Thread(() -> clientReaderLoop(cc), "ClientReader-" + playerId);
+                reader.setDaemon(true);
+                reader.start();
             }
 
-            int playerId = nextPlayerId++;
-            Protocol.JoinResponse resp = new Protocol.JoinResponse();
-            resp.accepted = true;
-            resp.assignedId = playerId;
-            sendMessage(socket.getOutputStream(), Protocol.toJson(resp));
-
-            ClientConnection cc = new ClientConnection(playerId, req.playerName, socket);
-            clients.put(playerId, cc);
-            System.out.println("[Server] " + req.playerName + " joined as player " + playerId
-                    + " (" + clients.size() + "/" + maxPlayers + ")");
-
-            // Start reader thread for this client
-            Thread reader = new Thread(() -> clientReaderLoop(cc), "ClientReader-" + playerId);
-            reader.setDaemon(true);
-            reader.start();
-
-        } catch (IOException e) {
-            System.err.println("[Server] Error handling new connection: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("[Server] Error handling new connection: " + e.getClass().getSimpleName() + ": " + e.getMessage());
             try { socket.close(); } catch (IOException ignored) {}
         }
     }

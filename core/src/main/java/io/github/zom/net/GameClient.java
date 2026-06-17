@@ -45,10 +45,13 @@ public class GameClient {
             // Send join request
             Protocol.JoinRequest req = new Protocol.JoinRequest();
             req.playerName = playerName;
-            Protocol.sendMessage(socket.getOutputStream(), Protocol.toJson(req));
+            String reqJson = Protocol.toJson(req);
+            Gdx.app.log("GameClient", "DEBUG: Sending JoinRequest: " + reqJson);
+            Protocol.sendMessage(socket.getOutputStream(), reqJson);
 
             // Wait for join response
             String respJson = Protocol.readMessage(socket.getInputStream());
+            Gdx.app.log("GameClient", "DEBUG: Received JoinResponse: " + respJson);
             Protocol.JoinResponse resp = Protocol.fromJson(Protocol.JoinResponse.class, respJson);
 
             if (!resp.accepted) {

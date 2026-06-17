@@ -22,6 +22,7 @@ public final class ConfigLoader {
     private static ItemDatabase     itemDatabase;
     private static EquippedDatabase equippedDatabase;
     private static ZedConfig        zedConfig;
+    private static ItemGridConfig   itemGridConfig;
 
     private static boolean loaded = false;
 
@@ -38,9 +39,11 @@ public final class ConfigLoader {
         itemDatabase     = loadConfig(json, ItemDatabase.class,     Gdx.files.internal("config/items.json"));
         equippedDatabase = loadConfig(json, EquippedDatabase.class, Gdx.files.internal("config/equipped.json"));
         zedConfig        = loadConfig(json, ZedConfig.class,        Gdx.files.internal("config/zed.json"));
+        itemGridConfig   = loadConfig(json, ItemGridConfig.class,   Gdx.files.internal("config/item_grid.json"));
 
         itemDatabase.buildIndex();
         equippedDatabase.buildIndex();
+        itemGridConfig.buildIndex();
 
         loaded = true;
         Gdx.app.log("ConfigLoader", "All configs loaded successfully.");
@@ -79,6 +82,7 @@ public final class ConfigLoader {
     public static ItemDatabase     getItemDatabase()     { assertLoaded(); return itemDatabase;     }
     public static EquippedDatabase getEquippedDatabase() { assertLoaded(); return equippedDatabase; }
     public static ZedConfig        getZedConfig()        { assertLoaded(); return zedConfig;        }
+    public static ItemGridConfig   getItemGridConfig()   { assertLoaded(); return itemGridConfig;   }
 
     private static void assertLoaded() {
         if (!loaded) throw new IllegalStateException("ConfigLoader.load() has not been called yet.");

@@ -3,20 +3,23 @@ package io.github.zom.util;
 import java.util.UUID;
 import io.github.zom.config.ConfigLoader;
 import io.github.zom.config.ItemDef;
+import io.github.zom.config.ItemGridDef;
 
 /**
- * Represents a concrete instance of an item in the world or in an inventory.
- * Contains instance-specific properties like stack quantity, loaded ammunition,
- * and container inventory references.
+ * A concrete instance of an item in the world or inventory.
+ *
+ * NEW: rotated — when true the item's gridW and gridH are swapped in the grid.
+ * Toggled with R while dragging in the inventory UI.
  */
 public class ItemInstance {
 
-    public int itemId;
-    public int quantity;
-    public int currentAmmo; // Loaded ammo for guns
-    public String uuid;
+    public int     itemId;
+    public int     quantity;
+    public int     currentAmmo;
+    public String  uuid;
+    /** When true gridW ↔ gridH are swapped — item is rotated 90°. */
+    public boolean rotated = false;
 
-    // Sub-grid inventory for container items (backpacks/sling bags)
     public ContainerInventory container;
 
     public ItemInstance() {
@@ -24,33 +27,50 @@ public class ItemInstance {
     }
 
     public ItemInstance(int itemId, int quantity) {
-        this.itemId = itemId;
+        this.itemId   = itemId;
         this.quantity = quantity;
-        this.uuid = UUID.randomUUID().toString();
+        this.uuid     = UUID.randomUUID().toString();
     }
 
-    /**
-     * Factory method to create a fully initialized ItemInstance.
-     * Automatically initializes sub-grid containers for backpack/sling bag items.
-     */
     public static ItemInstance create(int itemId, int quantity) {
         ItemInstance instance = new ItemInstance(itemId, quantity);
-        ItemDef def = ConfigLoader.getItemDatabase().get(itemId);
-        if (def != null) {
-            // Check if this item is a container (backpack/sling bag)
-            if (def.containerRows > 0 && def.containerCols > 0) {
-                instance.container = new ContainerInventory(def.containerRows, def.containerCols);
+        ItemGridDef gd = ConfigLoader.getItemGridConfig().get(itemId);
+        if (gd != null) {
+            if (gd.isContainer()) {
+                instance.container = new ContainerInventory(gd.containerRows, gd.containerCols);
             }
-            // If it's a gun, initialize its loaded clip ammo
-            if (def.isGun()) {
-                instance.currentAmmo = def.clipSize;
+            if (gd.isGun()) {
+                instance.currentAmmo = gd.clipSize;
             }
         }
         return instance;
     }
 
+    /**
+     * Effective grid width in the current orientation.
+     * Uses ItemGridConfig; falls back to 1.
+     */
+    public int effectiveW() {
+        ItemGridDef gd = ConfigLoader.getItemGridConfig().get(itemId);
+        if (gd == null) return 1;
+        return rotated ? gd.gridH : gd.gridW;
+    }
+
+    /**
+     * Effective grid height in the current orientation.
+     */
+    public int effectiveH() {
+        ItemGridDef gd = ConfigLoader.getItemGridConfig().get(itemId);
+        if (gd == null) return 1;
+        return rotated ? gd.gridW : gd.gridH;
+    }
+
+    /** Toggle rotation (swap W↔H). */
+    public void rotate() { rotated = !rotated; }
+
     @Override
     public String toString() {
-        return "ItemInstance[id=" + itemId + ", quantity=" + quantity + ", uuid=" + uuid + "]";
+        return "ItemInstance[id=" + itemId + ", qty=" + quantity
+            + (rotated ? ", rotated" : "") + ", uuid=" + uuid + "]";
     }
 }

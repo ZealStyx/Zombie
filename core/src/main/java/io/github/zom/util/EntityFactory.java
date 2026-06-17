@@ -20,10 +20,6 @@ import io.github.zom.config.PlayerConfig;
 import io.github.zom.config.ZedConfig;
 import io.github.zom.rendering.TextureCache;
 
-/**
- * Convenience factory for creating fully-composed entities.
- * All component wiring is done here so game code stays clean.
- */
 public final class EntityFactory {
 
     private static final float DEFAULT_PLAYER_SIZE = 30f;
@@ -34,13 +30,6 @@ public final class EntityFactory {
 
     // ── Player ────────────────────────────────────────────────────────────────
 
-    /**
-     * Create a player entity at the given world position.
-     * Returns the entity id.
-     *
-     * Default loadout: def_1 skin, white hands, no equipment.
-     * Inventory grid: 5 rows × 10 cols = 50 slots.
-     */
     public static int createPlayer(World world, float x, float y) {
         int id = world.create();
 
@@ -50,12 +39,13 @@ public final class EntityFactory {
         transform.set(x, y, wh[0], wh[1]);
         transform.direction = "down";
 
-        world.edit(id).create(AnimationStateComponent.class);   // defaults: idle, stateTime=0
-        world.edit(id).create(PlayerComponent.class);            // defaults: def_1 skin, no gear
-        world.edit(id).create(PlayerRendererComponent.class);    // renderer built lazily by system
+        world.edit(id).create(AnimationStateComponent.class);
+        world.edit(id).create(PlayerComponent.class);
+        world.edit(id).create(PlayerRendererComponent.class);
 
+        // FIX: base inventory is 4 rows × 6 cols per spec (was 5×10)
         InventoryComponent inv = world.edit(id).create(InventoryComponent.class);
-        inv.init(5, 10);
+        inv.init(4, 6);
 
         HealthComponent health = world.edit(id).create(HealthComponent.class);
         health.maxHp = 100f;
@@ -69,18 +59,8 @@ public final class EntityFactory {
 
     // ── Zed ──────────────────────────────────────────────────────────────────
 
-    /**
-     * Create a zed entity at the given world position.
-     *
-     * @param zedType      e.g. "normal", "fast", "army", "buried", "jumper", "screamer", "shooter", "tank"
-     * @param skinName     alive skin name, e.g. "zed_normal_skin3"
-     * @param deadSkinName dead skin name, e.g. "zed_normal_skin3_dead"
-     */
-    public static int createZed(World world,
-                                 float x, float y,
-                                 String zedType,
-                                 String skinName,
-                                 String deadSkinName) {
+    public static int createZed(World world, float x, float y,
+                                String zedType, String skinName, String deadSkinName) {
         int id = world.create();
 
         float[] wh = resolveZedSize(zedType, skinName);
@@ -92,12 +72,9 @@ public final class EntityFactory {
         AnimationStateComponent anim = world.edit(id).create(AnimationStateComponent.class);
         anim.setPose("idle");
 
-        // Automatically resolve matching dead skin name if null/empty
         if (deadSkinName == null || deadSkinName.trim().isEmpty()) {
             ZedConfig cfg = ConfigLoader.getZedConfig();
-            if (cfg != null) {
-                deadSkinName = cfg.getMatchingDeadSkinName(zedType, skinName);
-            }
+            if (cfg != null) deadSkinName = cfg.getMatchingDeadSkinName(zedType, skinName);
         }
 
         ZedComponent zed = world.edit(id).create(ZedComponent.class);
@@ -119,13 +96,7 @@ public final class EntityFactory {
 
     // ── World item ────────────────────────────────────────────────────────────
 
-    /**
-     * Drop an item into the world at position (x, y).
-     * Sprite size is the exact source texture pixel size (PPU=1).
-     */
-    public static int createWorldItem(World world,
-                                       float x, float y,
-                                       int itemId, int quantity) {
+    public static int createWorldItem(World world, float x, float y, int itemId, int quantity) {
         int id = world.create();
 
         float[] wh = resolveWorldItemSize(itemId);
@@ -140,14 +111,15 @@ public final class EntityFactory {
         return id;
     }
 
+    // ── Size resolution ───────────────────────────────────────────────────────
+
     private static float[] resolvePlayerSize(String skinName) {
         PlayerConfig cfg = ConfigLoader.getPlayerConfig();
         if (cfg == null) return new float[]{DEFAULT_PLAYER_SIZE, DEFAULT_PLAYER_SIZE};
-
         PlayerConfig.SkinEntry skin = cfg.getSkin(skinName);
         String path = firstPath(
             skin != null ? skin.getFrames("idle", "down") : null,
-            skin != null ? skin.getFrames("run", "down") : null,
+            skin != null ? skin.getFrames("run", "down")  : null,
             skin != null ? skin.dead : null
         );
         return readSize(path, DEFAULT_PLAYER_SIZE, DEFAULT_PLAYER_SIZE);
@@ -156,14 +128,13 @@ public final class EntityFactory {
     private static float[] resolveZedSize(String zedType, String skinName) {
         ZedConfig cfg = ConfigLoader.getZedConfig();
         if (cfg == null) return new float[]{DEFAULT_ZED_SIZE, DEFAULT_ZED_SIZE};
-
         ZedConfig.SkinEntry skin = cfg.getSkin(zedType, skinName);
         String path = firstPath(
-            skin != null ? skin.getFrames("idle", "down") : null,
-            skin != null ? skin.getFrames("walk", "down") : null,
-            skin != null ? skin.getFrames("run", "down") : null,
-            skin != null ? skin.getFrames("attack", "down") : null,
-            skin != null ? skin.getFrames("idle", "frames") : null
+            skin != null ? skin.getFrames("idle",   "down")   : null,
+            skin != null ? skin.getFrames("walk",   "down")   : null,
+            skin != null ? skin.getFrames("run",    "down")   : null,
+            skin != null ? skin.getFrames("attack", "down")   : null,
+            skin != null ? skin.getFrames("idle",   "frames") : null
         );
         return readSize(path, DEFAULT_ZED_SIZE, DEFAULT_ZED_SIZE);
     }
@@ -193,64 +164,15 @@ public final class EntityFactory {
     private static void applyZedTypeStats(String zedType, HealthComponent health, ZedAIComponent ai) {
         float hp;
         switch (zedType) {
-            case "fast":
-                hp = 40f;
-                ai.speed = 80f;
-                ai.detectionRange = 240f;
-                ai.attackDamage = 10f;
-                ai.attackCooldown = 0.8f;
-                break;
-            case "army":
-                hp = 80f;
-                ai.speed = 55f;
-                ai.detectionRange = 220f;
-                ai.attackDamage = 20f;
-                ai.attackCooldown = 1.0f;
-                break;
-            case "tank":
-                hp = 200f;
-                ai.speed = 24f;
-                ai.detectionRange = 160f;
-                ai.attackDamage = 35f;
-                ai.attackCooldown = 2.0f;
-                break;
-            case "screamer":
-                hp = 50f;
-                ai.speed = 32f;
-                ai.detectionRange = 280f;
-                ai.attackDamage = 5f;
-                ai.attackCooldown = 1.5f;
-                break;
-            case "shooter":
-                hp = 60f;
-                ai.speed = 36f;
-                ai.detectionRange = 300f;
-                ai.attackDamage = 12f;
-                ai.attackCooldown = 2.0f;
-                break;
-            case "jumper":
-                hp = 50f;
-                ai.speed = 70f;
-                ai.detectionRange = 200f;
-                ai.attackDamage = 20f;
-                ai.attackCooldown = 1.5f;
-                break;
-            case "buried":
-                hp = 60f;
-                ai.speed = 0f;
-                ai.state = ZedAIComponent.State.IDLE;
-                ai.detectionRange = 120f;
-                ai.attackDamage = 15f;
-                ai.attackCooldown = 1.2f;
-                break;
-            case "normal":
-            default:
-                hp = 60f;
-                ai.speed = 40f;
-                ai.detectionRange = 200f;
-                ai.attackDamage = 15f;
-                ai.attackCooldown = 1.2f;
-                break;
+            case "fast":     hp=40f;  ai.speed=80f;  ai.detectionRange=240f; ai.attackDamage=10f;  ai.attackCooldown=0.8f;  break;
+            case "army":     hp=80f;  ai.speed=55f;  ai.detectionRange=220f; ai.attackDamage=20f;  ai.attackCooldown=1.0f;  break;
+            case "tank":     hp=200f; ai.speed=24f;  ai.detectionRange=160f; ai.attackDamage=35f;  ai.attackCooldown=2.0f;  break;
+            case "screamer": hp=50f;  ai.speed=32f;  ai.detectionRange=280f; ai.attackDamage=5f;   ai.attackCooldown=1.5f;  break;
+            case "shooter":  hp=60f;  ai.speed=36f;  ai.detectionRange=300f; ai.attackDamage=12f;  ai.attackCooldown=2.0f;  break;
+            case "jumper":   hp=50f;  ai.speed=70f;  ai.detectionRange=200f; ai.attackDamage=20f;  ai.attackCooldown=1.5f;  break;
+            case "buried":   hp=60f;  ai.speed=0f;   ai.state=ZedAIComponent.State.IDLE;
+                ai.detectionRange=120f; ai.attackDamage=15f; ai.attackCooldown=1.2f; break;
+            default:         hp=60f;  ai.speed=40f;  ai.detectionRange=200f; ai.attackDamage=15f;  ai.attackCooldown=1.2f;  break;
         }
         health.maxHp = hp;
         health.hp    = hp;

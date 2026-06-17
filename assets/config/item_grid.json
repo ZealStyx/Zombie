@@ -1,0 +1,2956 @@
+{
+  "_comment": "Item grid sizes (gridW x gridH in inventory cells) and weapon/container stats. Loaded by ItemGridConfig. Kept separate from items.json to avoid bloat. All paths relative to assets/. gridW/gridH: how many inventory cells wide/tall the item occupies. Item icon is drawn aspect-ratio-correct inside the cell area (never stretched). rotated: per-instance field in ItemInstance \u2014 swaps gridW\u2194gridH.",
+  "cellSize": 30,
+  "items": [
+    {
+      "id": 1,
+      "name": "Canned Beans",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 2,
+      "name": "Canned Tuna",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 3,
+      "name": "Tactical Bacon",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 4,
+      "name": "Rice",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 5,
+      "name": "Tomato",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 6,
+      "name": "Apple",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 7,
+      "name": "Banana",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 8,
+      "name": "Pipsi",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 9,
+      "name": "Spite",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 10,
+      "name": "Kvas",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 11,
+      "name": "Whiskey",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 12,
+      "name": "Cranberries",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 13,
+      "name": "Nota-Cola",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 14,
+      "name": "Zucchini",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 15,
+      "name": "Bell Pepper",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 16,
+      "name": "Orange",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 17,
+      "name": "Raw Venison Steak",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 18,
+      "name": "Roasted Venison Steak",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 19,
+      "name": "Nuka-Cola",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 20,
+      "name": "Energy Drink",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 21,
+      "name": "Raw Rabbit",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 22,
+      "name": "Roasted Rabbit",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 23,
+      "name": "Cloudberries",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 24,
+      "name": "Bilberries",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 25,
+      "name": "MRE",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 26,
+      "name": "Herring",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 27,
+      "name": "Salmon",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 28,
+      "name": "Ruffe",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 29,
+      "name": "Perch",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 30,
+      "name": "Small Cooked Fillet",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 31,
+      "name": "Large Cooked Fillet",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 32,
+      "name": "Elderberries",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 33,
+      "name": "Beer",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 34,
+      "name": "Egg",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 35,
+      "name": "Raw Chicken",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 36,
+      "name": "Cooked Chincken",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 37,
+      "name": "Fried Egg",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 38,
+      "name": "Pepper Steak",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 39,
+      "name": "Shakshuka",
+      "type": "food",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 40,
+      "name": "Bandage",
+      "type": "medical",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 41,
+      "name": "IV Blood Bag",
+      "type": "medical",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 42,
+      "name": "Rags",
+      "type": "medical",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 43,
+      "name": "IV Saline Bag",
+      "type": "medical",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 44,
+      "name": "Vitamins",
+      "type": "medical",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 45,
+      "name": "Adrenaline",
+      "type": "medical",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 46,
+      "name": "Tetracycline",
+      "type": "medical",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 47,
+      "name": "Psilocybin",
+      "type": "medical",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 48,
+      "name": "IV Kit",
+      "type": "medical",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 49,
+      "name": "Adhesive Plaster",
+      "type": "medical",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 50,
+      "name": "Charcoal Tablets",
+      "type": "medical",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 51,
+      "name": "AI-2 Medkit",
+      "type": "medical",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 52,
+      "name": "Stimulants",
+      "type": "medical",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 53,
+      "name": "5.56x45 Ammo",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 54,
+      "name": ".45 ACP Ammo",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 55,
+      "name": "7.62x54R Ammo",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 56,
+      "name": "7.62x39 Ammo",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 57,
+      "name": "5.45x39 Ammo",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 58,
+      "name": ".357 M Ammo",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 59,
+      "name": "12 Cal Ammo",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 60,
+      "name": "Crafted Arrow",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 61,
+      "name": "Composite Bolt",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 62,
+      "name": ".22 LR Ammo",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 63,
+      "name": "9x19 P Ammo",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 64,
+      "name": "9x18 M Ammo",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 65,
+      "name": "9x39 Ammo",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 66,
+      "name": "50 BMG Ammo Can",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 67,
+      "name": "40mm Grenade",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 68,
+      "name": "VOG-25 Grenade",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 69,
+      "name": ".308 Win Ammo",
+      "type": "ammo",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 70,
+      "name": "F1 Grenade",
+      "type": "throwable",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 71,
+      "name": "Landmine",
+      "type": "throwable",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 72,
+      "name": "Claymore",
+      "type": "throwable",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 73,
+      "name": "Molotov Cocktail",
+      "type": "throwable",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 74,
+      "name": "M18 Smoke Grenade",
+      "type": "throwable",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 75,
+      "name": "VOG-25 Khatabka",
+      "type": "throwable",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 76,
+      "name": "RDS",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 77,
+      "name": "PU Scope",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 78,
+      "name": "PSO-1 Scope",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 79,
+      "name": "ACOG Scope",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 80,
+      "name": "5.45 Suppressor",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 81,
+      "name": "5.56 Suppressor",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 82,
+      "name": "Bandolier",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 83,
+      "name": "Magpul",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 84,
+      "name": "Choke",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 85,
+      "name": "Long Range Scope",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 86,
+      "name": "M203 Grenade Launcher",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 87,
+      "name": "GP-25 Grenade Launcher",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 88,
+      "name": "AK Grip",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 89,
+      "name": "Rail Grip",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 90,
+      "name": "Laser Sight",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 91,
+      "name": "Improvised Suppressor",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 92,
+      "name": "AN/PVS-4 Scope",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 93,
+      "name": "1PN51 Scope",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 94,
+      "name": "C-MAG 5.56 Drum",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 95,
+      "name": "7.62x39 Drum Mag",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 96,
+      "name": "Gun Sling",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 97,
+      "name": "Underbarrel Flashlight",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 98,
+      "name": "Laser AK Grip",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 99,
+      "name": "Laser Rail Grip",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 100,
+      "name": "12 Gauge Drum",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 101,
+      "name": "5.45x39 Drum Mag",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 102,
+      "name": "Mini Sight",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 103,
+      "name": "Pistol Suppressor",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 104,
+      "name": "Pistol Flashlight",
+      "type": "attachment",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 105,
+      "name": "9V Battery",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 106,
+      "name": "Ashwood Stick",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 107,
+      "name": "Wooden Sticks",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 108,
+      "name": "Duct Tape",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 109,
+      "name": "Burlap Sack",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 110,
+      "name": "Rope",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 111,
+      "name": "Tomato Seeds Pack",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 112,
+      "name": "Bell Pepper Seeds Pack",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 113,
+      "name": "Newspapers",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 114,
+      "name": "Woodpiles",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 115,
+      "name": "Gasoline Can",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 116,
+      "name": "Zucchini Seeds Pack",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 117,
+      "name": "Barbed Wire",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 118,
+      "name": "Protective Case",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 119,
+      "name": "Map Notes",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 120,
+      "name": "Scout Handbook",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 121,
+      "name": "Canvas",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 122,
+      "name": "Epoxy Glue",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 123,
+      "name": "Fertilizer",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 124,
+      "name": "Dye Bucket",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 125,
+      "name": "Deerskin",
+      "type": "material",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 126,
+      "name": "Flare",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 127,
+      "name": "Campfire Kit",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 128,
+      "name": "Matches",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 129,
+      "name": "Heatpack",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 130,
+      "name": "Sewing Kit",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 131,
+      "name": "Cleaning Kit",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 132,
+      "name": "Water Bottle",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 133,
+      "name": "Canteen",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 134,
+      "name": "Bear Trap",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 135,
+      "name": "Car Tool Kit",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 136,
+      "name": "Radio",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 137,
+      "name": "Hacksaw",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 138,
+      "name": "Spinning Fishing Rod",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 139,
+      "name": "Simple Fishing Rod",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 140,
+      "name": "Flare Gun",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 141,
+      "name": "Whetstone",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 142,
+      "name": "Binoculars",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 143,
+      "name": "Cigarettes",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 144,
+      "name": "Lighter",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 145,
+      "name": "Officer's Keycard",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 146,
+      "name": "Frying Pan",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 147,
+      "name": "Blowtorch",
+      "type": "tool",
+      "gridW": 1,
+      "gridH": 2
+    },
+    {
+      "id": 148,
+      "name": "Sneakers",
+      "type": "footwear",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 149,
+      "name": "Woodland Boots",
+      "type": "footwear",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 150,
+      "name": "Assault Boots",
+      "type": "footwear",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 151,
+      "name": "NBC Boots",
+      "type": "footwear",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 152,
+      "name": "NBC Gloves",
+      "type": "accessory",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 153,
+      "name": "Hunting Knife",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 154,
+      "name": "Army Knife",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 155,
+      "name": "Butcher Knife",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 156,
+      "name": "Hatchet",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 157,
+      "name": "Shovel",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 158,
+      "name": "Pipe Wrench",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 159,
+      "name": "Baseball Bat",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 160,
+      "name": "Fire-Axe",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 161,
+      "name": "Crowbar",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 162,
+      "name": "Butcher Knife",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 163,
+      "name": "Hunting Knife",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 164,
+      "name": "Army Knife",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 165,
+      "name": "Pickaxe",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 166,
+      "name": "Pitchfork",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 167,
+      "name": "Sledgehammer",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 168,
+      "name": "Crusader Sword",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 169,
+      "name": "Pan",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 170,
+      "name": "Katana",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 171,
+      "name": "Barbed Bat",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 172,
+      "name": "Chainsaw",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 173,
+      "name": "Generator",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 174,
+      "name": "Metal Sheet",
+      "type": "melee",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 25,
+      "range": 32,
+      "clipSize": 0,
+      "fireCooldown": 0,
+      "reloadTime": 0,
+      "ammoItemId": 0,
+      "fireMode": "semi"
+    },
+    {
+      "id": 175,
+      "name": "FNX 45",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 176,
+      "name": "Colt 1911",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 177,
+      "name": "Magnum Revolver",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 178,
+      "name": "Glock 17",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 179,
+      "name": "Amphibia S",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 180,
+      "name": "Sawn-Off IZh-43",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 181,
+      "name": "Sawn-Off Mosin",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 182,
+      "name": "Engraved Colt",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 183,
+      "name": "MAC-10",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 184,
+      "name": "Mare's Leg",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 185,
+      "name": "PM",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 186,
+      "name": "PB",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 187,
+      "name": "Desert Eagle",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 188,
+      "name": "M79",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 189,
+      "name": "Sawn-Off Blaze",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 190,
+      "name": "Longhorn",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 191,
+      "name": "Mini-UZI",
+      "type": "secondary",
+      "gridW": 1,
+      "gridH": 2,
+      "damage": 30,
+      "range": 400,
+      "clipSize": 15,
+      "fireCooldown": 0.22,
+      "reloadTime": 2.0,
+      "ammoItemId": 57,
+      "fireMode": "semi"
+    },
+    {
+      "id": 192,
+      "name": "Mosin-Nagant",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 193,
+      "name": "M4A1",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 194,
+      "name": "IZh-43",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 195,
+      "name": "AK-74",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 196,
+      "name": "AKM",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 197,
+      "name": "AKs-74u",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 198,
+      "name": "SKS",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 199,
+      "name": "L85A2",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 200,
+      "name": "Remington Model 870",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 201,
+      "name": "Improvised Bow",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 202,
+      "name": "Hunting Crossbow",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 203,
+      "name": "Ruger 10/22 Sporter",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 204,
+      "name": "Rossi R92",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 205,
+      "name": "SVD Dragunov",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 206,
+      "name": "MP5K",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 207,
+      "name": "UMP-45",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 208,
+      "name": "RPK",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 209,
+      "name": "FN-FAL",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 210,
+      "name": "Saiga-12K",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 211,
+      "name": "AUG A1",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 212,
+      "name": "PP-19 Bizon",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 213,
+      "name": "OTs-14 Groza",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 214,
+      "name": "VSS Vintorez",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 215,
+      "name": "SV-98",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 216,
+      "name": "Madsen",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 217,
+      "name": "AN-94",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 218,
+      "name": "Silenced Remington",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 219,
+      "name": "M16A2",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 220,
+      "name": "KRISS Vector",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 221,
+      "name": "M4A1 w/Drum",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 222,
+      "name": "AKM w/Drum",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 223,
+      "name": "M70 Tundra",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 224,
+      "name": "Saiga-12K w/Drum",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 225,
+      "name": "RPK w/Drum",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 226,
+      "name": "M16A2 w/Drum",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 227,
+      "name": "AUG A1 w/Drum",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 228,
+      "name": "Milkor MGL",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 229,
+      "name": "Blaze",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 230,
+      "name": "FAMAS F1",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 231,
+      "name": "Mini-14",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 232,
+      "name": "AK-74 w/Drum",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 233,
+      "name": "AKs-74U w/Drum",
+      "type": "primary",
+      "gridW": 2,
+      "gridH": 4,
+      "damage": 45,
+      "range": 700,
+      "clipSize": 30,
+      "fireCooldown": 0.1,
+      "reloadTime": 3.0,
+      "ammoItemId": 53,
+      "fireMode": "auto"
+    },
+    {
+      "id": 234,
+      "name": "Ghillie Suit",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 235,
+      "name": "Bulletproof Vest",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 236,
+      "name": "Assault Vest",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 237,
+      "name": "Press Vest",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 238,
+      "name": "High Capacity Vest",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 239,
+      "name": "Kevlar Vest",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 240,
+      "name": "Soviet Vest",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 241,
+      "name": "Apron",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 242,
+      "name": "Ghillie Suit",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 243,
+      "name": "M Heavy Armor",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 244,
+      "name": "Chem Suit",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 245,
+      "name": "M Kevlar CBRN Suit",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 246,
+      "name": "M Heavy CBRN Suit",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 247,
+      "name": "M Ghillie CBRN Suit",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 248,
+      "name": "Hazmat Suit",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 249,
+      "name": "NBC Suit",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 250,
+      "name": "CRBN Suit",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 251,
+      "name": "Chem Suit (stowed)",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 252,
+      "name": "Hazmat Suit (stowed)",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 253,
+      "name": "CBRN Suit",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 254,
+      "name": "NBC Suit",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 255,
+      "name": "NBC Suit",
+      "type": "vest",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 256,
+      "name": "Gas Mask",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 257,
+      "name": "Balaclava",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 258,
+      "name": "GP-5 Gas Mask",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 259,
+      "name": "Clown Mask",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 260,
+      "name": "Motorcycle Helmet",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 261,
+      "name": "Army Helmet",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 262,
+      "name": "Hard Hat",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 263,
+      "name": "Gas Mask",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 264,
+      "name": "Motorcycke Helmet 2",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 265,
+      "name": "Motorcycle Helmet 3",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 266,
+      "name": "Cap",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 267,
+      "name": "Warmhat",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 268,
+      "name": "Ushanka",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 269,
+      "name": "Beret",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 270,
+      "name": "Balaclava",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 271,
+      "name": "Headlamp",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 272,
+      "name": "Cowboy Hat",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 273,
+      "name": "Welding Mask",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 274,
+      "name": "Gorka Helmet",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 275,
+      "name": "Police Cap",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 276,
+      "name": "NVG",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 277,
+      "name": "Bandana",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 278,
+      "name": "Crusader Helm",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 279,
+      "name": "Pilot Helmet",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 280,
+      "name": "Altyn helmet",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 281,
+      "name": "Rys-T Helmet",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 282,
+      "name": "GP-5 Gas Mask",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 283,
+      "name": "Clown Mask",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 284,
+      "name": "Assault Helmet",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 285,
+      "name": "Assault Helmet",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 286,
+      "name": "Assault Helmet",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 287,
+      "name": "Assault Helmet",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 288,
+      "name": "Headlamp (stowed)",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 289,
+      "name": "NVG (stowed)",
+      "type": "helmet",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 290,
+      "name": "Jeans",
+      "type": "pants",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 291,
+      "name": "Worker Pants",
+      "type": "pants",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 292,
+      "name": "Tracksuit Pants",
+      "type": "pants",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 293,
+      "name": "Gorka Pants",
+      "type": "pants",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 294,
+      "name": "Paramedic Pants",
+      "type": "pants",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 295,
+      "name": "Orel Pants",
+      "type": "pants",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 296,
+      "name": "Hunter Pants",
+      "type": "pants",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 297,
+      "name": "Hoodie",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 298,
+      "name": "Shirt",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 299,
+      "name": "(Unnamed Top-Wear)",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 300,
+      "name": "Hoodie",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 301,
+      "name": "Raincoat",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 302,
+      "name": "Raincoat",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 303,
+      "name": "Jacket",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 304,
+      "name": "Trench Coat",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 305,
+      "name": "Gorka Jacket",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 306,
+      "name": "T-Shirt",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 307,
+      "name": "Paramedic Jacket",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 308,
+      "name": "Orel Jacket",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 309,
+      "name": "Tracksuit Jacket",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 310,
+      "name": "Dress",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 311,
+      "name": "Down Jacket",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 312,
+      "name": "Hunter Jacket",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 313,
+      "name": "Sweater",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 314,
+      "name": "Awesome Hoodie",
+      "type": "top",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 315,
+      "name": "Taloon Backpack",
+      "type": "backpack",
+      "gridW": 2,
+      "gridH": 3,
+      "containerRows": 6,
+      "containerCols": 6
+    },
+    {
+      "id": 316,
+      "name": "Mountain Backpack",
+      "type": "backpack",
+      "gridW": 2,
+      "gridH": 3,
+      "containerRows": 6,
+      "containerCols": 6
+    },
+    {
+      "id": 317,
+      "name": "Hunting Backpack",
+      "type": "backpack",
+      "gridW": 2,
+      "gridH": 3,
+      "containerRows": 8,
+      "containerCols": 6
+    },
+    {
+      "id": 318,
+      "name": "School Backpack",
+      "type": "backpack",
+      "gridW": 2,
+      "gridH": 3,
+      "containerRows": 6,
+      "containerCols": 6
+    },
+    {
+      "id": 319,
+      "name": "Improvised Sling Bag",
+      "type": "backpack",
+      "gridW": 2,
+      "gridH": 3,
+      "containerRows": 4,
+      "containerCols": 6
+    },
+    {
+      "id": 320,
+      "name": "Improvised Backpack",
+      "type": "backpack",
+      "gridW": 2,
+      "gridH": 3,
+      "containerRows": 6,
+      "containerCols": 6
+    },
+    {
+      "id": 321,
+      "name": "Camping Backpack",
+      "type": "backpack",
+      "gridW": 2,
+      "gridH": 3,
+      "containerRows": 6,
+      "containerCols": 6
+    },
+    {
+      "id": 322,
+      "name": "Tortilla Backpack",
+      "type": "backpack",
+      "gridW": 2,
+      "gridH": 3,
+      "containerRows": 6,
+      "containerCols": 6
+    },
+    {
+      "id": 323,
+      "name": "Satchel",
+      "type": "backpack",
+      "gridW": 2,
+      "gridH": 3,
+      "containerRows": 6,
+      "containerCols": 6
+    },
+    {
+      "id": 324,
+      "name": "Army Satchel",
+      "type": "backpack",
+      "gridW": 2,
+      "gridH": 3,
+      "containerRows": 6,
+      "containerCols": 6
+    },
+    {
+      "id": 325,
+      "name": "Medical Satchel",
+      "type": "backpack",
+      "gridW": 2,
+      "gridH": 3,
+      "containerRows": 6,
+      "containerCols": 6
+    },
+    {
+      "id": 326,
+      "name": "Supplies Stache",
+      "type": "backpack",
+      "gridW": 2,
+      "gridH": 3,
+      "containerRows": 6,
+      "containerCols": 6
+    },
+    {
+      "id": 327,
+      "name": "Mini-Game Console",
+      "type": "deployable",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 328,
+      "name": "Doggo Kennel",
+      "type": "deployable",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 329,
+      "name": "Supplies Stash",
+      "type": "deployable",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 330,
+      "name": "Secret Stash",
+      "type": "deployable",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 331,
+      "name": "Searchlight Set",
+      "type": "deployable",
+      "gridW": 2,
+      "gridH": 2
+    },
+    {
+      "id": 332,
+      "name": "Unknown Item #64",
+      "type": "unknown",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 333,
+      "name": "Unknown Item #65",
+      "type": "unknown",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 334,
+      "name": "Unknown Item #66",
+      "type": "unknown",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 335,
+      "name": "Unknown Item #67",
+      "type": "unknown",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 336,
+      "name": "Unknown Item #84",
+      "type": "unknown",
+      "gridW": 1,
+      "gridH": 1
+    },
+    {
+      "id": 337,
+      "name": "Unknown Item #728",
+      "type": "unknown",
+      "gridW": 1,
+      "gridH": 1
+    }
+  ]
+}
