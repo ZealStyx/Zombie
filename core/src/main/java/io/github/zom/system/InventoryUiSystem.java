@@ -95,10 +95,16 @@ public class InventoryUiSystem extends BaseSystem {
         mainPanel.add(descLabel).colspan(2).width(440f).height(35f).padTop(6f).expandX().fillX();
 
         mainPanel.setVisible(false);
+
+        // Add a background actor that fills the entire stage to catch drops outside the mainPanel
+        Table catchAll = new Table();
+        catchAll.setFillParent(true);
+        stage.addActor(catchAll);
+
         stage.addActor(mainPanel);
 
         // Target for dropping item outside the UI -> drops on the ground
-        dnd.addTarget(new DragAndDrop.Target(stage.getRoot()) {
+        dnd.addTarget(new DragAndDrop.Target(catchAll) {
             @Override
             public boolean drag(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
                 // Highlighting when dragging outside to drop
@@ -239,7 +245,7 @@ public class InventoryUiSystem extends BaseSystem {
 
     private Table createGridTable(Inventory inv, String sourceName, float cellSize) {
         Table table = new Table(skin);
-        table.setBackground("dialog-dim"); // Subtle background for the grid container
+        table.setBackground("alpha"); // Subtle background for the grid container
 
         inv.rebuildOccupiedGrid();
 
@@ -302,7 +308,7 @@ public class InventoryUiSystem extends BaseSystem {
             if (def == null) continue;
 
             Table itemWidget = createItemWidget(p.instance, def, p.r, p.c, cellSize);
-            
+
             // Calculate absolute position on grid table
             float w = def.gridW * cellSize + (def.gridW - 1) * 2f;
             float h = def.gridH * cellSize + (def.gridH - 1) * 2f;
@@ -402,7 +408,7 @@ public class InventoryUiSystem extends BaseSystem {
             public void drop(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
                 DragPayload dp = (DragPayload) payload.getObject();
                 removeInstanceFromSource(dp);
-                
+
                 // Equip new item
                 PlayerComponent player = mPlayer.get(playerEntityId);
                 player.equip(slotName, dp.instance);
@@ -415,7 +421,7 @@ public class InventoryUiSystem extends BaseSystem {
 
     private Table createItemWidget(ItemInstance inst, ItemDef def, int r, int c, float cellSize) {
         Table table = new Table(skin);
-        table.setBackground("dialog-dim");
+        table.setBackground("alpha");
         table.getColor().a = 0.95f;
 
         // Icon
