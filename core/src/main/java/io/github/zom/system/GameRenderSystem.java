@@ -30,6 +30,7 @@ import io.github.zom.config.ItemDef;
 import io.github.zom.rendering.PlayerRenderer;
 import io.github.zom.rendering.SpriteRenderState;
 import io.github.zom.rendering.TextureCache;
+import io.github.zom.rendering.WorldItemLabelRenderer;
 import io.github.zom.rendering.ZedRenderer;
 import io.github.zom.world.WorldCollision;
 
@@ -59,7 +60,8 @@ public class GameRenderSystem extends BaseSystem {
     private final SpriteBatch batch;
     private final OrthographicCamera camera;
 
-    private ItemPickupSystem pickupSystem;
+    /** Renders floating item-name labels above nearby ground items. */
+    private WorldItemLabelRenderer labelRenderer;
 
     // Sprite state holders for drawing
     private final SpriteRenderState zedRenderState = new SpriteRenderState();
@@ -88,10 +90,6 @@ public class GameRenderSystem extends BaseSystem {
         this.camera = camera;
     }
 
-    public void setPickupSystem(ItemPickupSystem pickupSystem) {
-        this.pickupSystem = pickupSystem;
-    }
-
     @Override
     protected void initialize() {
         playerSub = world.getAspectSubscriptionManager().get(Aspect.all(
@@ -103,6 +101,8 @@ public class GameRenderSystem extends BaseSystem {
         itemSub = world.getAspectSubscriptionManager().get(Aspect.all(
             WorldItemComponent.class, TransformComponent.class
         ));
+        // Label renderer created here so it can register its own subscriptions
+        labelRenderer = new WorldItemLabelRenderer(world);
     }
 
     @Override
@@ -166,9 +166,16 @@ public class GameRenderSystem extends BaseSystem {
             }
         }
 
-        // Proximity item labels
-        if (pickupSystem != null) {
-            pickupSystem.drawLabels(batch);
+        // Proximity item labels — find player centre first
+        IntBag playerBag = playerSub.getEntities();
+        if (labelRenderer != null && playerBag.size() > 0) {
+            int pid = playerBag.getData()[0];
+            if (mTransform.has(pid)) {
+                TransformComponent ptf = mTransform.get(pid);
+                float pcx = ptf.x + ptf.w * 0.5f;
+                float pcy = ptf.y + ptf.h * 0.5f;
+                labelRenderer.draw(batch, pcx, pcy);
+            }
         }
 
         // 6. Draw debug lines

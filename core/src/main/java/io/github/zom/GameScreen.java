@@ -15,7 +15,6 @@ import io.github.zom.system.CollisionSystem;
 import io.github.zom.system.CombatSystem;
 import io.github.zom.system.DebugConsoleSystem;
 import io.github.zom.system.HealthSystem;
-import io.github.zom.system.ItemPickupSystem;
 import io.github.zom.system.MovementSystem;
 import io.github.zom.system.GameRenderSystem;
 import io.github.zom.system.ZedAISystem;
@@ -32,10 +31,11 @@ import io.github.zom.world.WorldCollision;
  * 4. CollisionSystem — resolve feet vs world for ALL entities
  * 5. CombatSystem — melee hitbox + hitscan, queue damage
  * 6. HealthSystem — process damage queues, trigger death animations
- * 7. ItemPickupSystem — F key: nearest item → inventory
+ * 7. InventoryUiSystem — Tab toggle, drag-and-drop, Nearby Loot panel
+ *    (ItemPickupSystem removed — pickup now via inventory drag-from-loot-panel)
  * 8. DebugConsoleSystem — render console overlay (no-op when closed)
  * 9. GameRenderSystem — draw all items, dead/alive zeds, and player sorted by
- * feet Y-coordinate
+ * feet Y-coordinate; draws proximity labels via WorldItemLabelRenderer
  *
  * PPU (pixels per world unit) = 1. Sprites render at native pixel size via
  * TransformComponent.w/h set from the actual texture dimensions in
@@ -89,9 +89,7 @@ public class GameScreen implements Screen {
         androidController = new io.github.zom.system.AndroidControllerSystem();
         inventoryUi = new io.github.zom.system.InventoryUiSystem();
 
-        ItemPickupSystem itemPickupSystem = new ItemPickupSystem();
         GameRenderSystem gameRenderSystem = new GameRenderSystem(batch, camera);
-        gameRenderSystem.setPickupSystem(itemPickupSystem);
 
         WorldConfiguration cfg = new WorldConfigurationBuilder()
                 .with(
@@ -102,7 +100,6 @@ public class GameScreen implements Screen {
                         new CollisionSystem(),
                         new CombatSystem(),
                         new HealthSystem(),
-                        itemPickupSystem,
                         inventoryUi,
                         debugConsole,
                         gameRenderSystem)

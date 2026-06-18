@@ -59,10 +59,10 @@ public class MovementSystem extends IteratingSystem {
                     if (combat.hasRanged) combat.rangedRequested = true;
                     else                  combat.meleeRequested  = true;
                 }
-                if (AndroidControllerSystem.interactPressed) {
-                    // Interact is handled by ItemPickupSystem via the static flag;
-                    // nothing to set here for combat.
-                }
+                // if (AndroidControllerSystem.interactPressed) {
+                //     // Interact is handled by ItemPickupSystem via the static flag;
+                //     // nothing to set here for combat.
+                // }
             } else {
                 combat.isAutoFiring = Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && combat.hasRanged;
                 if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT))               combat.meleeRequested  = true;
