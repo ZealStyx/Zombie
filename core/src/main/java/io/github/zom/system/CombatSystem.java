@@ -15,17 +15,22 @@ import io.github.zom.component.InventoryComponent;
 import io.github.zom.component.PlayerComponent;
 import io.github.zom.component.TransformComponent;
 import io.github.zom.component.ZedComponent;
+import io.github.zom.config.ConfigLoader;
+import io.github.zom.config.ItemDataDef;
+import io.github.zom.config.ItemDef;
+import io.github.zom.util.ItemInstance;
 
 /**
- * Processes player attack requests (set by MovementSystem from mouse/touch input).
+ * Processes player attack requests set by MovementSystem.
  *
- * Melee  — builds a hit rectangle in front of the player, tests it against zed
- *           headBox first (headshot), then bodyBox. Queues damage into HealthComponent.
- *
- * Ranged — hitscan ray from player centre in facing direction, steps 4px at a time,
- *           tests zed headBox first then bodyBox, stops at first hit or rangedRange.
- *
- * All distances in pixels (PPU=1).
+ * CHANGES:
+ * - syncHeldWeapon() reads stats from ItemDataConfig (not ItemGridDef) and writes
+ *   currentAmmo back to player.equippedHeld.currentAmmo so ammo persists across
+ *   equip/unequip cycles.
+ * - doRanged() picks the correct fire animation ("twohand" for primary, "pistol"
+ *   for secondary) instead of hardcoding "pistol".
+ * - player.dirty is consumed (set false) AFTER syncHeldWeapon, so GameRenderSystem
+ *   still sees it for PlayerRenderer.rebuild().
  */
 public class CombatSystem extends IteratingSystem {
 
@@ -58,10 +63,18 @@ public class CombatSystem extends IteratingSystem {
 
     @Override
     protected void process(int entityId) {
+        PlayerComponent         player    = mPlayer.get(entityId);
         CombatComponent         combat    = mCombat.get(entityId);
         TransformComponent      transform = mTransform.get(entityId);
         AnimationStateComponent anim      = mAnim.get(entityId);
         float delta = world.getDelta();
+
+        // Sync weapon stats whenever equipment changed
+        if (player.dirty) {
+            syncHeldWeapon(player, combat);
+            // Note: we do NOT clear player.dirty here — GameRenderSystem needs it
+            // to trigger PlayerRenderer.rebuild(). It is cleared there.
+        }
 
         // Tick cooldown timers
         combat.meleeTimer  = Math.max(0f, combat.meleeTimer  - delta);
@@ -72,7 +85,7 @@ public class CombatSystem extends IteratingSystem {
             combat.reloadTimer -= delta;
             if (combat.reloadTimer <= 0f) {
                 combat.reloading = false;
-                completeReload(entityId, combat);
+                completeReload(entityId, combat, player);
             }
         }
 
@@ -91,7 +104,8 @@ public class CombatSystem extends IteratingSystem {
         if (combat.hasRanged && !combat.reloading) {
             if (combat.rangedRequested) {
                 wantsToFire = true;
-            } else if (combat.isAutoFiring && ("auto".equals(combat.fireMode) || "both".equals(combat.fireMode))) {
+            } else if (combat.isAutoFiring
+                && ("auto".equals(combat.fireMode) || "both".equals(combat.fireMode))) {
                 wantsToFire = true;
             }
         }
@@ -100,9 +114,14 @@ public class CombatSystem extends IteratingSystem {
         if (wantsToFire && combat.rangedTimer <= 0f) {
             if (combat.currentAmmo > 0) {
                 combat.currentAmmo--;
+                // Persist ammo into the equipped instance immediately
+                if (player.equippedHeld != null) {
+                    player.equippedHeld.currentAmmo = combat.currentAmmo;
+                }
                 combat.rangedTimer = combat.rangedCooldown;
-                // pose depends on weapon type; "pistol" for secondary, "twohand" for primary
-                anim.playOnce("pistol", combat.rangedCooldown);
+                // Fire animation: twohand for primary, pistol for secondary
+                String fireAnim = resolveFireAnim(player);
+                anim.playOnce(fireAnim, combat.rangedCooldown);
                 doRanged(transform, combat);
             } else {
                 combat.reloadRequested = true;
@@ -113,104 +132,134 @@ public class CombatSystem extends IteratingSystem {
         if (combat.reloadRequested) {
             combat.reloadRequested = false;
             if (!combat.reloading && combat.currentAmmo < combat.clipSize && combat.hasRanged) {
-                int needed = combat.clipSize - combat.currentAmmo;
                 int found = countAmmoInInventory(entityId, combat.ammoItemId);
                 if (found > 0) {
-                    combat.reloading = true;
-                    combat.reloadTimer = combat.reloadDuration;
-                    com.badlogic.gdx.Gdx.app.log("Combat", "Started reloading... Needs " + needed + ", found " + found);
+                    combat.reloading    = true;
+                    combat.reloadTimer  = combat.reloadDuration;
+                    com.badlogic.gdx.Gdx.app.log("Combat", "Reloading… need "
+                        + (combat.clipSize - combat.currentAmmo) + ", found " + found);
                 } else {
-                    com.badlogic.gdx.Gdx.app.log("Combat", "Cannot reload: Out of ammo of type " + combat.ammoItemId);
+                    com.badlogic.gdx.Gdx.app.log("Combat", "No ammo of type " + combat.ammoItemId);
                 }
             }
         }
     }
 
-    private void completeReload(int entityId, CombatComponent combat) {
-        int needed = combat.clipSize - combat.currentAmmo;
-        if (needed <= 0) return;
+    // ── Weapon sync ───────────────────────────────────────────────────────────
 
+    /**
+     * Copies stats from ItemDataConfig into CombatComponent.
+     * Also restores currentAmmo from the ItemInstance so reloaded rounds survive
+     * holster/un-holster cycles.
+     */
+    private void syncHeldWeapon(PlayerComponent player, CombatComponent combat) {
+        ItemInstance held = player.equippedHeld;
+        if (held == null) {
+            setFistDefaults(combat);
+            return;
+        }
+
+        ItemDataDef dd = ConfigLoader.getItemDataConfig().get(held.itemId);
+        if (dd == null) {
+            setFistDefaults(combat);
+            return;
+        }
+
+        if (dd.isGun()) {
+            combat.hasRanged      = true;
+            combat.rangedDamage   = dd.damage;
+            combat.rangedRange    = dd.range;
+            combat.clipSize       = dd.clipSize;
+            combat.rangedCooldown = dd.fireCooldown;
+            combat.reloadDuration = dd.reloadTime;
+            combat.ammoItemId     = dd.ammoItemId;
+            combat.fireMode       = dd.fireMode != null ? dd.fireMode : "semi";
+            // Restore ammo from the instance — preserves count across holster cycles
+            combat.currentAmmo    = held.currentAmmo;
+        } else {
+            // Melee weapon
+            combat.hasRanged     = false;
+            combat.meleeDamage   = dd.damage > 0 ? dd.damage : 20f;
+            combat.meleeRange    = dd.range  > 0 ? dd.range  : 36f;
+        }
+    }
+
+    private void setFistDefaults(CombatComponent combat) {
+        combat.hasRanged     = false;
+        combat.meleeDamage   = 15f;
+        combat.meleeRange    = 28f;
+        combat.meleeCooldown = 0.5f;
+    }
+
+    private String resolveFireAnim(PlayerComponent player) {
+        if (player.equippedHeld == null) return "pistol";
+        ItemDef def = ConfigLoader.getItemDatabase().get(player.equippedHeld.itemId);
+        if (def != null && "primary".equals(def.type)) return "twohand";
+        return "pistol";
+    }
+
+    // ── Reload completion ────────────────────────────────────────────────────
+
+    private void completeReload(int entityId, CombatComponent combat, PlayerComponent player) {
+        int needed   = combat.clipSize - combat.currentAmmo;
+        if (needed <= 0) return;
         int consumed = consumeAmmoFromInventory(entityId, combat.ammoItemId, needed);
         combat.currentAmmo += consumed;
-        com.badlogic.gdx.Gdx.app.log("Combat", "Reload completed! Loaded " + consumed + " rounds. Total: " + combat.currentAmmo);
+        // Persist into equipped instance
+        if (player.equippedHeld != null) {
+            player.equippedHeld.currentAmmo = combat.currentAmmo;
+        }
+        com.badlogic.gdx.Gdx.app.log("Combat", "Reload done: " + consumed
+            + " rounds. Total: " + combat.currentAmmo);
     }
+
+    // ── Ammo inventory helpers ────────────────────────────────────────────────
 
     private int countAmmoInInventory(int entityId, int ammoItemId) {
         int count = 0;
         if (mInventory.has(entityId)) {
-            InventoryComponent invComp = mInventory.get(entityId);
-            if (invComp.inventory != null) {
-                count += invComp.inventory.count(ammoItemId);
-            }
+            InventoryComponent inv = mInventory.get(entityId);
+            if (inv.inventory != null) count += inv.inventory.count(ammoItemId);
         }
         if (mPlayer.has(entityId)) {
-            PlayerComponent player = mPlayer.get(entityId);
-            if (player.equippedBackpack != null && player.equippedBackpack.container != null) {
-                count += player.equippedBackpack.container.count(ammoItemId);
-            }
-            if (player.equippedSlingBag != null && player.equippedSlingBag.container != null) {
-                count += player.equippedSlingBag.container.count(ammoItemId);
-            }
+            PlayerComponent p = mPlayer.get(entityId);
+            if (p.equippedBackpack != null && p.equippedBackpack.container != null)
+                count += p.equippedBackpack.container.count(ammoItemId);
+            if (p.equippedSlingBag != null && p.equippedSlingBag.container != null)
+                count += p.equippedSlingBag.container.count(ammoItemId);
         }
         return count;
     }
 
     private int consumeAmmoFromInventory(int entityId, int ammoItemId, int amount) {
-        int remainingToConsume = amount;
-
-        // 1. Consume from base inventory first
+        int remaining = amount;
         if (mInventory.has(entityId)) {
-            InventoryComponent invComp = mInventory.get(entityId);
-            if (invComp.inventory != null) {
-                int available = invComp.inventory.count(ammoItemId);
-                int take = Math.min(available, remainingToConsume);
-                if (take > 0) {
-                    invComp.inventory.remove(ammoItemId, take);
-                    remainingToConsume -= take;
-                }
+            InventoryComponent inv = mInventory.get(entityId);
+            if (inv.inventory != null) {
+                int take = Math.min(inv.inventory.count(ammoItemId), remaining);
+                if (take > 0) { inv.inventory.remove(ammoItemId, take); remaining -= take; }
             }
         }
-
-        // 2. Consume from backpack
-        if (remainingToConsume > 0 && mPlayer.has(entityId)) {
-            PlayerComponent player = mPlayer.get(entityId);
-            if (player.equippedBackpack != null && player.equippedBackpack.container != null) {
-                int available = player.equippedBackpack.container.count(ammoItemId);
-                int take = Math.min(available, remainingToConsume);
-                if (take > 0) {
-                    player.equippedBackpack.container.remove(ammoItemId, take);
-                    remainingToConsume -= take;
-                }
+        if (remaining > 0 && mPlayer.has(entityId)) {
+            PlayerComponent p = mPlayer.get(entityId);
+            if (p.equippedBackpack != null && p.equippedBackpack.container != null) {
+                int take = Math.min(p.equippedBackpack.container.count(ammoItemId), remaining);
+                if (take > 0) { p.equippedBackpack.container.remove(ammoItemId, take); remaining -= take; }
+            }
+            if (remaining > 0 && p.equippedSlingBag != null && p.equippedSlingBag.container != null) {
+                int take = Math.min(p.equippedSlingBag.container.count(ammoItemId), remaining);
+                if (take > 0) { p.equippedSlingBag.container.remove(ammoItemId, take); remaining -= take; }
             }
         }
-
-        // 3. Consume from sling bag
-        if (remainingToConsume > 0 && mPlayer.has(entityId)) {
-            PlayerComponent player = mPlayer.get(entityId);
-            if (player.equippedSlingBag != null && player.equippedSlingBag.container != null) {
-                int available = player.equippedSlingBag.container.count(ammoItemId);
-                int take = Math.min(available, remainingToConsume);
-                if (take > 0) {
-                    player.equippedSlingBag.container.remove(ammoItemId, take);
-                    remainingToConsume -= take;
-                }
-            }
-        }
-
-        return amount - remainingToConsume;
+        return amount - remaining;
     }
 
-    // ── Melee implementation ─────────────────────────────────────────────────
+    // ── Melee ─────────────────────────────────────────────────────────────────
 
     private void doMelee(TransformComponent t, CombatComponent combat) {
         float cx = t.x + t.w * 0.5f;
         float cy = t.y + t.h * 0.5f;
-
-        // Build hit rect in front of player based on facing direction
-        float range = combat.meleeRange;
-        float hw    = combat.meleeHalfWidth;
-
-        Rectangle hitRect = buildHitRect(cx, cy, t.direction, range, hw);
+        Rectangle hitRect = buildHitRect(cx, cy, t.direction, combat.meleeRange, combat.meleeHalfWidth);
 
         IntBag zeds = zedSub.getEntities();
         int[]  data = zeds.getData();
@@ -218,15 +267,10 @@ public class CombatSystem extends IteratingSystem {
             int zId = data[i];
             ZedComponent zed = mZed.get(zId);
             if (!zed.alive) continue;
-
             CollisionComponent col    = mCollision.get(zId);
             HealthComponent    health = mHealth.get(zId);
-
-            if (hitRect.overlaps(col.headBox)) {
-                health.queueDamage(combat.meleeDamage, true);
-            } else if (hitRect.overlaps(col.bodyBox)) {
-                health.queueDamage(combat.meleeDamage, false);
-            }
+            if      (hitRect.overlaps(col.headBox)) health.queueDamage(combat.meleeDamage, true);
+            else if (hitRect.overlaps(col.bodyBox)) health.queueDamage(combat.meleeDamage, false);
         }
     }
 
@@ -235,18 +279,17 @@ public class CombatSystem extends IteratingSystem {
         switch (dir) {
             case "up":    return new Rectangle(cx - hw, cy,         hw * 2f, range);
             case "down":  return new Rectangle(cx - hw, cy - range, hw * 2f, range);
-            case "right": return new Rectangle(cx,       cy - hw,  range,    hw * 2f);
-            case "left":  return new Rectangle(cx - range, cy - hw, range,   hw * 2f);
+            case "right": return new Rectangle(cx,       cy - hw,   range,   hw * 2f);
+            case "left":  return new Rectangle(cx-range, cy - hw,   range,   hw * 2f);
             default:      return new Rectangle(cx - hw, cy,         hw * 2f, range);
         }
     }
 
-    // ── Ranged / hitscan implementation ──────────────────────────────────────
+    // ── Ranged / hitscan ─────────────────────────────────────────────────────
 
     private void doRanged(TransformComponent t, CombatComponent combat) {
         float cx = t.x + t.w * 0.5f;
         float cy = t.y + t.h * 0.5f;
-
         float dx = 0f, dy = 0f;
         switch (t.direction) {
             case "up":    dy =  1f; break;
@@ -254,34 +297,23 @@ public class CombatSystem extends IteratingSystem {
             case "right": dx =  1f; break;
             case "left":  dx = -1f; break;
         }
-
-        float step       = 4f;  // px per sample
-        int   steps      = (int)(combat.rangedRange / step);
+        float step  = 4f;
+        int   steps = (int)(combat.rangedRange / step);
         float rx = cx, ry = cy;
 
         IntBag zeds = zedSub.getEntities();
         int[]  data = zeds.getData();
-
         for (int s = 0; s < steps; s++) {
             rx += dx * step;
             ry += dy * step;
-
             for (int i = 0, n = zeds.size(); i < n; i++) {
                 int zId = data[i];
                 ZedComponent zed = mZed.get(zId);
                 if (!zed.alive) continue;
-
                 CollisionComponent col    = mCollision.get(zId);
                 HealthComponent    health = mHealth.get(zId);
-
-                if (col.headBox.contains(rx, ry)) {
-                    health.queueDamage(combat.rangedDamage, true);
-                    return; // hitscan stops at first hit
-                }
-                if (col.bodyBox.contains(rx, ry)) {
-                    health.queueDamage(combat.rangedDamage, false);
-                    return;
-                }
+                if (col.headBox.contains(rx, ry)) { health.queueDamage(combat.rangedDamage, true);  return; }
+                if (col.bodyBox.contains(rx, ry)) { health.queueDamage(combat.rangedDamage, false); return; }
             }
         }
     }

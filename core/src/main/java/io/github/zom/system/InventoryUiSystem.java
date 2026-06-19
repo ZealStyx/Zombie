@@ -8,9 +8,10 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -18,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import io.github.zom.component.InventoryComponent;
@@ -26,6 +27,7 @@ import io.github.zom.component.PlayerComponent;
 import io.github.zom.component.TransformComponent;
 import io.github.zom.component.WorldItemComponent;
 import io.github.zom.config.ConfigLoader;
+import io.github.zom.config.ItemDataDef;
 import io.github.zom.config.ItemDef;
 import io.github.zom.config.ItemGridConfig;
 import io.github.zom.config.ItemGridDef;
@@ -36,29 +38,8 @@ import io.github.zom.util.Inventory;
 import io.github.zom.util.ItemInstance;
 import io.github.zom.util.ItemPlacement;
 
-/**
- * Scene2D inventory UI.
- *
- * FIX (5.2 / Bug A & D): Removed full-screen catchAll DragAndDrop.Target.
- *   Ground-drop is now handled in Source.dragStop() when target==null AND
- *   the release point is outside mainPanel. Releasing over dead panel space
- *   (gaps, padding) snaps back — no accidental ground-drops.
- *
- * FIX (5.3 / Bug B): createItemWidget() now visually rotates the icon Image
- *   90° when inst.rotated==true, using setOrigin(center)+setRotation(90).
- *
- * FIX (5.4 / Bug C): slotMaxSize() for held/holstered now treats guns as
- *   horizontal (swaps W↔H when computing max). createGearSlot() force-rotates
- *   the icon for portrait guns in held/holstered slots.
- *
- * NEW  (5.5): Nearby Loot panel — shows WorldItemComponent entities within
- *   LOOT_RANGE while inventory is open. Items are draggable into grids/slots.
- *   Dragging inventory items onto the Nearby Loot panel drops them on ground.
- *   Refreshed every frame (cheap distance check, not just on needsRebuild).
- */
 public class InventoryUiSystem extends BaseSystem {
 
-    // ── Loot range (mirrors old ItemPickupSystem.PICKUP_RANGE) ────────────────
     public static final float LOOT_RANGE = 80f;
 
     private ComponentMapper<PlayerComponent>    mPlayer;
@@ -73,31 +54,26 @@ public class InventoryUiSystem extends BaseSystem {
     private Table mainPanel;
     private Table gearTable;
     private Table gridsTable;
-    /** Nearby Loot section — always visible inside the panel when open. */
     private Table lootTable;
     private Label descLabel;
-    /** Hint label shown when dragging outside the panel. */
     private Label groundHintLabel;
 
     private boolean open           = false;
     private boolean needsRebuild   = false;
     private int     playerEntityId = -1;
 
-    /** Subscription for world items (for nearby-loot scan). */
     private com.artemis.EntitySubscription worldItemSub;
-
-    /** The item instance currently being dragged (for rotation). */
     private ItemInstance dragging = null;
 
-    private static final String[] GEAR_SLOTS = {
-        "helmet", "top", "vest", "held", "pants", "holstered", "backpack", "footwear", "slingbag"
-    };
+    /** Snapshot of nearby entity IDs — change triggers rebuild. */
+    private final IntArray lastNearbyIds = new IntArray();
 
     @Override
     protected void initialize() {
         stage = new Stage(new ScreenViewport());
         skin  = new Skin(Gdx.files.internal("ui/uiskin.json"));
         dnd   = new DragAndDrop();
+        dnd.setDragTime(0);
 
         worldItemSub = world.getAspectSubscriptionManager()
             .get(Aspect.all(WorldItemComponent.class, TransformComponent.class));
@@ -105,20 +81,20 @@ public class InventoryUiSystem extends BaseSystem {
         buildUI();
     }
 
+    // ── UI skeleton ───────────────────────────────────────────────────────────
+
     private void buildUI() {
         mainPanel = new Table(skin);
         mainPanel.setBackground("window");
         mainPanel.getColor().a = 0.92f;
         mainPanel.pad(10f);
 
-        Label.LabelStyle titleStyle = new Label.LabelStyle(FontCache.get().bold(12), Color.CYAN);
-        mainPanel.add(new Label("GEAR & INVENTORY", titleStyle)).colspan(3).left().padBottom(8f).row();
+        Label.LabelStyle title = new Label.LabelStyle(FontCache.get().bold(12), Color.CYAN);
+        mainPanel.add(new Label("GEAR & INVENTORY", title)).colspan(3).left().padBottom(8f).row();
 
-        gearTable  = new Table(skin);
-        gearTable.padRight(12f);
+        gearTable  = new Table(skin); gearTable.padRight(12f);
         gridsTable = new Table(skin);
-        lootTable  = new Table(skin);
-        lootTable.padLeft(12f);
+        lootTable  = new Table(skin); lootTable.padLeft(12f);
 
         mainPanel.add(gearTable).top().left();
         mainPanel.add(gridsTable).top().left().expandX().fillX();
@@ -130,8 +106,7 @@ public class InventoryUiSystem extends BaseSystem {
         descLabel.setAlignment(Align.center);
         mainPanel.add(descLabel).colspan(3).width(560f).height(35f).padTop(6f).expandX().fillX();
 
-        // Ground-drop hint — shown only while dragging outside the panel
-        groundHintLabel = new Label("[ Drop to throw on ground ]",
+        groundHintLabel = new Label("[ Release outside panel to drop on ground ]",
             new Label.LabelStyle(FontCache.get().regular(9), Color.ORANGE));
         groundHintLabel.setVisible(false);
         groundHintLabel.pack();
@@ -141,75 +116,84 @@ public class InventoryUiSystem extends BaseSystem {
         stage.addActor(mainPanel);
     }
 
+    // ── Per-frame ─────────────────────────────────────────────────────────────
+
     @Override
     protected void processSystem() {
-        // Find player
         if (playerEntityId < 0) {
-            IntBag players = world.getAspectSubscriptionManager()
+            IntBag bag = world.getAspectSubscriptionManager()
                 .get(Aspect.all(PlayerComponent.class, InventoryComponent.class, TransformComponent.class))
                 .getEntities();
-            if (players.size() > 0) playerEntityId = players.get(0);
+            if (bag.size() > 0) playerEntityId = bag.get(0);
         }
         if (playerEntityId < 0) return;
 
-        // Toggle
         boolean toggle = Gdx.input.isKeyJustPressed(Input.Keys.TAB)
             || (Gdx.app.getType() == Application.ApplicationType.Android
-                && AndroidControllerSystem.inventoryPressed);
+            && AndroidControllerSystem.inventoryPressed);
         if (toggle) {
             open = !open;
             mainPanel.setVisible(open);
-            if (open) needsRebuild = true;
+            if (open) { needsRebuild = true; lastNearbyIds.clear(); }
         }
 
-        // Rotation key (R) during drag
         if (dragging != null && Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             dragging.rotate();
             needsRebuild = true;
         }
 
-        // Rebuild when equipment changed or inventory toggled open
-        if (open && needsRebuild) {
-            rebuildViews();
-            needsRebuild = false;
-        }
-
         if (open) {
+            if (!needsRebuild) {
+                IntArray cur = computeNearbyIds();
+                if (!intArrayEquals(cur, lastNearbyIds)) needsRebuild = true;
+            }
+            if (needsRebuild) { rebuildViews(); needsRebuild = false; }
             stage.act(world.getDelta());
-            // Refresh nearby loot every frame (player may have walked)
-            refreshLootPanel();
-            // Update ground-drop hint visibility while dragging
             updateGroundHint();
         }
     }
 
-    public void drawStage() { if (open) stage.draw(); }
-    public Stage getStage() { return stage; }
+    public void drawStage()           { if (open) stage.draw(); }
+    public Stage getStage()           { return stage; }
+    public void resize(int w, int h)  { stage.getViewport().update(w, h, true); if (open) positionPanel(); }
+    public void markDirty()           { needsRebuild = true; }
 
-    public void resize(int w, int h) {
-        stage.getViewport().update(w, h, true);
-        if (open) positionPanel();
+    // ── Nearby ID helpers ────────────────────────────────────────────────────
+
+    private IntArray computeNearbyIds() {
+        IntArray out = new IntArray();
+        if (playerEntityId < 0) return out;
+        TransformComponent ptf = mTransform.get(playerEntityId);
+        float pcx = ptf.x + ptf.w * 0.5f, pcy = ptf.y + ptf.h * 0.5f;
+        IntBag bag  = worldItemSub.getEntities();
+        int[]  data = bag.getData();
+        for (int i = 0, n = bag.size(); i < n; i++) {
+            int eid = data[i];
+            if (!mTransform.has(eid)) continue;
+            TransformComponent tf = mTransform.get(eid);
+            float dx = (tf.x + tf.w * 0.5f) - pcx;
+            float dy = (tf.y + tf.h * 0.5f) - pcy;
+            if (dx*dx + dy*dy <= LOOT_RANGE * LOOT_RANGE) out.add(eid);
+        }
+        out.sort();
+        return out;
     }
 
-    public void markDirty() { needsRebuild = true; }
+    private static boolean intArrayEquals(IntArray a, IntArray b) {
+        if (a.size != b.size) return false;
+        for (int i = 0; i < a.size; i++) if (a.get(i) != b.get(i)) return false;
+        return true;
+    }
 
     // ── Ground-drop hint ──────────────────────────────────────────────────────
 
     private void updateGroundHint() {
-        if (dragging == null) {
-            groundHintLabel.setVisible(false);
-            return;
-        }
-        // Show hint at bottom-centre of screen when drag pointer is outside panel
-        float mx = Gdx.input.getX();
-        float my = Gdx.graphics.getHeight() - Gdx.input.getY();
-        boolean overPanel = isPanelBounds(mx, my);
-        groundHintLabel.setVisible(!overPanel);
-        if (!overPanel) {
-            groundHintLabel.setPosition(
-                Gdx.graphics.getWidth() / 2f - groundHintLabel.getWidth() / 2f,
-                20f);
-        }
+        if (dragging == null) { groundHintLabel.setVisible(false); return; }
+        float mx = Gdx.input.getX(), my = Gdx.graphics.getHeight() - Gdx.input.getY();
+        boolean over = isPanelBounds(mx, my);
+        groundHintLabel.setVisible(!over);
+        if (!over) groundHintLabel.setPosition(
+            Gdx.graphics.getWidth() / 2f - groundHintLabel.getWidth() / 2f, 24f);
     }
 
     private boolean isPanelBounds(float sx, float sy) {
@@ -217,11 +201,10 @@ public class InventoryUiSystem extends BaseSystem {
             && mainPanel.getY() <= sy && sy <= mainPanel.getY() + mainPanel.getHeight();
     }
 
-    // ── UI rebuild ────────────────────────────────────────────────────────────
+    // ── Full rebuild ──────────────────────────────────────────────────────────
 
-    public void rebuildViews() {
+    private void rebuildViews() {
         if (playerEntityId < 0) return;
-
         PlayerComponent    player  = mPlayer.get(playerEntityId);
         InventoryComponent invComp = mInventory.get(playerEntityId);
 
@@ -229,16 +212,14 @@ public class InventoryUiSystem extends BaseSystem {
         gridsTable.clearChildren();
         lootTable.clearChildren();
         dnd.clear();
-        // Note: NO registerCatchAll() — that was the bug root cause.
 
         float cellSize = ConfigLoader.getItemGridConfig().cellSize;
         ItemGridConfig igc = ConfigLoader.getItemGridConfig();
 
-        // ── Left: gear slots ──────────────────────────────────────────────────
-        gearTable.add(new Label("EQUIPPED",
-                new Label.LabelStyle(FontCache.get().bold(9), Color.GRAY)))
-            .colspan(3).padBottom(4f).row();
+        Label.LabelStyle sec = new Label.LabelStyle(FontCache.get().bold(9), Color.GRAY);
 
+        // ── Left: gear slots ──────────────────────────────────────────────────
+        gearTable.add(new Label("EQUIPPED", sec)).colspan(3).padBottom(4f).row();
         gearTable.add(createGearSlot("helmet",    player.helmetId,        cellSize, igc)).pad(2f);
         gearTable.add(createGearSlot("top",       player.topId,           cellSize, igc)).pad(2f);
         gearTable.add(createGearSlot("vest",      player.vestId,          cellSize, igc)).pad(2f).row();
@@ -249,46 +230,93 @@ public class InventoryUiSystem extends BaseSystem {
         gearTable.add(createGearSlot("footwear",  player.footwearId,      cellSize, igc)).pad(2f);
         gearTable.add(createGearSlot("slingbag",  player.slingBagId,      cellSize, igc)).pad(2f).row();
 
-        // ── Centre: grid sections ─────────────────────────────────────────────
-        Label.LabelStyle sectionStyle = new Label.LabelStyle(FontCache.get().bold(9), Color.GRAY);
-
-        gridsTable.add(new Label("BASE INVENTORY", sectionStyle)).left().padBottom(2f).row();
+        // ── Centre: inventory grids ───────────────────────────────────────────
+        gridsTable.add(new Label("BASE INVENTORY", sec)).left().padBottom(2f).row();
         gridsTable.add(createGridTable(invComp.inventory, "base", cellSize)).padBottom(8f).row();
 
         if (player.equippedBackpack != null && player.equippedBackpack.container != null) {
-            gridsTable.add(new Label("BACKPACK", sectionStyle)).left().padBottom(2f).row();
+            gridsTable.add(new Label("BACKPACK", sec)).left().padBottom(2f).row();
             gridsTable.add(createGridTable(player.equippedBackpack.container, "backpack", cellSize)).padBottom(8f).row();
         }
-
         if (player.equippedSlingBag != null && player.equippedSlingBag.container != null) {
-            gridsTable.add(new Label("SLING BAG", sectionStyle)).left().padBottom(2f).row();
+            gridsTable.add(new Label("SLING BAG", sec)).left().padBottom(2f).row();
             gridsTable.add(createGridTable(player.equippedSlingBag.container, "slingbag", cellSize)).row();
         }
 
-        // ── Right: Nearby Loot panel (populated by refreshLootPanel) ──────────
-        buildLootPanelShell(cellSize);
-
+        // ── Right: nearby loot ────────────────────────────────────────────────
+        buildLootPanel(cellSize);
         positionPanel();
     }
 
-    // ── Nearby Loot shell (built once on rebuild; items refreshed each frame) ──
+    // ── Nearby Loot panel ────────────────────────────────────────────────────
 
-    private void buildLootPanelShell(float cellSize) {
-        Label.LabelStyle sectionStyle = new Label.LabelStyle(FontCache.get().bold(9), Color.GRAY);
-        lootTable.add(new Label("NEARBY LOOT", sectionStyle)).left().padBottom(4f).row();
-        // Actual loot widgets are added/removed by refreshLootPanel() each frame.
-        // We add a placeholder child table that refreshLootPanel replaces.
-        Table placeholder = new Table();
-        lootTable.add(placeholder).row();
+    private void buildLootPanel(float cellSize) {
+        Label.LabelStyle sec = new Label.LabelStyle(FontCache.get().bold(9), Color.GRAY);
+        lootTable.add(new Label("NEARBY LOOT", sec)).left().padBottom(4f).row();
 
-        // The Nearby Loot area is also a drop target — dropping here = ground drop.
+        IntArray nearbyIds = computeNearbyIds();
+        lastNearbyIds.clear();
+        lastNearbyIds.addAll(nearbyIds);
+
+        if (nearbyIds.size == 0) {
+            lootTable.add(new Label("Nothing nearby",
+                new Label.LabelStyle(FontCache.get().regular(8), Color.DARK_GRAY))).pad(8f).row();
+        } else {
+            Table flow = new Table();
+            for (int i = 0; i < nearbyIds.size; i++) {
+                int eid = nearbyIds.get(i);
+                WorldItemComponent wc  = mWorldItem.get(eid);
+                ItemDef            def = ConfigLoader.getItemDatabase().get(wc.itemId);
+                ItemGridDef        gd  = ConfigLoader.getItemGridConfig().get(wc.itemId);
+                if (def == null) continue;
+
+                ItemInstance inst = wc.getItemInstance();
+                int iw = Math.min(inst.effectiveW(), 2);
+                int ih = Math.min(inst.effectiveH(), 2);
+                float gap = 2f;
+                float pw = iw * cellSize + (iw-1)*gap;
+                float ph = ih * cellSize + (ih-1)*gap;
+
+                Table widget = createItemWidget(inst, def, cellSize);
+
+                final int   capturedEid  = eid;
+                final float cpw = pw, cph = ph;
+                final ItemInstance capturedInst = inst;
+                final ItemDef capturedDef = def;
+
+                dnd.addSource(new DragAndDrop.Source(widget) {
+                    @Override public DragAndDrop.Payload dragStart(InputEvent e, float x, float y, int ptr) {
+                        dragging = capturedInst;
+                        DragAndDrop.Payload payload = new DragAndDrop.Payload();
+                        DragPayload dp = new DragPayload();
+                        dp.instance = capturedInst;
+                        dp.source   = "world:" + capturedEid;
+                        payload.setObject(dp);
+                        payload.setDragActor(createItemWidget(capturedInst, capturedDef, cellSize));
+                        payload.getDragActor().setSize(cpw, cph);
+                        return payload;
+                    }
+                    @Override public void dragStop(InputEvent e, float x, float y, int ptr,
+                                                   DragAndDrop.Payload payload, DragAndDrop.Target target) {
+                        dragging = null; // loot stays on ground if target==null
+                    }
+                });
+
+                Table cell = new Table();
+                cell.add(widget).size(pw, ph);
+                flow.add(cell).pad(2f);
+                if ((i+1) % 3 == 0) flow.row();
+            }
+            lootTable.add(flow).row();
+        }
+
+        // Loot panel as drop target = ground drop for inventory items
         dnd.addTarget(new DragAndDrop.Target(lootTable) {
-            @Override
-            public boolean drag(DragAndDrop.Source src, DragAndDrop.Payload payload,
-                                float x, float y, int ptr) {
+            @Override public boolean drag(DragAndDrop.Source src, DragAndDrop.Payload payload,
+                                          float x, float y, int ptr) {
                 DragPayload dp = (DragPayload) payload.getObject();
-                if (dp.source.startsWith("world:")) return false; // can't drop loot onto loot panel
-                descLabel.setText("Release to drop item on the ground.");
+                if (dp.source.startsWith("world:")) return false;
+                descLabel.setText("Release to drop on the ground.");
                 descLabel.getStyle().fontColor = Color.ORANGE;
                 return true;
             }
@@ -308,123 +336,22 @@ public class InventoryUiSystem extends BaseSystem {
         });
     }
 
-    /**
-     * Called every frame while inventory is open.
-     * Rebuilds only the loot item widgets inside lootTable (row index 1 onward).
-     */
-    private void refreshLootPanel() {
-        if (playerEntityId < 0) return;
-
-        TransformComponent playerTf = mTransform.get(playerEntityId);
-        float pcx = playerTf.x + playerTf.w * 0.5f;
-        float pcy = playerTf.y + playerTf.h * 0.5f;
-
-        float cellSize = ConfigLoader.getItemGridConfig().cellSize;
-
-        // Collect nearby entities (this is cheap — small subscription)
-        IntBag itemBag = worldItemSub.getEntities();
-        int[]  data    = itemBag.getData();
-
-        // Remove all rows after the header row (index 0) before re-adding
-        // We achieve this by rebuilding cells from row index 1 onward.
-        // Scene2D Table: clearChildren would clear the header too. Instead we
-        // track a dedicated inner container refreshed here.
-        // Implementation: use a scrollable sub-table as the loot item area.
-
-        // For simplicity (avoids per-frame layout thrash), only rebuild when
-        // the set has changed. We snapshot entity ids.
-        // However, per the plan refresh is desired every frame—we keep it simple
-        // and just rebuild the item container.
-
-        // Find the second cell (index 1) which is our item area container
-        if (lootTable.getCells().size < 2) return;
-        com.badlogic.gdx.scenes.scene2d.ui.Cell<?> itemCell = lootTable.getCells().get(1);
-        Table itemArea = new Table();
-
-        int nearbyCount = 0;
-        for (int i = 0, n = itemBag.size(); i < n; i++) {
-            int eid = data[i];
-            if (!mTransform.has(eid)) continue;
-            TransformComponent tf = mTransform.get(eid);
-            float dx = (tf.x + tf.w * 0.5f) - pcx;
-            float dy = (tf.y + tf.h * 0.5f) - pcy;
-            if (dx * dx + dy * dy > LOOT_RANGE * LOOT_RANGE) continue;
-
-            WorldItemComponent wc = mWorldItem.get(eid);
-            ItemDef     def = ConfigLoader.getItemDatabase().get(wc.itemId);
-            ItemGridDef gd  = ConfigLoader.getItemGridConfig().get(wc.itemId);
-            if (def == null) continue;
-
-            ItemInstance inst = wc.getItemInstance();
-
-            // Size: show loot item as its natural footprint capped to 2×2 cells
-            // for compactness in the panel
-            int iw = Math.min(inst.effectiveW(), 2);
-            int ih = Math.min(inst.effectiveH(), 2);
-            float gap = 2f;
-            float pw = iw * cellSize + (iw - 1) * gap;
-            float ph = ih * cellSize + (ih - 1) * gap;
-
-            Table widget = createItemWidget(inst, def, gd, cellSize);
-            widget.setSize(pw, ph);
-
-            final int capturedEid = eid;
-            final DragPayload dp = new DragPayload();
-            dp.instance = inst;
-            dp.source   = "world:" + capturedEid;
-
-            dnd.addSource(new DragAndDrop.Source(widget) {
-                @Override
-                public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
-                    dragging = inst;
-                    DragAndDrop.Payload payload = new DragAndDrop.Payload();
-                    payload.setObject(dp);
-                    Table ghost = createItemWidget(inst, def, gd, cellSize);
-                    ghost.setSize(pw, ph);
-                    payload.setDragActor(ghost);
-                    return payload;
-                }
-                @Override
-                public void dragStop(InputEvent event, float x, float y, int pointer,
-                                     DragAndDrop.Payload payload, DragAndDrop.Target target) {
-                    // If dropped on no target → snap back (loot stays on ground)
-                    if (target == null) dragging = null;
-                }
-            });
-
-            itemArea.add(widget).size(pw, ph).pad(2f);
-            nearbyCount++;
-            // Stack 4 items per row in the loot panel
-            if (nearbyCount % 4 == 0) itemArea.row();
-        }
-
-        if (nearbyCount == 0) {
-            itemArea.add(new Label("Nothing nearby",
-                new Label.LabelStyle(FontCache.get().regular(8), Color.DARK_GRAY))).pad(4f);
-        }
-
-        // Replace the old item area
-        itemCell.setActor(itemArea);
-        lootTable.invalidate();
-    }
-
     // ── Grid table ────────────────────────────────────────────────────────────
 
     private Table createGridTable(Inventory inv, String sourceName, float cellSize) {
         Table table = new Table(skin);
         inv.rebuildOccupiedGrid();
 
-        // Empty cell backgrounds + drop targets
+        // Build 2D array of cell slot actors for multi-cell drag highlighting
+        final Table[][] cellSlots = new Table[inv.rows][inv.cols];
+
         for (int r = 0; r < inv.rows; r++) {
             for (int c = 0; c < inv.cols; c++) {
                 Table slot = new Table(skin);
                 slot.setBackground("textfield");
                 slot.getColor().a = 0.45f;
-                slot.addListener(new ClickListener() {
-                    @Override public void enter(InputEvent e, float x, float y, int ptr, Actor from) { slot.getColor().a = 0.75f; }
-                    @Override public void exit(InputEvent e, float x, float y, int ptr, Actor to)   { slot.getColor().a = 0.45f; }
-                });
                 table.add(slot).size(cellSize).pad(1f);
+                cellSlots[r][c] = slot;
 
                 final int cr = r, cc = c;
                 dnd.addTarget(new DragAndDrop.Target(slot) {
@@ -432,17 +359,35 @@ public class InventoryUiSystem extends BaseSystem {
                     public boolean drag(DragAndDrop.Source src, DragAndDrop.Payload payload,
                                         float x, float y, int ptr) {
                         DragPayload dp = (DragPayload) payload.getObject();
+                        int iw = dp.instance.effectiveW();
+                        int ih = dp.instance.effectiveH();
                         boolean fits = inv.canFit(cr, cc, dp.instance, dp.instance);
-                        slot.getColor().set(fits ? Color.GREEN : Color.RED);
-                        slot.getColor().a = 0.6f;
+
+                        // Highlight the full footprint — green if fits, red if not
+                        Color highlight = fits ? Color.GREEN : Color.RED;
+                        for (int dr = 0; dr < ih; dr++) {
+                            for (int dc = 0; dc < iw; dc++) {
+                                int nr = cr + dr, nc = cc + dc;
+                                if (nr < inv.rows && nc < inv.cols) {
+                                    cellSlots[nr][nc].getColor().set(highlight);
+                                    cellSlots[nr][nc].getColor().a = 0.6f;
+                                }
+                            }
+                        }
                         return fits;
                     }
-                    @Override public void reset(DragAndDrop.Source src, DragAndDrop.Payload payload) {
-                        slot.getColor().set(Color.WHITE);
-                        slot.getColor().a = 0.45f;
+                    @Override
+                    public void reset(DragAndDrop.Source src, DragAndDrop.Payload payload) {
+                        // Reset all cells in the grid
+                        for (int rr = 0; rr < inv.rows; rr++)
+                            for (int cc2 = 0; cc2 < inv.cols; cc2++) {
+                                cellSlots[rr][cc2].getColor().set(Color.WHITE);
+                                cellSlots[rr][cc2].getColor().a = 0.45f;
+                            }
                     }
-                    @Override public void drop(DragAndDrop.Source src, DragAndDrop.Payload payload,
-                                               float x, float y, int ptr) {
+                    @Override
+                    public void drop(DragAndDrop.Source src, DragAndDrop.Payload payload,
+                                     float x, float y, int ptr) {
                         DragPayload dp = (DragPayload) payload.getObject();
                         removeInstanceFromSource(dp);
                         inv.addAt(dp.instance, cr, cc);
@@ -454,56 +399,52 @@ public class InventoryUiSystem extends BaseSystem {
             table.row();
         }
 
-        // Overlay item widgets
+        // Item overlay widgets
         float gap = 2f;
         for (ItemPlacement p : inv.placements) {
-            ItemDef     def = ConfigLoader.getItemDatabase().get(p.instance.itemId);
-            ItemGridDef gd  = ConfigLoader.getItemGridConfig().get(p.instance.itemId);
+            ItemDef def = ConfigLoader.getItemDatabase().get(p.instance.itemId);
             if (def == null) continue;
 
-            int iw = p.instance.effectiveW();
-            int ih = p.instance.effectiveH();
+            int   iw  = p.instance.effectiveW();
+            int   ih  = p.instance.effectiveH();
+            float pw  = iw * cellSize + (iw-1)*gap;
+            float ph  = ih * cellSize + (ih-1)*gap;
+            float px  = p.c * (cellSize+gap) + gap*0.5f;
+            float gridH = inv.rows * (cellSize+gap);
+            float py  = gridH - (p.r+ih) * (cellSize+gap) + gap*0.5f;
 
-            float pw  = iw * cellSize + (iw - 1) * gap;
-            float ph  = ih * cellSize + (ih - 1) * gap;
-            float px  = p.c * (cellSize + gap) + gap * 0.5f;
-            float gridH = inv.rows * (cellSize + gap);
-            float py  = gridH - (p.r + ih) * (cellSize + gap) + gap * 0.5f;
-
-            Table widget = createItemWidget(p.instance, def, gd, cellSize);
+            Table widget = createItemWidget(p.instance, def, cellSize);
             table.addActor(widget);
             widget.setBounds(px, py, pw, ph);
 
-            // Capture for closures
-            final DragPayload dp = new DragPayload();
-            dp.instance  = p.instance;
-            dp.source    = "grid:" + sourceName;
-            dp.placement = p;
+            final ItemPlacement capturedP   = p;
+            final ItemDef       capturedDef = def;
+            final float         cpw = pw, cph = ph;
 
             dnd.addSource(new DragAndDrop.Source(widget) {
-                @Override
-                public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
-                    dragging = dp.instance;
+                @Override public DragAndDrop.Payload dragStart(InputEvent e, float x, float y, int ptr) {
+                    dragging = capturedP.instance;
                     DragAndDrop.Payload payload = new DragAndDrop.Payload();
+                    DragPayload dp = new DragPayload();
+                    dp.instance  = capturedP.instance;
+                    dp.source    = "grid:" + sourceName;
+                    dp.placement = capturedP;
                     payload.setObject(dp);
-                    Table ghost = createItemWidget(dp.instance, def, gd, cellSize);
-                    ghost.setSize(pw, ph);
+                    Table ghost = createItemWidget(capturedP.instance, capturedDef, cellSize);
+                    ghost.setSize(cpw, cph);
                     payload.setDragActor(ghost);
                     return payload;
                 }
-                @Override
-                public void dragStop(InputEvent event, float x, float y, int pointer,
-                                     DragAndDrop.Payload payload, DragAndDrop.Target target) {
-                    // FIX (Bug A/D): no catchAll anymore.
-                    // target==null + outside panel = ground drop; inside panel = snap back.
+                @Override public void dragStop(InputEvent e, float x, float y, int ptr,
+                                               DragAndDrop.Payload payload, DragAndDrop.Target target) {
                     if (target == null) {
-                        float sx = event.getStageX(), sy = event.getStageY();
+                        float sx = e.getStageX(), sy = e.getStageY();
                         if (!isPanelBounds(sx, sy)) {
+                            DragPayload dp = (DragPayload) payload.getObject();
                             removeInstanceFromSource(dp);
                             dropItemOnGround(dp.instance);
                             needsRebuild = true;
                         }
-                        // else: released on dead panel padding — snap back, no-op
                         dragging = null;
                     }
                 }
@@ -516,65 +457,60 @@ public class InventoryUiSystem extends BaseSystem {
     // ── Gear slot ─────────────────────────────────────────────────────────────
 
     private Table createGearSlot(String slotName, int itemId, float cellSize, ItemGridConfig igc) {
-        // FIX (Bug C / 5.4): for held/holstered, compute slot size with guns lying flat.
         int[] maxSize = slotMaxSizeFixed(slotName, igc);
-        float slotW = maxSize[0] * cellSize + (maxSize[0] - 1) * 2f;
-        float slotH = maxSize[1] * cellSize + (maxSize[1] - 1) * 2f;
+        float slotW = maxSize[0] * cellSize + (maxSize[0]-1)*2f;
+        float slotH = maxSize[1] * cellSize + (maxSize[1]-1)*2f;
 
         Table slot = new Table(skin);
         slot.setBackground("textfield");
         slot.getColor().a = 0.55f;
 
-        Label nameLabel = new Label(
-            slotName.toUpperCase().substring(0, Math.min(slotName.length(), 4)),
+        Label lbl = new Label(slotName.toUpperCase().substring(0, Math.min(slotName.length(), 4)),
             new Label.LabelStyle(FontCache.get().regular(6), new Color(0.7f, 0.7f, 0.7f, 1f)));
-        nameLabel.setAlignment(Align.topLeft);
-        slot.add(nameLabel).expand().top().left().pad(2f).row();
+        lbl.setAlignment(Align.topLeft);
+        slot.add(lbl).expand().top().left().pad(2f).row();
 
         if (itemId > 0) {
-            ItemDef     def = ConfigLoader.getItemDatabase().get(itemId);
-            ItemGridDef gd  = igc.get(itemId);
+            ItemDef def = ConfigLoader.getItemDatabase().get(itemId);
+            ItemGridDef gd = igc.get(itemId);
             if (def != null) {
                 PlayerComponent player = mPlayer.get(playerEntityId);
                 ItemInstance instance = null;
-                if ("backpack".equals(slotName))  instance = player.equippedBackpack;
-                else if ("slingbag".equals(slotName)) instance = player.equippedSlingBag;
+                if ("held".equals(slotName))      instance = player.equippedHeld;
+                else if ("holstered".equals(slotName)) instance = player.equippedHolstered;
+                else if ("backpack".equals(slotName))  instance = player.equippedBackpack;
+                else if ("slingbag".equals(slotName))  instance = player.equippedSlingBag;
                 if (instance == null) instance = ItemInstance.create(itemId, 1);
 
-                // FIX (Bug C / 5.4): force-rotate portrait guns in held/holstered slots
-                boolean isHeldOrHolstered = "held".equals(slotName) || "holstered".equals(slotName);
-                boolean displayRotated = isHeldOrHolstered && gd != null && gd.gridH > gd.gridW;
+                boolean weaponSlot  = "held".equals(slotName) || "holstered".equals(slotName);
+                boolean displayFlat = weaponSlot && gd != null && gd.isPortrait();
 
                 if (def.sprite != null && def.sprite.icon != null) {
                     TextureRegion region = TextureCache.get().region(def.sprite.icon);
-                    Image icon = new Image(new TextureRegionDrawable(region), Scaling.fit);
-                    if (displayRotated) {
-                        icon.setOrigin(Align.center);
-                        icon.setRotation(90f);
-                    }
+                    // For gear slots pass 0×0 grid dims (ignored when forceFlat=true)
+                    // displayFlat is already correct: true for held/holstered portrait weapons
+                    ItemIcon icon = new ItemIcon(region, 1, 1, false, displayFlat);
                     slot.add(icon).expand().fill().pad(4f);
                 }
 
                 final ItemInstance finalInst = instance;
                 dnd.addSource(new DragAndDrop.Source(slot) {
-                    @Override
-                    public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
+                    @Override public DragAndDrop.Payload dragStart(InputEvent e, float x, float y, int ptr) {
                         dragging = finalInst;
                         DragAndDrop.Payload payload = new DragAndDrop.Payload();
                         DragPayload dp = new DragPayload();
                         dp.instance = finalInst;
                         dp.source   = "slot:" + slotName;
                         payload.setObject(dp);
-                        Table ghost = createItemWidget(finalInst, def, gd, cellSize);
+                        Table ghost = createItemWidget(finalInst, def, cellSize);
                         ghost.setSize(slotW, slotH);
                         payload.setDragActor(ghost);
                         return payload;
                     }
-                    @Override
-                    public void dragStop(InputEvent event, float x, float y, int pointer,
-                                         DragAndDrop.Payload payload, DragAndDrop.Target target) {
+                    @Override public void dragStop(InputEvent e, float x, float y, int ptr,
+                                                   DragAndDrop.Payload payload, DragAndDrop.Target target) {
                         if (target == null) {
-                            float sx = event.getStageX(), sy = event.getStageY();
+                            float sx = e.getStageX(), sy = e.getStageY();
                             if (!isPanelBounds(sx, sy)) {
                                 DragPayload dp = (DragPayload) payload.getObject();
                                 removeInstanceFromSource(dp);
@@ -589,9 +525,8 @@ public class InventoryUiSystem extends BaseSystem {
         }
 
         dnd.addTarget(new DragAndDrop.Target(slot) {
-            @Override
-            public boolean drag(DragAndDrop.Source src, DragAndDrop.Payload payload,
-                                float x, float y, int ptr) {
+            @Override public boolean drag(DragAndDrop.Source src, DragAndDrop.Payload payload,
+                                          float x, float y, int ptr) {
                 DragPayload dp = (DragPayload) payload.getObject();
                 ItemDef def = ConfigLoader.getItemDatabase().get(dp.instance.itemId);
                 boolean ok = isCompatible(slotName, def);
@@ -606,8 +541,7 @@ public class InventoryUiSystem extends BaseSystem {
                                        float x, float y, int ptr) {
                 DragPayload dp = (DragPayload) payload.getObject();
                 removeInstanceFromSource(dp);
-                PlayerComponent player = mPlayer.get(playerEntityId);
-                player.equip(slotName, dp.instance);
+                mPlayer.get(playerEntityId).equip(slotName, dp.instance);
                 dragging = null;
                 needsRebuild = true;
             }
@@ -618,29 +552,19 @@ public class InventoryUiSystem extends BaseSystem {
         return wrapper;
     }
 
-    /**
-     * FIX (Bug C / 5.4): slotMaxSize for held/holstered treats guns as horizontal
-     * (swaps gridW↔gridH before taking max) so the slot is wide, not tall.
-     */
     private int[] slotMaxSizeFixed(String slotName, ItemGridConfig igc) {
-        boolean isWeaponSlot = "held".equals(slotName) || "holstered".equals(slotName);
-        if (!isWeaponSlot) {
-            return igc.slotMaxSize(slotName); // unchanged for all other slots
-        }
-        // Weapon slots: compute max with guns lying flat
+        boolean weaponSlot = "held".equals(slotName) || "holstered".equals(slotName);
+        if (!weaponSlot) return igc.slotMaxSize(slotName);
         int maxW = 1, maxH = 1;
         com.badlogic.gdx.utils.Array<ItemGridDef> items = igc.items;
         if (items == null) return new int[]{maxW, maxH};
         for (ItemGridDef d : items) {
             String t = d.type;
-            if (t == null) continue;
-            if ("melee".equals(t) || "primary".equals(t) || "secondary".equals(t)) {
-                // Lay flat: long axis → W, short axis → H
-                int w = Math.max(d.gridH, d.gridW);
-                int h = Math.min(d.gridH, d.gridW);
-                if (w > maxW) maxW = w;
-                if (h > maxH) maxH = h;
-            }
+            if (!"melee".equals(t) && !"primary".equals(t) && !"secondary".equals(t)) continue;
+            int w = Math.max(d.gridW, d.gridH);
+            int h = Math.min(d.gridW, d.gridH);
+            if (w > maxW) maxW = w;
+            if (h > maxH) maxH = h;
         }
         return new int[]{maxW, maxH};
     }
@@ -648,55 +572,47 @@ public class InventoryUiSystem extends BaseSystem {
     // ── Item widget ───────────────────────────────────────────────────────────
 
     /**
-     * Creates a visual widget for an item.
-     *
-     * FIX (Bug B / 5.3): when inst.rotated is true the icon Image is actually
-     *   rotated 90° around its centre so the texture matches the rotated footprint.
+     * Builds the visual widget for one item using the custom ItemIcon actor.
+     * No more Image+setRotation — ItemIcon handles all rotation/fit maths in draw().
      */
-    private Table createItemWidget(ItemInstance inst, ItemDef def, ItemGridDef gd, float cellSize) {
+    private Table createItemWidget(ItemInstance inst, ItemDef def, float cellSize) {
         Table table = new Table();
         table.setBackground(skin.newDrawable("white", new Color(0.2f, 0.2f, 0.25f, 0.9f)));
 
         if (def.sprite != null && def.sprite.icon != null) {
             TextureRegion region = TextureCache.get().region(def.sprite.icon);
-            Image icon = new Image(new TextureRegionDrawable(region), Scaling.fit);
-
-            // FIX (Bug B / 5.3): visually rotate the icon when the item is rotated.
-            // For a rotated item the cell is now wider than tall, so the icon's
-            // "natural" axis must be swapped before rotating 90° around centre.
-            if (inst.rotated) {
-                icon.setOrigin(Align.center);
-                icon.setRotation(90f);
-                // expand().fill() still works because libGDX measures the actor's
-                // *pre-rotation* bounding box; we rely on the table cell being already
-                // sized to the rotated footprint by the calling code (setBounds with
-                // swapped pw/ph). This is the standard libGDX pattern.
-            }
+            ItemIcon icon = new ItemIcon(region,
+                inst.effectiveW(), inst.effectiveH(),
+                inst.rotated, false);
             table.add(icon).expand().fill().pad(2f);
         }
 
-        // Overlay labels
-        if (Inventory.isStackable(inst.itemId) && inst.quantity > 1) {
-            Label qty = new Label(String.valueOf(inst.quantity),
-                new Label.LabelStyle(FontCache.get().bold(7), Color.WHITE));
-            table.addActor(qty);
-            qty.pack();
-            table.addListener(e -> { qty.setPosition(table.getWidth() - qty.getWidth() - 2f, 2f); return false; });
-        }
-        if (gd != null && gd.isGun()) {
-            Label ammo = new Label(inst.currentAmmo + "/" + gd.clipSize,
+        // Ammo badge — read from ItemDataConfig
+        ItemDataDef dd = ConfigLoader.getItemDataConfig().get(inst.itemId);
+        if (dd != null && dd.isGun()) {
+            Label ammo = new Label(inst.currentAmmo + "/" + dd.clipSize,
                 new Label.LabelStyle(FontCache.get().bold(6), Color.YELLOW));
             table.addActor(ammo);
             ammo.pack();
             table.addListener(e -> { ammo.setPosition(2f, 2f); return false; });
         }
+
+        // Stack count badge
+        if (Inventory.isStackable(inst.itemId) && inst.quantity > 1) {
+            Label qty = new Label(String.valueOf(inst.quantity),
+                new Label.LabelStyle(FontCache.get().bold(7), Color.WHITE));
+            table.addActor(qty);
+            qty.pack();
+            table.addListener(e -> { qty.setPosition(table.getWidth()-qty.getWidth()-2f, 2f); return false; });
+        }
+
+        // Rotation indicator
         if (inst.rotated) {
             Label rot = new Label("↻", new Label.LabelStyle(FontCache.get().regular(7), Color.CYAN));
             table.addActor(rot);
             rot.pack();
             table.addListener(e -> {
-                rot.setPosition(table.getWidth() - rot.getWidth() - 2f,
-                                table.getHeight() - rot.getHeight() - 2f);
+                rot.setPosition(table.getWidth()-rot.getWidth()-2f, table.getHeight()-rot.getHeight()-2f);
                 return false;
             });
         }
@@ -716,24 +632,132 @@ public class InventoryUiSystem extends BaseSystem {
         return table;
     }
 
+    // ── ItemIcon — custom actor that draws a TextureRegion with correct rotation/fit ──
+
+    /**
+     * Custom actor that draws a TextureRegion correctly fitted inside its bounds,
+     * rotating the sprite 90° when the sprite's natural aspect ratio doesn't match
+     * the grid cell's aspect ratio.
+     *
+     * ROOT CAUSE FIX: All gun sprites are LANDSCAPE (wider than tall), but their
+     * grid cells are PORTRAIT (gridH > gridW). Simply cramming a landscape texture
+     * into a portrait Table cell squishes it. The sprite must be rotated 90° to
+     * visually fill the portrait cell correctly.
+     *
+     * Decision logic:
+     *   naturalRotation = (sprite is landscape) AND (cell is portrait)
+     *                     OR (sprite is portrait) AND (cell is landscape)
+     *                   = (spriteW > spriteH) == (gridH > gridW)
+     *   finalRotation   = naturalRotation XOR inst.rotated
+     *                     (user R-key toggle flips the natural state)
+     *
+     * For the held/holstered gear slot icon, forceFlat=true overrides everything
+     * and always rotates landscape sprites to lie flat in the wide-and-short slot.
+     */
+    private static class ItemIcon extends Actor {
+
+        private final TextureRegion region;
+        private final boolean       shouldRotate;  // pre-computed at construction
+
+        /**
+         * @param region      the sprite texture
+         * @param gridW       item's effective grid width  (after inst.rotated applied)
+         * @param gridH       item's effective grid height (after inst.rotated applied)
+         * @param userRotated inst.rotated — true when user pressed R
+         * @param forceFlat   true for held/holstered gear slot: always show lying flat
+         */
+        ItemIcon(TextureRegion region, int gridW, int gridH,
+                 boolean userRotated, boolean forceFlat) {
+            this.region = region;
+
+            if (region == null) {
+                this.shouldRotate = false;
+                return;
+            }
+
+            int spriteW = region.getRegionWidth();
+            int spriteH = region.getRegionHeight();
+
+            if (forceFlat) {
+                // Gear slot: always lay the gun flat → rotate if sprite is portrait
+                // (which would be unusual, but handles it correctly)
+                this.shouldRotate = spriteH > spriteW; // portrait sprite → rotate to landscape
+            } else {
+                // Inventory grid cell: rotate when sprite and cell aspects disagree
+                boolean spriteIsLandscape = spriteW > spriteH;
+                boolean cellIsPortrait    = gridH > gridW;
+                boolean naturalRotation   = (spriteIsLandscape == cellIsPortrait);
+                this.shouldRotate = naturalRotation ^ userRotated;
+            }
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            if (region == null) return;
+
+            float aw = getWidth(), ah = getHeight();
+            float ax = getX(),     ay = getY();
+            int   sw = region.getRegionWidth();
+            int   sh = region.getRegionHeight();
+
+            batch.setColor(getColor().r, getColor().g, getColor().b,
+                getColor().a * parentAlpha);
+
+            if (shouldRotate) {
+                // Draw the sprite rotated 90° centred inside aw×ah.
+                // batch.draw rotates around (originX,originY) in pre-rotation space.
+                // We swap the "logical" w/h so the rotated image fits the actor cell.
+                float scaleW = ah / (float) sw;  // sprite natural-width → actor height
+                float scaleH = aw / (float) sh;  // sprite natural-height → actor width
+                float scale  = Math.min(scaleW, scaleH);
+
+                float dw = sw * scale;  // pre-rotation draw width  (= post-rot visual height)
+                float dh = sh * scale;  // pre-rotation draw height (= post-rot visual width)
+
+                // Centre the pre-rotation rect so post-rotation it sits centred in aw×ah
+                float dx = ax + (aw - dh) * 0.5f;
+                float dy = ay + (ah - dw) * 0.5f;
+
+                batch.draw(region,
+                    dx, dy,           // position
+                    dh * 0.5f,        // originX (centre of pre-rotation rect)
+                    dw * 0.5f,        // originY
+                    dh, dw,           // width, height (swapped so 90° lands right)
+                    1f, 1f,
+                    90f);
+            } else {
+                // Normal fit-centre draw
+                float scaleW = aw / (float) sw;
+                float scaleH = ah / (float) sh;
+                float scale  = Math.min(scaleW, scaleH);
+
+                float dw = sw * scale;
+                float dh = sh * scale;
+                float dx = ax + (aw - dw) * 0.5f;
+                float dy = ay + (ah - dh) * 0.5f;
+
+                batch.draw(region, dx, dy, dw, dh);
+            }
+
+            batch.setColor(1f, 1f, 1f, 1f); // restore
+        }
+    }
+
     // ── Helpers ───────────────────────────────────────────────────────────────
 
     private void positionPanel() {
         mainPanel.pack();
-        mainPanel.setPosition(
-            Gdx.graphics.getWidth()  - mainPanel.getWidth()  - 10f,
-            10f
-        );
+        mainPanel.setPosition(Gdx.graphics.getWidth() - mainPanel.getWidth() - 10f, 10f);
     }
 
     private boolean isCompatible(String slotName, ItemDef def) {
         if (def == null) return false;
         switch (slotName) {
-            case "helmet":    return "helmet".equals(def.type);
-            case "top":       return "top".equals(def.type);
-            case "vest":      return "vest".equals(def.type);
-            case "pants":     return "pants".equals(def.type);
-            case "footwear":  return "footwear".equals(def.type);
+            case "helmet":   return "helmet".equals(def.type);
+            case "top":      return "top".equals(def.type);
+            case "vest":     return "vest".equals(def.type);
+            case "pants":    return "pants".equals(def.type);
+            case "footwear": return "footwear".equals(def.type);
             case "backpack": {
                 ItemGridDef gd = ConfigLoader.getItemGridConfig().get(def.id);
                 return "backpack".equals(def.type) && gd != null && gd.isContainer();
@@ -744,8 +768,9 @@ public class InventoryUiSystem extends BaseSystem {
                     && gd != null && gd.isContainer() && gd.containerRows <= 4;
             }
             case "held":
-            case "holstered": return "melee".equals(def.type) || "primary".equals(def.type) || "secondary".equals(def.type);
-            default:          return false;
+            case "holstered": return "melee".equals(def.type)
+                || "primary".equals(def.type) || "secondary".equals(def.type);
+            default: return false;
         }
     }
 
@@ -758,16 +783,15 @@ public class InventoryUiSystem extends BaseSystem {
             if ("base".equals(gn)) {
                 inv.inventory.remove(dp.instance);
             } else if ("backpack".equals(gn) && player.equippedBackpack != null
-                        && player.equippedBackpack.container != null) {
+                && player.equippedBackpack.container != null) {
                 player.equippedBackpack.container.remove(dp.instance);
             } else if ("slingbag".equals(gn) && player.equippedSlingBag != null
-                        && player.equippedSlingBag.container != null) {
+                && player.equippedSlingBag.container != null) {
                 player.equippedSlingBag.container.remove(dp.instance);
             }
         } else if (dp.source.startsWith("slot:")) {
             player.unequip(dp.source.substring(5));
         } else if (dp.source.startsWith("world:")) {
-            // Loot item dragged into inventory: delete the world entity
             try {
                 int eid = Integer.parseInt(dp.source.substring(6));
                 world.delete(eid);

@@ -3,6 +3,7 @@ package io.github.zom.system;
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.systems.IteratingSystem;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,16 +13,17 @@ import io.github.zom.component.AnimationStateComponent;
 import io.github.zom.component.CombatComponent;
 import io.github.zom.component.PlayerComponent;
 import io.github.zom.component.TransformComponent;
+import io.github.zom.config.ConfigLoader;
+import io.github.zom.config.ItemDef;
 
 /**
- * Reads WASD / arrow-key input → updates player position, direction, animation.
- * Also reads mouse buttons and sets CombatComponent request flags for CombatSystem.
- * Centers the camera on the player each frame.
+ * WASD / joystick → player position, direction, animation pose.
+ * Also sets CombatComponent request flags from mouse/touch.
  *
- * FIX: AndroidControllerSystem.moveX/Y were computed but never applied to the
- * player's movement. Added a second input source for Android that reads the
- * joystick values and adds them to the moveDir vector, then falls through to the
- * same direction-resolution and movement code used for keyboard input.
+ * FIX: When idle and not locked, determine the correct stance pose from the
+ * equipped weapon type ("twohand" for primary, "pistol" for secondary, "axe"
+ * for melee) instead of always reverting to "idle". Fixes the bug where hands
+ * appear at the sides while holding a weapon.
  */
 public class MovementSystem extends IteratingSystem {
 
@@ -48,7 +50,7 @@ public class MovementSystem extends IteratingSystem {
         TransformComponent      transform = mTransform.get(entityId);
         AnimationStateComponent anim      = mAnim.get(entityId);
 
-        boolean isAndroid = Gdx.app.getType() == com.badlogic.gdx.Application.ApplicationType.Android;
+        boolean isAndroid = Gdx.app.getType() == Application.ApplicationType.Android;
 
         // ── Combat input ──────────────────────────────────────────────────────
         if (mCombat.has(entityId)) {
@@ -59,23 +61,17 @@ public class MovementSystem extends IteratingSystem {
                     if (combat.hasRanged) combat.rangedRequested = true;
                     else                  combat.meleeRequested  = true;
                 }
-                // if (AndroidControllerSystem.interactPressed) {
-                //     // Interact is handled by ItemPickupSystem via the static flag;
-                //     // nothing to set here for combat.
-                // }
             } else {
                 combat.isAutoFiring = Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && combat.hasRanged;
-                if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT))               combat.meleeRequested  = true;
+                if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT))                    combat.meleeRequested  = true;
                 if (Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT) && combat.hasRanged) combat.rangedRequested = true;
-                if (Gdx.input.isKeyJustPressed(Input.Keys.R))                        combat.reloadRequested = true;
+                if (Gdx.input.isKeyJustPressed(Input.Keys.R))                             combat.reloadRequested = true;
             }
         }
 
         // ── Movement input ────────────────────────────────────────────────────
         moveDir.setZero();
-
         if (isAndroid) {
-            // FIX: apply joystick values that AndroidControllerSystem computed
             moveDir.x += AndroidControllerSystem.moveX;
             moveDir.y += AndroidControllerSystem.moveY;
         } else {
@@ -85,26 +81,24 @@ public class MovementSystem extends IteratingSystem {
             if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) moveDir.x += 1f;
         }
 
-        boolean moving = moveDir.len() > 0.05f; // small dead-zone for joystick noise
+        boolean moving = moveDir.len() > 0.05f;
 
         if (moving && !anim.locked) {
-            // Normalise only when over length 1 (joystick already normalised to ≤1)
             if (moveDir.len() > 1f) moveDir.nor();
-
             float dist = player.speed * world.getDelta();
             transform.x += moveDir.x * dist;
             transform.y += moveDir.y * dist;
 
-            // Direction: prefer vertical when equally diagonal
-            if (Math.abs(moveDir.y) >= Math.abs(moveDir.x)) {
+            if (Math.abs(moveDir.y) >= Math.abs(moveDir.x))
                 transform.direction = moveDir.y > 0f ? "up" : "down";
-            } else {
+            else
                 transform.direction = moveDir.x > 0f ? "right" : "left";
-            }
+
             anim.setPose("run");
 
         } else if (!anim.locked) {
-            anim.setPose("idle");
+            // FIX: use weapon-specific stance pose instead of always "idle"
+            anim.setPose(resolveIdlePose(player));
         }
 
         // ── Camera follow ─────────────────────────────────────────────────────
@@ -113,5 +107,24 @@ public class MovementSystem extends IteratingSystem {
             transform.y + transform.h * 0.5f,
             0f
         );
+    }
+
+    /**
+     * Returns the correct idle/stance pose name for the player's equipped weapon.
+     * "twohand" → primary rifles/shotguns
+     * "pistol"  → secondary handguns
+     * "axe"     → melee weapons
+     * "idle"    → unarmed
+     */
+    private static String resolveIdlePose(PlayerComponent player) {
+        if (player.heldItemId <= 0) return "idle";
+        ItemDef def = ConfigLoader.getItemDatabase().get(player.heldItemId);
+        if (def == null) return "idle";
+        switch (def.type) {
+            case "primary":   return "twohand";
+            case "secondary": return "pistol";
+            case "melee":     return "axe";
+            default:          return "idle";
+        }
     }
 }
