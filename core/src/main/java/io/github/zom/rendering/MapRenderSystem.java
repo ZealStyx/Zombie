@@ -9,20 +9,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import io.github.zom.world.ProceduralMapGenerator;
 import io.github.zom.world.TileDesc;
 
-/**
- * Artemis BaseSystem that draws the procedural tile map.
- * Registered BEFORE GameRenderSystem so tiles are drawn first (background layer).
- *
- * Draw strategy:
- *   - Camera frustum culling — only tiles inside the viewport (+1 tile margin).
- *   - Per-sheet passes (sheets 1→4) so each pass only binds one colour texture
- *     and one mask texture, minimising GL state switches.
- *   - Sub-regions cached via TextureCache.storeRegionByKey() to avoid per-frame
- *     TextureRegion allocation.
- */
 public final class MapRenderSystem extends BaseSystem {
 
-    public static final int TILE_PX = 60; // tile size in world pixels
+    public static final int TILE_PX = 60;
 
     private final SpriteBatch        batch;
     private final OrthographicCamera camera;
@@ -30,16 +19,14 @@ public final class MapRenderSystem extends BaseSystem {
     private ProceduralMapGenerator generator;
     private TileShader             tileShader;
 
-    // Indexed 1–4; index 0 unused
-    private final Texture[]       colourTex = new Texture[5];
-    private final Texture[]       maskTex   = new Texture[5];
+    private final Texture[] colourTex = new Texture[5];
+    private final Texture[] maskTex   = new Texture[5];
 
     public MapRenderSystem(SpriteBatch batch, OrthographicCamera camera) {
         this.batch  = batch;
         this.camera = camera;
     }
 
-    /** Wire the generator before the ECS world processes its first frame. */
     public void setGenerator(ProceduralMapGenerator gen) {
         this.generator = gen;
     }
@@ -47,7 +34,6 @@ public final class MapRenderSystem extends BaseSystem {
     @Override
     protected void initialize() {
         tileShader = new TileShader();
-
         for (int i = 1; i <= 4; i++) {
             colourTex[i] = TextureCache.get().texture("tiles/" + i + ".png");
             maskTex[i]   = TextureCache.get().texture("tiles/" + i + "_m.png");
@@ -62,7 +48,6 @@ public final class MapRenderSystem extends BaseSystem {
         int mapW = generator.getMapW();
         int mapH = generator.getMapH();
 
-        // ── Frustum cull: compute visible tile range ──────────────────────────
         float halfW = camera.viewportWidth  * camera.zoom * 0.5f;
         float halfH = camera.viewportHeight * camera.zoom * 0.5f;
 
@@ -71,10 +56,19 @@ public final class MapRenderSystem extends BaseSystem {
         int yMin = Math.max(0,    (int)((camera.position.y - halfH) / TILE_PX) - 1);
         int yMax = Math.min(mapH, (int)((camera.position.y + halfH) / TILE_PX) + 2);
 
-        // ── One pass per sheet to minimise texture/shader switches ────────────
         for (int sheet = 1; sheet <= 4; sheet++) {
             drawSheetPass(tiles, xMin, xMax, yMin, yMax, sheet);
         }
+
+        // ── CRITICAL FIX ────────────────────────────────────────────────────
+        // After all tile passes, flush any remaining geometry and restore the
+        // default shader explicitly so GameRenderSystem starts clean.
+        // batch.setShader(null) inside drawSheetPass already does this per-pass,
+        // but we do a final flush here to guarantee the state is clean for the
+        // next system (GameRenderSystem) regardless of which pass ran last.
+        batch.flush();
+        batch.setShader(null);
+        // ────────────────────────────────────────────────────────────────────
     }
 
     private void drawSheetPass(TileDesc[][] tiles,
@@ -88,6 +82,12 @@ public final class MapRenderSystem extends BaseSystem {
                 if (td == null || td.sheet != targetSheet) continue;
 
                 if (!shaderBound) {
+                    // ── CRITICAL FIX ────────────────────────────────────────
+                    // Flush pending geometry BEFORE switching the shader so the
+                    // previous batch contents are submitted with the old shader,
+                    // not accidentally mixed with the new tile shader.
+                    batch.flush();
+                    // ────────────────────────────────────────────────────────
                     batch.setShader(tileShader.getProgram());
                     tileShader.bindMask(maskTex[targetSheet]);
                     shaderBound = true;
@@ -99,14 +99,11 @@ public final class MapRenderSystem extends BaseSystem {
         }
 
         if (shaderBound) {
-            batch.setShader(null); // restore default SpriteBatch shader
+            batch.flush();           // flush tile geometry with tile shader
+            batch.setShader(null);   // restore default shader for next pass
         }
     }
 
-    /**
-     * Returns (and permanently caches) the 60×60 TextureRegion for the given
-     * sheet position. Key format: "tile:S:C:R".
-     */
     private TextureRegion getOrCreateRegion(int sheet, int col, int row) {
         String key = "tile:" + sheet + ":" + col + ":" + row;
         TextureRegion cached = TextureCache.get().cachedRegionByKey(key);
