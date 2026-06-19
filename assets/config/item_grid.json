@@ -1,5 +1,4 @@
 {
-  "_comment": "Item grid sizes (gridW x gridH in inventory cells) and weapon/container stats. Loaded by ItemGridConfig. Kept separate from items.json to avoid bloat. All paths relative to assets/. gridW/gridH: how many inventory cells wide/tall the item occupies. Item icon is drawn aspect-ratio-correct inside the cell area (never stretched). rotated: per-instance field in ItemInstance \u2014 swaps gridW\u2194gridH.",
   "cellSize": 30,
   "items": [
     {
@@ -1071,1134 +1070,567 @@
       "name": "Hunting Knife",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 154,
       "name": "Army Knife",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 155,
       "name": "Butcher Knife",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 156,
       "name": "Hatchet",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 157,
       "name": "Shovel",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 158,
       "name": "Pipe Wrench",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 159,
       "name": "Baseball Bat",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 160,
       "name": "Fire-Axe",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 161,
       "name": "Crowbar",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 162,
       "name": "Butcher Knife",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 163,
       "name": "Hunting Knife",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 164,
       "name": "Army Knife",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 165,
       "name": "Pickaxe",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 166,
       "name": "Pitchfork",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 167,
       "name": "Sledgehammer",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 168,
       "name": "Crusader Sword",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 169,
       "name": "Pan",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 170,
       "name": "Katana",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 171,
       "name": "Barbed Bat",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 172,
       "name": "Chainsaw",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 173,
       "name": "Generator",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 174,
       "name": "Metal Sheet",
       "type": "melee",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 25,
-      "range": 32,
-      "clipSize": 0,
-      "fireCooldown": 0,
-      "reloadTime": 0,
-      "ammoItemId": 0,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 175,
       "name": "FNX 45",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 176,
       "name": "Colt 1911",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 177,
       "name": "Magnum Revolver",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 178,
       "name": "Glock 17",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 179,
       "name": "Amphibia S",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 180,
       "name": "Sawn-Off IZh-43",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 181,
       "name": "Sawn-Off Mosin",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 182,
       "name": "Engraved Colt",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 183,
       "name": "MAC-10",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 184,
       "name": "Mare's Leg",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 185,
       "name": "PM",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 186,
       "name": "PB",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 187,
       "name": "Desert Eagle",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 188,
       "name": "M79",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 189,
       "name": "Sawn-Off Blaze",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 190,
       "name": "Longhorn",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 191,
       "name": "Mini-UZI",
       "type": "secondary",
       "gridW": 1,
-      "gridH": 2,
-      "damage": 30,
-      "range": 400,
-      "clipSize": 15,
-      "fireCooldown": 0.22,
-      "reloadTime": 2.0,
-      "ammoItemId": 57,
-      "fireMode": "semi"
+      "gridH": 2
     },
     {
       "id": 192,
       "name": "Mosin-Nagant",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 193,
       "name": "M4A1",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 194,
       "name": "IZh-43",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 195,
       "name": "AK-74",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 196,
       "name": "AKM",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 197,
       "name": "AKs-74u",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 198,
       "name": "SKS",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 199,
       "name": "L85A2",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 200,
       "name": "Remington Model 870",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 201,
       "name": "Improvised Bow",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 202,
       "name": "Hunting Crossbow",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 203,
       "name": "Ruger 10/22 Sporter",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 204,
       "name": "Rossi R92",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 205,
       "name": "SVD Dragunov",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 206,
       "name": "MP5K",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 207,
       "name": "UMP-45",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 208,
       "name": "RPK",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 209,
       "name": "FN-FAL",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 210,
       "name": "Saiga-12K",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 211,
       "name": "AUG A1",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 212,
       "name": "PP-19 Bizon",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 213,
       "name": "OTs-14 Groza",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 214,
       "name": "VSS Vintorez",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 215,
       "name": "SV-98",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 216,
       "name": "Madsen",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 217,
       "name": "AN-94",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 218,
       "name": "Silenced Remington",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 219,
       "name": "M16A2",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 220,
       "name": "KRISS Vector",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 221,
       "name": "M4A1 w/Drum",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 222,
       "name": "AKM w/Drum",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 223,
       "name": "M70 Tundra",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 224,
       "name": "Saiga-12K w/Drum",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 225,
       "name": "RPK w/Drum",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 226,
       "name": "M16A2 w/Drum",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 227,
       "name": "AUG A1 w/Drum",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 228,
       "name": "Milkor MGL",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 229,
       "name": "Blaze",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 230,
       "name": "FAMAS F1",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 231,
       "name": "Mini-14",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 232,
       "name": "AK-74 w/Drum",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 233,
       "name": "AKs-74U w/Drum",
       "type": "primary",
       "gridW": 2,
-      "gridH": 4,
-      "damage": 45,
-      "range": 700,
-      "clipSize": 30,
-      "fireCooldown": 0.1,
-      "reloadTime": 3.0,
-      "ammoItemId": 53,
-      "fireMode": "auto"
+      "gridH": 4
     },
     {
       "id": 234,

@@ -5,8 +5,9 @@ import io.github.zom.util.ItemInstance;
 
 /**
  * Player identity, equipment slots, and movement speed.
- * Item IDs from items.json (0 = empty). Skin/hands names from player.json.
- * dirty=true triggers PlayerRenderer.rebuild() on next frame.
+ *
+ * CHANGE: Added equippedHeld and equippedHolstered ItemInstance references so
+ * weapon state (currentAmmo) is preserved when weapons are moved between slots.
  */
 public class PlayerComponent extends Component {
 
@@ -23,67 +24,77 @@ public class PlayerComponent extends Component {
     public int slingBagId      = 0;
     public int footwearId      = 0;
 
-    // References to the container instances for backpacks and sling bags
+    /** Full instance for held weapon — preserves currentAmmo across equip/holster cycles. */
+    public ItemInstance equippedHeld;
+    /** Full instance for holstered weapon. */
+    public ItemInstance equippedHolstered;
+    /** Full instance for backpack container. */
     public ItemInstance equippedBackpack;
+    /** Full instance for sling bag container. */
     public ItemInstance equippedSlingBag;
 
     public boolean dirty = true;
-
-    /** Movement speed in pixels/second (PPU=1, player sprite = 30px). */
-    public float speed = 120f;
+    public float   speed = 120f;
 
     public void equip(String slot, ItemInstance instance) {
         int itemId = instance != null ? instance.itemId : 0;
         switch (slot) {
-            case "held":      heldItemId      = itemId; break;
-            case "holstered": holsteredItemId = itemId; break;
-            case "vest":      vestId          = itemId; break;
-            case "helmet":    helmetId        = itemId; break;
-            case "pants":     pantsId         = itemId; break;
-            case "top":       topId           = itemId; break;
+            case "held":
+                heldItemId    = itemId;
+                equippedHeld  = instance;
+                break;
+            case "holstered":
+                holsteredItemId   = itemId;
+                equippedHolstered = instance;
+                break;
+            case "vest":     vestId     = itemId; break;
+            case "helmet":   helmetId   = itemId; break;
+            case "pants":    pantsId    = itemId; break;
+            case "top":      topId      = itemId; break;
             case "backpack":
-                backpackId = itemId;
+                backpackId       = itemId;
                 equippedBackpack = instance;
                 break;
             case "slingbag":
             case "sling_bag":
-                slingBagId = itemId;
+                slingBagId       = itemId;
                 equippedSlingBag = instance;
                 break;
-            case "footwear":  footwearId      = itemId; break;
+            case "footwear": footwearId = itemId; break;
         }
         dirty = true;
     }
 
     public void equip(String slot, int itemId) {
-        if (itemId == 0) {
-            unequip(slot);
-            return;
-        }
-        ItemInstance inst = ItemInstance.create(itemId, 1);
-        equip(slot, inst);
+        if (itemId == 0) { unequip(slot); return; }
+        equip(slot, ItemInstance.create(itemId, 1));
     }
 
     public void unequip(String slot) {
         switch (slot) {
-            case "held":      heldItemId      = 0; break;
-            case "holstered": holsteredItemId = 0; break;
-            case "vest":      vestId          = 0; break;
-            case "helmet":    helmetId        = 0; break;
-            case "pants":     pantsId         = 0; break;
-            case "top":       topId           = 0; break;
+            case "held":
+                heldItemId   = 0;
+                equippedHeld = null;
+                break;
+            case "holstered":
+                holsteredItemId   = 0;
+                equippedHolstered = null;
+                break;
+            case "vest":     vestId     = 0; break;
+            case "helmet":   helmetId   = 0; break;
+            case "pants":    pantsId    = 0; break;
+            case "top":      topId      = 0; break;
             case "backpack":
-                backpackId = 0;
+                backpackId       = 0;
                 equippedBackpack = null;
                 break;
             case "slingbag":
             case "sling_bag":
-                slingBagId = 0;
+                slingBagId       = 0;
                 equippedSlingBag = null;
                 break;
-            case "footwear":  footwearId      = 0; break;
+            case "footwear": footwearId = 0; break;
         }
         dirty = true;
     }
 }
-

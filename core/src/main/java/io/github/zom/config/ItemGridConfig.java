@@ -66,4 +66,8 @@ public class ItemGridConfig {
             default:          return false;
         }
     }
+
+    public String size() {
+        return "ItemGridConfig[cellSize=" + cellSize + ", items=" + items.size + "]";
+    }
 }

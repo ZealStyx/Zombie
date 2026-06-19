@@ -2,14 +2,12 @@ package io.github.zom.util;
 
 import java.util.UUID;
 import io.github.zom.config.ConfigLoader;
-import io.github.zom.config.ItemDef;
+import io.github.zom.config.ItemDataDef;
 import io.github.zom.config.ItemGridDef;
 
 /**
  * A concrete instance of an item in the world or inventory.
- *
- * NEW: rotated — when true the item's gridW and gridH are swapped in the grid.
- * Toggled with R while dragging in the inventory UI.
+ * rotated — when true gridW ↔ gridH are swapped in the grid.
  */
 public class ItemInstance {
 
@@ -17,7 +15,6 @@ public class ItemInstance {
     public int     quantity;
     public int     currentAmmo;
     public String  uuid;
-    /** When true gridW ↔ gridH are swapped — item is rotated 90°. */
     public boolean rotated = false;
 
     public ContainerInventory container;
@@ -34,38 +31,30 @@ public class ItemInstance {
 
     public static ItemInstance create(int itemId, int quantity) {
         ItemInstance instance = new ItemInstance(itemId, quantity);
-        ItemGridDef gd = ConfigLoader.getItemGridConfig().get(itemId);
-        if (gd != null) {
-            if (gd.isContainer()) {
-                instance.container = new ContainerInventory(gd.containerRows, gd.containerCols);
-            }
-            if (gd.isGun()) {
-                instance.currentAmmo = gd.clipSize;
-            }
+        ItemGridDef  gd = ConfigLoader.getItemGridConfig().get(itemId);
+        ItemDataDef  dd = ConfigLoader.getItemDataConfig().get(itemId);
+
+        if (gd != null && gd.isContainer()) {
+            instance.container = new ContainerInventory(gd.containerRows, gd.containerCols);
+        }
+        if (dd != null && dd.isGun()) {
+            instance.currentAmmo = dd.clipSize;
         }
         return instance;
     }
 
-    /**
-     * Effective grid width in the current orientation.
-     * Uses ItemGridConfig; falls back to 1.
-     */
     public int effectiveW() {
         ItemGridDef gd = ConfigLoader.getItemGridConfig().get(itemId);
         if (gd == null) return 1;
         return rotated ? gd.gridH : gd.gridW;
     }
 
-    /**
-     * Effective grid height in the current orientation.
-     */
     public int effectiveH() {
         ItemGridDef gd = ConfigLoader.getItemGridConfig().get(itemId);
         if (gd == null) return 1;
         return rotated ? gd.gridW : gd.gridH;
     }
 
-    /** Toggle rotation (swap W↔H). */
     public void rotate() { rotated = !rotated; }
 
     @Override

@@ -64,6 +64,22 @@ public final class TextureCache implements Disposable {
     }
 
     /**
+     * Store an arbitrary TextureRegion under a synthetic key.
+     * Used by MapRenderSystem to cache sheet sub-regions without allocating
+     * a new TextureRegion on every draw call.
+     */
+    public void storeRegionByKey(String key, TextureRegion region) {
+        regionCache.put(key, region);
+    }
+
+    /**
+     * Retrieve a TextureRegion by synthetic key, or null if not cached yet.
+     */
+    public TextureRegion cachedRegionByKey(String key) {
+        return regionCache.get(key);
+    }
+
+    /**
      * Pixel width of the texture at the given path.
      * Used by EntityFactory to set w/h in world-unit == pixel coordinates (PPU=1).
      */
