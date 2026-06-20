@@ -489,7 +489,7 @@ public class InventoryUiSystem extends BaseSystem {
                     TextureRegion region = TextureCache.get().region(def.sprite.icon);
                     // For gear slots pass 0×0 grid dims (ignored when forceFlat=true)
                     // displayFlat is already correct: true for held/holstered portrait weapons
-                    ItemIcon icon = new ItemIcon(region, 1, 1, false, displayFlat);
+                    ItemIcon icon = new ItemIcon(region, gd != null ? gd.gridW : 1, gd != null ? gd.gridH : 1, false, displayFlat);
                     slot.add(icon).expand().fill().pad(4f);
                 }
 
@@ -581,9 +581,10 @@ public class InventoryUiSystem extends BaseSystem {
 
         if (def.sprite != null && def.sprite.icon != null) {
             TextureRegion region = TextureCache.get().region(def.sprite.icon);
-            ItemIcon icon = new ItemIcon(region,
-                inst.effectiveW(), inst.effectiveH(),
-                inst.rotated, false);
+            ItemGridDef gd = ConfigLoader.getItemGridConfig().get(inst.itemId);
+            int rawGridW = (gd != null) ? gd.gridW : 1;
+            int rawGridH = (gd != null) ? gd.gridH : 1;
+            ItemIcon icon = new ItemIcon(region, rawGridW, rawGridH, inst.rotated, false);
             table.add(icon).expand().fill().pad(2f);
         }
 
@@ -634,39 +635,45 @@ public class InventoryUiSystem extends BaseSystem {
 
     // ── ItemIcon — custom actor that draws a TextureRegion with correct rotation/fit ──
 
+    // ── ItemIcon — the corrected version ─────────────────────────────────────────
+
     /**
-     * Custom actor that draws a TextureRegion correctly fitted inside its bounds,
-     * rotating the sprite 90° when the sprite's natural aspect ratio doesn't match
-     * the grid cell's aspect ratio.
+     * Custom actor that draws a TextureRegion correctly fitted and optionally
+     * rotated 90° inside its bounds.
      *
-     * ROOT CAUSE FIX: All gun sprites are LANDSCAPE (wider than tall), but their
-     * grid cells are PORTRAIT (gridH > gridW). Simply cramming a landscape texture
-     * into a portrait Table cell squishes it. The sprite must be rotated 90° to
-     * visually fill the portrait cell correctly.
+     * shouldRotate is computed once at construction from the sprite's natural
+     * aspect ratio versus the cell's intended display orientation.
      *
-     * Decision logic:
-     *   naturalRotation = (sprite is landscape) AND (cell is portrait)
-     *                     OR (sprite is portrait) AND (cell is landscape)
-     *                   = (spriteW > spriteH) == (gridH > gridW)
-     *   finalRotation   = naturalRotation XOR inst.rotated
-     *                     (user R-key toggle flips the natural state)
+     * RULE: rotate the sprite when (sprite is landscape) != (cell should display landscape).
      *
-     * For the held/holstered gear slot icon, forceFlat=true overrides everything
-     * and always rotates landscape sprites to lie flat in the wide-and-short slot.
+     *   "Cell should display landscape" is true when:
+     *     - The raw grid is landscape (gridW > gridH) and item is NOT user-rotated
+     *     - The raw grid is portrait  (gridH > gridW) and item IS  user-rotated
+     *   = (gridW > gridH) XOR inst.rotated
+     *
+     *   So: shouldRotate = spriteIsLandscape != cellShouldDisplayLandscape
+     *                    = spriteIsLandscape != ((gridW > gridH) XOR inst.rotated)
+     *
+     * For the held/holstered gear slot (forceFlat=true): the slot is always
+     * displayed wide, so we just need to match the sprite to a landscape display.
+     *
+     * KEY DIFFERENCE from the broken version:
+     *   WRONG: pass effectiveW/H (already swapped) then XOR userRotated → double-flip
+     *   RIGHT: pass RAW gridW/gridH and compute orientation from scratch
      */
     private static class ItemIcon extends Actor {
 
         private final TextureRegion region;
-        private final boolean       shouldRotate;  // pre-computed at construction
+        private final boolean       shouldRotate;
 
         /**
-         * @param region      the sprite texture
-         * @param gridW       item's effective grid width  (after inst.rotated applied)
-         * @param gridH       item's effective grid height (after inst.rotated applied)
-         * @param userRotated inst.rotated — true when user pressed R
-         * @param forceFlat   true for held/holstered gear slot: always show lying flat
+         * @param region      sprite texture region
+         * @param rawGridW    item's RAW gridW from config (NOT effectiveW — not swapped)
+         * @param rawGridH    item's RAW gridH from config (NOT effectiveH — not swapped)
+         * @param userRotated inst.rotated — true when player pressed R
+         * @param forceFlat   true for held/holstered gear slot icons
          */
-        ItemIcon(TextureRegion region, int gridW, int gridH,
+        ItemIcon(TextureRegion region, int rawGridW, int rawGridH,
                  boolean userRotated, boolean forceFlat) {
             this.region = region;
 
@@ -677,17 +684,27 @@ public class InventoryUiSystem extends BaseSystem {
 
             int spriteW = region.getRegionWidth();
             int spriteH = region.getRegionHeight();
+            boolean spriteIsLandscape = spriteW > spriteH;
 
             if (forceFlat) {
-                // Gear slot: always lay the gun flat → rotate if sprite is portrait
-                // (which would be unusual, but handles it correctly)
-                this.shouldRotate = spriteH > spriteW; // portrait sprite → rotate to landscape
+                // Gear slot is always displayed wide (landscape).
+                // Rotate only if the sprite is portrait (needs to be turned to fit wide).
+                this.shouldRotate = !spriteIsLandscape; // portrait sprite → rotate to landscape
             } else {
-                // Inventory grid cell: rotate when sprite and cell aspects disagree
-                boolean spriteIsLandscape = spriteW > spriteH;
-                boolean cellIsPortrait    = gridH > gridW;
-                boolean naturalRotation   = (spriteIsLandscape == cellIsPortrait);
-                this.shouldRotate = naturalRotation ^ userRotated;
+                // Inventory grid: the cell's display orientation depends on the raw
+                // grid dimensions XOR whether the user has rotated the item.
+                // raw portrait (gridH > gridW) + not rotated → display portrait
+                // raw portrait (gridH > gridW) + rotated     → display landscape
+                // raw landscape (gridW > gridH) + not rotated → display landscape
+                // raw landscape (gridW > gridH) + rotated     → display portrait
+                boolean rawIsPortrait          = rawGridH > rawGridW;
+                boolean cellShouldBePortrait   = rawIsPortrait != userRotated;
+                // Rotate when sprite and cell display orientation disagree
+                this.shouldRotate = spriteIsLandscape == cellShouldBePortrait;
+                //   landscape sprite in portrait cell → rotate ✓
+                //   landscape sprite in landscape cell → don't rotate ✓
+                //   portrait sprite in portrait cell → don't rotate ✓
+                //   portrait sprite in landscape cell → rotate ✓
             }
         }
 
@@ -695,38 +712,39 @@ public class InventoryUiSystem extends BaseSystem {
         public void draw(Batch batch, float parentAlpha) {
             if (region == null) return;
 
-            float aw = getWidth(), ah = getHeight();
-            float ax = getX(),     ay = getY();
+            float aw = getWidth(),  ah = getHeight();
+            float ax = getX(),      ay = getY();
             int   sw = region.getRegionWidth();
             int   sh = region.getRegionHeight();
 
-            batch.setColor(getColor().r, getColor().g, getColor().b,
-                getColor().a * parentAlpha);
+            batch.setColor(getColor().r, getColor().g, getColor().b, getColor().a * parentAlpha);
 
             if (shouldRotate) {
-                // Draw the sprite rotated 90° centred inside aw×ah.
-                // batch.draw rotates around (originX,originY) in pre-rotation space.
-                // We swap the "logical" w/h so the rotated image fits the actor cell.
-                float scaleW = ah / (float) sw;  // sprite natural-width → actor height
-                float scaleH = aw / (float) sh;  // sprite natural-height → actor width
+                // Scale so the sprite (turned 90°) fills the actor cell with correct aspect.
+                // sprite natural-width (sw) becomes visual height (wants to fit in ah)
+                // sprite natural-height (sh) becomes visual width (wants to fit in aw)
+                float scaleW = ah / (float) sw;
+                float scaleH = aw / (float) sh;
                 float scale  = Math.min(scaleW, scaleH);
 
-                float dw = sw * scale;  // pre-rotation draw width  (= post-rot visual height)
-                float dh = sh * scale;  // pre-rotation draw height (= post-rot visual width)
+                float dw = sw * scale; // pre-rotation width (matches sprite aspect)
+                float dh = sh * scale; // pre-rotation height (matches sprite aspect)
 
-                // Centre the pre-rotation rect so post-rotation it sits centred in aw×ah
-                float dx = ax + (aw - dh) * 0.5f;
-                float dy = ay + (ah - dw) * 0.5f;
+                // The rotated object (dh x dw) should be centered in (aw x ah)
+                // The center of the actor is ax + aw/2, ay + ah/2
+                // The center of the unrotated rect (dw x dh) should match actor center
+                float dx = ax + (aw - dw) * 0.5f;
+                float dy = ay + (ah - dh) * 0.5f;
 
+                // Draw at 90 degrees around its center
                 batch.draw(region,
-                    dx, dy,           // position
-                    dh * 0.5f,        // originX (centre of pre-rotation rect)
-                    dw * 0.5f,        // originY
-                    dh, dw,           // width, height (swapped so 90° lands right)
+                    dx, dy,
+                    dw * 0.5f, dh * 0.5f, // origin = center of dw x dh
+                    dw, dh,                // NO SWAP — keep texture aspect ratio
                     1f, 1f,
                     90f);
             } else {
-                // Normal fit-centre draw
+                // Normal centred-fit draw
                 float scaleW = aw / (float) sw;
                 float scaleH = ah / (float) sh;
                 float scale  = Math.min(scaleW, scaleH);
@@ -739,7 +757,7 @@ public class InventoryUiSystem extends BaseSystem {
                 batch.draw(region, dx, dy, dw, dh);
             }
 
-            batch.setColor(1f, 1f, 1f, 1f); // restore
+            batch.setColor(1f, 1f, 1f, 1f);
         }
     }
 
